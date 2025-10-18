@@ -4,18 +4,20 @@ import TextInputEglish from './components/input/TextInputEnglish'
 import TextInputTranslation from './components/input/TextInputTranslation';
 import { supabase } from './supabaseClient';
 import './App.css'
+import CardItem from './components/card/CardItem';
 
 function App() {
   const [textEnglish, setTextEnglish] = useState(" ");
   const [textTranslation, setTextTranslation] = useState(" ");
   const [cards, setCards] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [isHoverCard, setIsHoverCard] = useState(null);
 
-  function onChangeTextEnglish(text){
+  function onChangeTextEnglish(text) {
     setTextEnglish(text);
   }
 
-  function onChangeTextTranslation(text){
+  function onChangeTextTranslation(text) {
     setTextTranslation(text);
   }
 
@@ -48,26 +50,24 @@ function App() {
     fetchCards();
   }, []);
 
-  console.log(cards);
-  
   return (
     <section className="home">
       <div className="wrapper">
         <div className="form">
-          <TextInputEglish handleChangeTextEngField = {onChangeTextEnglish}/>
-          <TextInputTranslation handleChangeTextTranslation = {onChangeTextTranslation} />
+          <TextInputEglish handleChangeTextEngField={onChangeTextEnglish} />
+          <TextInputTranslation handleChangeTextTranslation={onChangeTextTranslation} />
           <ButtonText handleSubmit={onSubmit} />
         </div>
         <h3>Danh sách</h3>
-        <div className="flip-card">
+        <div className="listCard">
           {cards.map((card) => (
-            <div className="flip-card-inner" key={card.card_id}>
-              <div className="flip-card-front">
-                <h2>{card.text_english}</h2>
-              </div>
-              <div className="flip-card-back">
-                <h2>{card.text_translation}</h2>
-              </div>
+            <div
+              className="flip-card"
+              key={card.card_id}
+              onMouseEnter={() => setIsHoverCard(card.card_id)}
+              onMouseLeave={() => setIsHoverCard(null)}
+            >
+              <CardItem data={card} />
             </div>
           ))}
         </div>
@@ -76,4 +76,4 @@ function App() {
   )
 }
 
-export default App
+export default App;

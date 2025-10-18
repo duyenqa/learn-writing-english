@@ -21,12 +21,15 @@
   gap: 10px;
 }
 
-.flip-card {
+.listCard{
   display:grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 10px;
+}
+
+.flip-card {
   background-color: transparent;
-  height: 200px;
+  height: 100px;
   border: 1px solid #f1f1f1;
   perspective: 1000px;
 }
@@ -35,7 +38,6 @@
   position: relative;
   width: 100%;
   height: 100%;
-  text-align: center;
   transition: transform 0.8s;
   transform-style: preserve-3d;
 }
@@ -44,17 +46,22 @@
   position: absolute;
   width: 100%;
   height: 100%;
-  -webkit-backface-visibility: hidden; /* Safari */
+  -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .flip-card-front {
-  background-color: #bbb;
-  color: black;
+  background-color: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(40px);
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
 }
 
 .flip-card-back {
-  background-color: dodgerblue;
+  background-color: #f80;
   color: white;
   transform: rotateY(180deg);
 }
