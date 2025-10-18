@@ -1,0 +1,28 @@
+/* #root {
+  max-width: 1280px;
+} */
+
+.home{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 100vh;
+}
+
+.wrapper{
+  width: 70%;
+  background-color: #f0f0f0;
+  padding: 2rem;
+}
+
+.form{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+@media (max-width: 480px) {
+  .wrapper{
+    /* max-width: 600px; */
+  }
+}
