@@ -3,7 +3,7 @@ import TextField from '@mui/material/TextField';
 const TextInputEglish = ({handleChangeTextEngField}) => {
     return <TextField
           id="outlined-multiline-flexible"
-          label="Nhập câu tiếng anh"
+          label="Nhập câu 1"
           multiline
           maxRows={2}
           size="small"

@@ -5,12 +5,12 @@ import TextInputTranslation from './components/input/TextInputTranslation';
 import { supabase } from './supabaseClient';
 import './App.css'
 import CardItem from './components/card/CardItem';
+import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 
 function App() {
   const [textEnglish, setTextEnglish] = useState(" ");
   const [textTranslation, setTextTranslation] = useState(" ");
   const [cards, setCards] = useState([]);
-  const [loading, setLoading] = useState(false);
   const [isHoverCard, setIsHoverCard] = useState(null);
 
   function onChangeTextEnglish(text) {
@@ -68,6 +68,9 @@ function App() {
               onMouseLeave={() => setIsHoverCard(null)}
             >
               <CardItem data={card} />
+              <div className="btn-delete">
+                <DeleteOutlinedIcon />
+              </div>
             </div>
           ))}
         </div>
