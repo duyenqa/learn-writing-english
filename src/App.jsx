@@ -1,11 +1,9 @@
 import { useState, useEffect } from 'react';
-// import reactLogo from './assets/react.svg'
-// import viteLogo from '/vite.svg'
-import './App.css'
 import ButtonText from './components/button/ButtonText'
 import TextInputEglish from './components/input/TextInputEnglish'
 import TextInputTranslation from './components/input/TextInputTranslation';
 import { supabase } from './supabaseClient';
+import './App.css'
 
 function App() {
   const [textEnglish, setTextEnglish] = useState(" ");
@@ -15,12 +13,10 @@ function App() {
 
   function onChangeTextEnglish(text){
     setTextEnglish(text);
-    // console.log(textEnglish);
   }
 
   function onChangeTextTranslation(text){
     setTextTranslation(text);
-    // console.log(textTranslation);
   }
 
   const onSubmit = async () => {
@@ -39,6 +35,21 @@ function App() {
     setTextTranslation(" ");
   }
 
+  useEffect(() => {
+    const fetchCards = async () => {
+      const { data, error } = await supabase
+        .from('cards')
+        .select('*');
+
+      if (error) console.error('Lỗi:', error);
+      else setCards(data);
+    };
+
+    fetchCards();
+  }, []);
+
+  console.log(cards);
+  
   return (
     <section className="home">
       <div className="wrapper">
@@ -47,9 +58,19 @@ function App() {
           <TextInputTranslation handleChangeTextTranslation = {onChangeTextTranslation} />
           <ButtonText handleSubmit={onSubmit} />
         </div>
-        <ul className="listCard">
-
-        </ul>
+        <h3>Danh sách</h3>
+        <div className="flip-card">
+          {cards.map((card) => (
+            <div className="flip-card-inner" key={card.card_id}>
+              <div className="flip-card-front">
+                <h2>{card.text_english}</h2>
+              </div>
+              <div className="flip-card-back">
+                <h2>{card.text_translation}</h2>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   )
