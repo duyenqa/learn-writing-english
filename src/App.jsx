@@ -5,7 +5,7 @@ import TextInputTranslation from './components/input/TextInputTranslation';
 import { supabase } from './supabaseClient';
 import './App.css'
 import CardItem from './components/card/CardItem';
-import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
+import DeleteIcon from '@mui/icons-material/Delete';
 import Typography from '@mui/material/Typography';
 import { ToastContainer, toast } from 'react-toastify';
 
@@ -83,7 +83,7 @@ function App() {
             >
               <CardItem data={card} />
               <div className="btn-delete" onClick={() => deleteOneCard(card.card_id)}>
-                <DeleteOutlinedIcon style={{ fontSize: '32px' }} />
+                <DeleteIcon style={{ fontSize: '32px' }} />
               </div>
             </div>
           ))}
