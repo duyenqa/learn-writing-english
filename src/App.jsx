@@ -29,6 +29,7 @@ function App() {
 
       setTextEnglish(" ");
       setTextTranslation(" ");
+      fetchCards();
     if (error) {
       console.error('Lỗi khi lưu:', error.message);
     } else {
