@@ -27,14 +27,13 @@ function App() {
       .from('cards')
       .insert([{ text_english: textEnglish, text_translation: textTranslation }]);
 
+      setTextEnglish(" ");
+      setTextTranslation(" ");
     if (error) {
       console.error('Lỗi khi lưu:', error.message);
     } else {
       console.log('Đã lưu thành công:', data);
     }
-
-    setTextEnglish(" ");
-    setTextTranslation(" ");
   }
 
   const fetchCards = async () => {
@@ -64,8 +63,8 @@ function App() {
     <section className="home">
       <div className="wrapper">
         <div className="form">
-          <TextInputEglish handleChangeTextEngField={onChangeTextEnglish} />
-          <TextInputTranslation handleChangeTextTranslation={onChangeTextTranslation} />
+          <TextInputEglish text={textEnglish} handleChangeTextEngField={onChangeTextEnglish} />
+          <TextInputTranslation text={textTranslation} handleChangeTextTranslation={onChangeTextTranslation} />
           <ButtonText handleSubmit={onSubmit} />
         </div>
         <Typography variant="h4" gutterBottom>Danh sách</Typography>
@@ -79,7 +78,7 @@ function App() {
             >
               <CardItem data={card} />
               <div className="btn-delete" onClick={() => deleteOneCard(card.card_id)}>
-                <DeleteOutlinedIcon />
+                <DeleteOutlinedIcon style={{ fontSize: '32px' }} />
               </div>
             </div>
           ))}

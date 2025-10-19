@@ -1,6 +1,6 @@
 import TextField from '@mui/material/TextField';
 
-const TextInputEglish = ({handleChangeTextEngField}) => {
+const TextInputEglish = ({text, handleChangeTextEngField}) => {
     return <TextField
           id="outlined-multiline-flexible"
           label="Nhập câu 1"
@@ -8,6 +8,7 @@ const TextInputEglish = ({handleChangeTextEngField}) => {
           maxRows={2}
           size="small"
           onChange={(event) => handleChangeTextEngField(event.target.value)}
+          value={text}
           sx={{
             width: {
               xs: '100%',
