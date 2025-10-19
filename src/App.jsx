@@ -7,6 +7,7 @@ import './App.css'
 import CardItem from './components/card/CardItem';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import Typography from '@mui/material/Typography';
+import { ToastContainer, toast } from 'react-toastify';
 
 function App() {
   const [textEnglish, setTextEnglish] = useState(" ");
@@ -30,9 +31,12 @@ function App() {
       setTextEnglish(" ");
       setTextTranslation(" ");
       fetchCards();
+      
     if (error) {
       console.error('Lỗi khi lưu:', error.message);
+      toast("Thêm dữ liệu thất bại!");
     } else {
+      toast("Thêm dữ liệu thành công!");
       console.log('Đã lưu thành công:', data);
     }
   }
@@ -85,6 +89,10 @@ function App() {
           ))}
         </div>
       </div>
+      <ToastContainer 
+        position="top-right"
+        autoClose={3000}
+       />
     </section>
   )
 }
