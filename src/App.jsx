@@ -6,6 +6,7 @@ import { supabase } from './supabaseClient';
 import './App.css'
 import CardItem from './components/card/CardItem';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
+import Typography from '@mui/material/Typography';
 
 function App() {
   const [textEnglish, setTextEnglish] = useState(" ");
@@ -22,7 +23,6 @@ function App() {
   }
 
   const onSubmit = async () => {
-    console.log(textEnglish + "-" + textTranslation);
     const { data, error } = await supabase
       .from('cards')
       .insert([{ text_english: textEnglish, text_translation: textTranslation }]);
@@ -37,16 +37,26 @@ function App() {
     setTextTranslation(" ");
   }
 
+  const fetchCards = async () => {
+    const { data, error } = await supabase
+      .from('cards')
+      .select('*');
+
+    if (error) console.error('Lỗi:', error);
+    else setCards(data);
+  };
+
+  const deleteOneCard = async (id) => {
+    const { error } = await supabase.from('cards').delete().eq('card_id', id);
+    if (error) {
+      console.error('Lỗi khi xóa:', error.message);
+    } else {
+      console.log('Đã xóa thành công');
+      fetchCards();
+    }
+  }
+
   useEffect(() => {
-    const fetchCards = async () => {
-      const { data, error } = await supabase
-        .from('cards')
-        .select('*');
-
-      if (error) console.error('Lỗi:', error);
-      else setCards(data);
-    };
-
     fetchCards();
   }, []);
 
@@ -58,7 +68,7 @@ function App() {
           <TextInputTranslation handleChangeTextTranslation={onChangeTextTranslation} />
           <ButtonText handleSubmit={onSubmit} />
         </div>
-        <h3>Danh sách</h3>
+        <Typography variant="h4" gutterBottom>Danh sách</Typography>
         <div className="listCard">
           {cards.map((card) => (
             <div
@@ -68,7 +78,7 @@ function App() {
               onMouseLeave={() => setIsHoverCard(null)}
             >
               <CardItem data={card} />
-              <div className="btn-delete">
+              <div className="btn-delete" onClick={() => deleteOneCard(card.card_id)}>
                 <DeleteOutlinedIcon />
               </div>
             </div>
