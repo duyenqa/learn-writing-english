@@ -6,16 +6,9 @@ const TextInputEglish = ({text, handleChangeTextEngField}) => {
           label="Nhập câu 1"
           multiline
           maxRows={2}
-          size="small"
+          size="medium"
           onChange={(event) => handleChangeTextEngField(event.target.value)}
           value={text}
-          sx={{
-            width: {
-              xs: '100%',
-              sm: '80%',
-              md: '60%'
-            }
-          }}
           required
         />;
 }

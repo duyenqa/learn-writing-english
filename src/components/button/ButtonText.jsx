@@ -4,15 +4,9 @@ import SaveOutlinedIcon from '@mui/icons-material/SaveOutlined';
 const ButtonText = ({handleSubmit}) => {
     return <Button
         variant="contained"
-        endIcon={<SaveOutlinedIcon />}
+        startIcon={<SaveOutlinedIcon />}
         onClick={handleSubmit}
-        sx={{
-            width: {
-                xs: '100%',
-                sm: '80%',
-                md: '60%'
-            }
-        }}>
+        >
         Lưu trữ
     </Button>;
 }
