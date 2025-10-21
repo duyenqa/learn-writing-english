@@ -1,16 +1,12 @@
-/* #root {
-  max-width: 1280px;
-} */
-
 .home{
   display: flex;
   justify-content: center;
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   background-image: url('./assets/bg.jpg');
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: top bottom;
+  background-position: top;
 }
 
 .wrapper{
