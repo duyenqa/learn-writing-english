@@ -88,6 +88,13 @@
   text-align: right;
 }
 
+.footer{
+  margin: 1rem 0;
+  padding: 0.125rem 0;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
 @media (max-width: 480px) {
   .wrapper{
     max-width: 600px;

@@ -9,6 +9,7 @@ import FlipCameraAndroidIcon from '@mui/icons-material/FlipCameraAndroid';
 import { supabase } from './supabaseClient';
 import { ToastContainer, toast } from 'react-toastify';
 import './App.css'
+import Footer from './components/footer/Footer';
 
 function App() {
   const [textEnglish, setTextEnglish] = useState(" ");
@@ -121,6 +122,7 @@ function App() {
             <CardItem key={card.card_id} data={card} removeItem={deleteOneCard} />
           ))}
         </div>
+        <Footer />
       </div>
       <ToastContainer
         position="top-right"
