@@ -21,9 +21,12 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-  align-items: center;
 }
-
+.errorMessage{
+  color: red;
+  font-weight: 600;
+  margin: 0;
+}
 .listCard{
   display:grid;
   grid-template-columns: repeat(auto-fill, minmax(min(250px, 100%), 1fr));
@@ -31,7 +34,6 @@
 }
 
 .flip-card {
-  /* background-color: #ffd6e8; */
   background: transparent;
   height: 200px;
   border: 2px solid #f1f1f1;
