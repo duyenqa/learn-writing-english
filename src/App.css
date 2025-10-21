@@ -79,10 +79,6 @@
   transform: rotateY(180deg);
 }
 
-.flip-card-back {
-  transform: rotateY(180deg);
-}
-
 .btn-delete{
   cursor: pointer;
   width: 100%;
