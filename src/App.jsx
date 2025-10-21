@@ -4,7 +4,6 @@ import TextInputEglish from './components/input/TextInputEnglish'
 import TextInputTranslation from './components/input/TextInputTranslation';
 import CardItem from './components/card/CardItem';
 import { supabase } from './supabaseClient';
-import DeleteIcon from '@mui/icons-material/Delete';
 import Typography from '@mui/material/Typography';
 import { ToastContainer, toast } from 'react-toastify';
 import './App.css'
@@ -13,7 +12,6 @@ function App() {
   const [textEnglish, setTextEnglish] = useState(" ");
   const [textTranslation, setTextTranslation] = useState(" ");
   const [cards, setCards] = useState([]);
-  const [isHoverCard, setIsHoverCard] = useState(null);
   const [errorMsgField1, setErrorMsgField1] = useState('');
   const [errorMsgField2, setErrorMsgField2] = useState('');
 
@@ -36,12 +34,12 @@ function App() {
       return;
     }
 
-    if(!textTranslation.trim()){
+    if (!textTranslation.trim()) {
       setErrorMsgField2('Không được để trống!!!');
       return;
     }
 
-    if(textTranslation.length > 75){
+    if (textTranslation.length > 75) {
       setErrorMsgField2('Văn bản quá dài. Vui lòng nhập tối đa 75 ký tự!!!');
       return;
     }
@@ -61,6 +59,16 @@ function App() {
     }
   }
 
+  const deleteOneCard = async (id) => {
+        const { error } = await supabase.from('cards').delete().eq('card_id', id);
+        if (error) {
+            console.error('Lỗi khi xóa:', error.message);
+        } else {
+            console.log('Đã xóa thành công');
+            fetchCards();
+        }
+    }
+
   const fetchCards = async () => {
     const { data, error } = await supabase
       .from('cards')
@@ -69,16 +77,6 @@ function App() {
     if (error) console.error('Lỗi:', error);
     else setCards(data);
   };
-
-  const deleteOneCard = async (id) => {
-    const { error } = await supabase.from('cards').delete().eq('card_id', id);
-    if (error) {
-      console.error('Lỗi khi xóa:', error.message);
-    } else {
-      console.log('Đã xóa thành công');
-      fetchCards();
-    }
-  }
 
   useEffect(() => {
     fetchCards();
@@ -95,19 +93,9 @@ function App() {
           <ButtonText handleSubmit={onSubmit} />
         </div>
         <Typography variant="h4" gutterBottom>Danh sách</Typography>
-        <div className="listCard">
+        <div className="flip-card">
           {cards.map((card) => (
-            <div
-              className="flip-card"
-              key={card.card_id}
-              onMouseEnter={() => setIsHoverCard(card.card_id)}
-              onMouseLeave={() => setIsHoverCard(null)}
-            >
-              <CardItem data={card} />
-              <div className="btn-delete" onClick={() => deleteOneCard(card.card_id)}>
-                <DeleteIcon style={{ fontSize: '32px' }} />
-              </div>
-            </div>
+            <CardItem key={card.card_id} data={card} removeItem={deleteOneCard} />
           ))}
         </div>
       </div>
