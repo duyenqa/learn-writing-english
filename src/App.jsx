@@ -3,8 +3,9 @@ import ButtonText from './components/button/ButtonText'
 import TextInputEglish from './components/input/TextInputEnglish'
 import TextInputTranslation from './components/input/TextInputTranslation';
 import CardItem from './components/card/CardItem';
+import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
 import { supabase } from './supabaseClient';
-import Typography from '@mui/material/Typography';
 import { ToastContainer, toast } from 'react-toastify';
 import './App.css'
 
@@ -60,14 +61,23 @@ function App() {
   }
 
   const deleteOneCard = async (id) => {
-        const { error } = await supabase.from('cards').delete().eq('card_id', id);
-        if (error) {
-            console.error('Lỗi khi xóa:', error.message);
-        } else {
-            console.log('Đã xóa thành công');
-            fetchCards();
-        }
+    const { error } = await supabase.from('cards').delete().eq('card_id', id);
+    if (error) {
+      console.error('Lỗi khi xóa:', error.message);
+    } else {
+      console.log('Đã xóa thành công');
+      fetchCards();
     }
+  }
+
+  function handleRandomData(data) {
+    return [...data].sort(() => Math.random() - 0.5);
+  }
+
+  function onChangeCards() {
+    const newCards = handleRandomData(cards);
+    setCards(newCards);
+  }
 
   const fetchCards = async () => {
     const { data, error } = await supabase
@@ -92,7 +102,19 @@ function App() {
           {errorMsgField2 && (<p className="errorMessage">{errorMsgField2}</p>)}
           <ButtonText handleSubmit={onSubmit} />
         </div>
-        <Typography variant="h4" gutterBottom>Danh sách</Typography>
+        <Stack
+          direction="row"
+          spacing={2}
+          sx={{
+            justifyContent: "flex-end",
+            alignItems: "center",
+            my: 2
+          }}
+        >
+          <Button variant="contained" size="small" onClick={onChangeCards}>
+            Xáo trộn
+          </Button>
+        </Stack>
         <div className="flip-card">
           {cards.map((card) => (
             <CardItem key={card.card_id} data={card} removeItem={deleteOneCard} />
