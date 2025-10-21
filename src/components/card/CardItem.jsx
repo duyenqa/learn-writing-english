@@ -1,28 +1,65 @@
 import { useState } from 'react';
 import Typography from '@mui/material/Typography';
 import DeleteIcon from '@mui/icons-material/Delete';
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import { toast } from 'react-toastify';
 
 const CardItem = ({ data, removeItem }) => {
     const [isHoverCard, setIsHoverCard] = useState(null);
+    const [openModal, setOpenModal] = useState(false);
 
+    const handleDeleteAndClose = () => {
+        removeItem(data.card_id);
+        setOpenModal(false);
+        toast("Xóa dữ liệu thành công!");
+    };
     return (
-        <div className="cardItem">
-            <div className="btn-delete" onClick={() => removeItem(data.card_id)}>
-                <DeleteIcon style={{ fontSize: '32px' }} />
+        <>
+            <div className="cardItem">
+                <div className="btn-delete" onClick={() => setOpenModal(true)}>
+                    <DeleteIcon style={{ fontSize: '32px' }} />
+                </div>
+                <div
+                    className={`flip-card-inner ${isHoverCard ? 'hovered' : ''}`}
+                    onMouseEnter={() => setIsHoverCard(data.card_id)}
+                    onMouseLeave={() => setIsHoverCard(null)}
+                >
+                    <div className="flip-card-front">
+                        <Typography variant="h5" gutterBottom>{data.text_english}</Typography>
+                    </div>
+                    <div className="flip-card-back">
+                        <Typography variant="h5" gutterBottom>{data.text_translation}</Typography>
+                    </div>
+                </div>
             </div>
-            <div
-                className={`flip-card-inner ${isHoverCard ? 'hovered' : ''}`}
-                onMouseEnter={() => setIsHoverCard(data.card_id)}
-                onMouseLeave={() => setIsHoverCard(null)}
+            <Dialog
+                open={openModal}
+                onClose={() => setOpenModal(false)}
+                aria-labelledby="responsive-dialog-title"
             >
-                <div className="flip-card-front">
-                    <Typography variant="h5" gutterBottom>{data.text_english}</Typography>
-                </div>
-                <div className="flip-card-back">
-                    <Typography variant="h5" gutterBottom>{data.text_translation}</Typography>
-                </div>
-            </div>
-        </div>
+                <DialogTitle id="responsive-dialog-title">
+                    Xóa từ
+                </DialogTitle>
+                <DialogContent>
+                    <DialogContentText>
+                        Bạn có chắc là muốn xóa không ? 
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button autoFocus onClick={() => setOpenModal(false)}>
+                        Thoát
+                    </Button>
+                    <Button onClick={handleDeleteAndClose} autoFocus>
+                        Xóa
+                    </Button>
+                </DialogActions>
+            </Dialog>
+        </>
     );
 }
 export default CardItem;
