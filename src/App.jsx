@@ -5,6 +5,7 @@ import TextInputTranslation from './components/input/TextInputTranslation';
 import CardItem from './components/card/CardItem';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
+import FlipCameraAndroidIcon from '@mui/icons-material/FlipCameraAndroid';
 import { supabase } from './supabaseClient';
 import { ToastContainer, toast } from 'react-toastify';
 import './App.css'
@@ -111,7 +112,7 @@ function App() {
             my: 2
           }}
         >
-          <Button variant="contained" size="small" onClick={onChangeCards}>
+          <Button startIcon={<FlipCameraAndroidIcon/>} variant="contained" size="small" onClick={onChangeCards}>
             Xáo trộn
           </Button>
         </Stack>
