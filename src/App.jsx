@@ -28,25 +28,34 @@ function App() {
   }
 
   const onSubmit = async () => {
-    if (!textEnglish.trim()) {
+    if (!textEnglish.trim() && !textTranslation.trim()) {
       setErrorMsgField1('Không được để trống!!!');
-      return;
-    }
-
-    if (textEnglish.length > 75) {
-      setErrorMsgField1('Văn bản quá dài. Vui lòng nhập tối đa 75 ký tự!!!');
-      return;
-    }
-
-    if (!textTranslation.trim()) {
       setErrorMsgField2('Không được để trống!!!');
       return;
-    }
-
-    if (textTranslation.length > 75) {
+    }else if (!textEnglish.trim() && textTranslation.length < 75) {
+      setErrorMsgField1('Không được để trống!!!');
+      return;
+    }else if (!textTranslation.trim() && textEnglish.length < 75) {
+      setErrorMsgField2('Không được để trống!!!');
+      return;
+    }else if(!textEnglish.trim() && !!textTranslation.trim()){
+      setErrorMsgField1('Không được để trống!!!');
+      return;
+    }else if (textTranslation.length > 75 && textEnglish.length < 75) {
+        setErrorMsgField2('Văn bản quá dài. Vui lòng nhập tối đa 75 ký tự!!!');
+        return;
+    }else if (!textTranslation.trim() && !!textEnglish.trim()) {
+      setErrorMsgField2('Không được để trống!!!');
+      return;
+    }else if (textEnglish.length > 75 && textTranslation.length < 75) {
+      setErrorMsgField1('Văn bản quá dài. Vui lòng nhập tối đa 75 ký tự!!!');
+      return;
+    }else if (textEnglish.length > 75 && textTranslation.length > 75) {
+      setErrorMsgField1('Văn bản quá dài. Vui lòng nhập tối đa 75 ký tự!!!');
       setErrorMsgField2('Văn bản quá dài. Vui lòng nhập tối đa 75 ký tự!!!');
       return;
     }
+
     const { data, error } = await supabase
       .from('cards')
       .insert([{ text_english: textEnglish, text_translation: textTranslation }]);
