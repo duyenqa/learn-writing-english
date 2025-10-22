@@ -13,6 +13,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import './App.css'
 import Footer from './components/footer/Footer';
 import ShareSocial from './components/share/ShareSocial';
+import SearchBar from './components/searchbar/SearchBar';
 
 function App() {
   const [textEnglish, setTextEnglish] = useState(" ");
@@ -20,6 +21,7 @@ function App() {
   const [cards, setCards] = useState([]);
   const [errorMsgField1, setErrorMsgField1] = useState('');
   const [errorMsgField2, setErrorMsgField2] = useState('');
+  const [textSearch, setTextSearch] = useState('');
 
   function onChangeTextEnglish(text) {
     setTextEnglish(text);
@@ -36,25 +38,25 @@ function App() {
       setErrorMsgField1('Không được để trống!!!');
       setErrorMsgField2('Không được để trống!!!');
       return;
-    }else if (!textEnglish.trim() && textTranslation.length < 75) {
+    } else if (!textEnglish.trim() && textTranslation.length < 75) {
       setErrorMsgField1('Không được để trống!!!');
       return;
-    }else if (!textTranslation.trim() && textEnglish.length < 75) {
+    } else if (!textTranslation.trim() && textEnglish.length < 75) {
       setErrorMsgField2('Không được để trống!!!');
       return;
-    }else if(!textEnglish.trim() && !!textTranslation.trim()){
+    } else if (!textEnglish.trim() && !!textTranslation.trim()) {
       setErrorMsgField1('Không được để trống!!!');
       return;
-    }else if (textTranslation.length > 75 && textEnglish.length < 75) {
-        setErrorMsgField2('Văn bản quá dài. Vui lòng nhập tối đa 75 ký tự!!!');
-        return;
-    }else if (!textTranslation.trim() && !!textEnglish.trim()) {
+    } else if (textTranslation.length > 75 && textEnglish.length < 75) {
+      setErrorMsgField2('Văn bản quá dài. Vui lòng nhập tối đa 75 ký tự!!!');
+      return;
+    } else if (!textTranslation.trim() && !!textEnglish.trim()) {
       setErrorMsgField2('Không được để trống!!!');
       return;
-    }else if (textEnglish.length > 75 && textTranslation.length < 75) {
+    } else if (textEnglish.length > 75 && textTranslation.length < 75) {
       setErrorMsgField1('Văn bản quá dài. Vui lòng nhập tối đa 75 ký tự!!!');
       return;
-    }else if (textEnglish.length > 75 && textTranslation.length > 75) {
+    } else if (textEnglish.length > 75 && textTranslation.length > 75) {
       setErrorMsgField1('Văn bản quá dài. Vui lòng nhập tối đa 75 ký tự!!!');
       setErrorMsgField2('Văn bản quá dài. Vui lòng nhập tối đa 75 ký tự!!!');
       return;
@@ -95,6 +97,17 @@ function App() {
     setCards(newCards);
   }
 
+  const onChangeTextSearch = async (text) => {
+    setTextSearch(text);
+
+    const { data, error } = await supabase
+      .from('cards')
+      .select('*')
+      .ilike('text_english', `%${text}%`);
+    if (error) console.error('Lỗi:', error)
+    else if (textSearch) setCards(data)
+  }
+
   const fetchCards = async () => {
     const { data, error } = await supabase
       .from('cards')
@@ -123,24 +136,29 @@ function App() {
           direction="row"
           spacing={2}
           sx={{
-            justifyContent: "flex-end",
+            justifyContent: "space-between",
             alignItems: "center",
+            flexWrap: "wrap-reverse",
+            gap: '20px',
             my: 2
           }}
         >
-          <Badge color="primary" badgeContent={cards.length}>
-            <ArticleIcon style={{ fontSize: '32px' }} />
-          </Badge>
-          <Button startIcon={<FlipCameraAndroidIcon/>} variant="contained" size="small" onClick={onChangeCards}>
-            Xáo trộn
-          </Button>
+          <SearchBar text={textSearch} handleChangeTextSearch={onChangeTextSearch} />
+          <div>
+            <Badge color="primary" badgeContent={cards.length}>
+              <ArticleIcon style={{ fontSize: '32px' }} />
+            </Badge>
+            <Button startIcon={<FlipCameraAndroidIcon />} variant="contained" size="small" onClick={onChangeCards}>
+              Xáo trộn
+            </Button>
+          </div>
         </Stack>
         <div className="flip-card">
           {cards.map((card) => (
             <CardItem key={card.card_id} data={card} removeItem={deleteOneCard} />
           ))}
         </div>
-        <ShareSocial/>
+        <ShareSocial />
         <Footer />
       </div>
       <ToastContainer
