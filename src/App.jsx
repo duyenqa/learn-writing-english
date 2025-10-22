@@ -98,7 +98,8 @@ function App() {
   const fetchCards = async () => {
     const { data, error } = await supabase
       .from('cards')
-      .select('*');
+      .select('*')
+      .order('created_at', { ascending: false });
 
     if (error) console.error('Lỗi:', error);
     else setCards(data);
