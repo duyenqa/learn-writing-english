@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Typography from '@mui/material/Typography';
-import DeleteIcon from '@mui/icons-material/Delete';
+import Checkbox from '@mui/material/Checkbox';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -12,17 +12,29 @@ import { toast } from 'react-toastify';
 const CardItem = ({ data, removeItem }) => {
     const [isHoverCard, setIsHoverCard] = useState(null);
     const [openModal, setOpenModal] = useState(false);
+    const [checked, setChecked] = useState(false);
+
+    const handleCloseModal = () => {
+        setOpenModal(false);
+        setChecked(false);
+    }
 
     const handleDeleteAndClose = () => {
         removeItem(data.card_id);
         setOpenModal(false);
+        setChecked(false);
         toast("Xóa dữ liệu thành công!");
     };
+
     return (
         <>
             <div className="cardItem">
                 <div className="btn-delete" onClick={() => setOpenModal(true)}>
-                    <DeleteIcon style={{ fontSize: '32px' }} />
+                    <Checkbox 
+                        inputProps={{ 'aria-label': 'controlled' }} 
+                        checked={checked}
+                        onChange={(event) => setChecked(event.target.value)}
+                    />
                 </div>
                 <div
                     className={`flip-card-inner ${isHoverCard ? 'hovered' : ''}`}
@@ -39,7 +51,7 @@ const CardItem = ({ data, removeItem }) => {
             </div>
             <Dialog
                 open={openModal}
-                onClose={() => setOpenModal(false)}
+                onClose={handleCloseModal}
                 aria-labelledby="responsive-dialog-title"
             >
                 <DialogTitle id="responsive-dialog-title">
@@ -51,7 +63,7 @@ const CardItem = ({ data, removeItem }) => {
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                    <Button autoFocus onClick={() => setOpenModal(false)}>
+                    <Button autoFocus onClick={handleCloseModal}>
                         Thoát
                     </Button>
                     <Button onClick={handleDeleteAndClose} autoFocus>
