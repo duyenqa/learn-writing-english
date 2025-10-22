@@ -21,10 +21,12 @@ function App() {
 
   function onChangeTextEnglish(text) {
     setTextEnglish(text);
+    setErrorMsgField1(" ");
   }
 
   function onChangeTextTranslation(text) {
     setTextTranslation(text);
+    setErrorMsgField2(" ");
   }
 
   const onSubmit = async () => {
