@@ -10,6 +10,7 @@ import { supabase } from './supabaseClient';
 import { ToastContainer, toast } from 'react-toastify';
 import './App.css'
 import Footer from './components/footer/Footer';
+import ShareSocial from './components/share/ShareSocial';
 
 function App() {
   const [textEnglish, setTextEnglish] = useState(" ");
@@ -122,6 +123,7 @@ function App() {
             <CardItem key={card.card_id} data={card} removeItem={deleteOneCard} />
           ))}
         </div>
+        <ShareSocial/>
         <Footer />
       </div>
       <ToastContainer

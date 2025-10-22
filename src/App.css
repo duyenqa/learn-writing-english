@@ -95,6 +95,17 @@
   background-color: rgba(255, 255, 255, 0.4);
 }
 
+.shareApps{
+    position: fixed;
+    bottom: 10rem;
+    right: 10px;
+}
+
+.apps{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
 @media (max-width: 480px) {
   .wrapper{
     max-width: 600px;
