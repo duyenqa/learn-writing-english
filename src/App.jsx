@@ -5,7 +5,9 @@ import TextInputTranslation from './components/input/TextInputTranslation';
 import CardItem from './components/card/CardItem';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
+import Badge from '@mui/material/Badge';
 import FlipCameraAndroidIcon from '@mui/icons-material/FlipCameraAndroid';
+import ArticleIcon from '@mui/icons-material/Article';
 import { supabase } from './supabaseClient';
 import { ToastContainer, toast } from 'react-toastify';
 import './App.css'
@@ -125,6 +127,9 @@ function App() {
             my: 2
           }}
         >
+          <Badge color="primary" badgeContent={cards.length}>
+            <ArticleIcon style={{ fontSize: '32px' }} />
+          </Badge>
           <Button startIcon={<FlipCameraAndroidIcon/>} variant="contained" size="small" onClick={onChangeCards}>
             Xáo trộn
           </Button>
