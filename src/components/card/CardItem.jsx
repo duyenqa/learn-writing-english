@@ -6,6 +6,8 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import IconButton from '@mui/material/IconButton';
+import Tooltip from '@mui/material/Tooltip';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import { toast } from 'react-toastify';
 
@@ -21,8 +23,21 @@ const CardItem = ({ data, removeItem }) => {
     return (
         <>
             <div className="cardItem">
-                <div className="btn-delete" onClick={() => setOpenModal(true)}>
-                    <DeleteOutlinedIcon sx={{fontSize: '32px'}}/>
+                <div className="btn-delete">
+                    <Tooltip title="Xóa" placement="top">
+                        <IconButton 
+                            size="small" 
+                            aria-label="delete" 
+                            onClick={() => setOpenModal(true)}
+                            sx={{
+                                color: '#000',
+                                '&:hover': {
+                                    color: 'aqua'
+                                },
+                            }}>
+                        <DeleteOutlinedIcon sx={{fontSize: '25px'}}/>
+                    </IconButton>
+                    </Tooltip>
                 </div>
                 <div className="flip-card-inner">
                     <div className="flip-card-front">
