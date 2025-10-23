@@ -132,19 +132,11 @@ function App() {
           {errorMsgField2 && (<p className="errorMessage">{errorMsgField2}</p>)}
           <ButtonText handleSubmit={onSubmit} />
         </div>
-        <Stack
-          direction="row"
-          spacing={2}
-          sx={{
-            justifyContent: "space-between",
-            alignItems: "center",
-            flexWrap: "wrap-reverse",
-            gap: '20px',
-            my: 2
-          }}
-        >
-          <SearchBar text={textSearch} handleChangeTextSearch={onChangeTextSearch} />
-          <div>
+        <div className="menu">
+          <div className="searchField">
+            <SearchBar text={textSearch} handleChangeTextSearch={onChangeTextSearch} />
+          </div>
+          <div className="features">
             <Badge color="primary" badgeContent={cards.length}>
               <ArticleIcon style={{ fontSize: '32px' }} />
             </Badge>
@@ -152,7 +144,7 @@ function App() {
               Xáo trộn
             </Button>
           </div>
-        </Stack>
+        </div>
         <div className="flip-card">
           {cards.map((card) => (
             <CardItem key={card.card_id} data={card} removeItem={deleteOneCard} />

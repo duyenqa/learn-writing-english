@@ -7,8 +7,8 @@ const SearchBar = ({text, handleChangeTextSearch}) => {
             placeholder='Nhập từ tiếng anh'
             id="outlined-size-small"
             size="small"
-            sx={{width: '60ch'}}
             value={text}
+            fullWidth
             onChange={(event) => handleChangeTextSearch(event.target.value)}
         />
     )
