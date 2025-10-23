@@ -50,11 +50,7 @@
   transform-style: preserve-3d;
   background: #f1f1f1;
   border-radius: 4px;
-}
-
-.flip-card-inner.hovered {
-  transform: rotateY(180deg);
-  cursor: pointer;
+  overflow: hidden;
 }
 
 .flip-card-front,
@@ -70,6 +66,7 @@
   background-color: rgba(255, 255, 255, 0.2);
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   border-radius: 4px;
+  transition: transform 0.6s;
 }
 
 .flip-card-front {
@@ -79,6 +76,15 @@
 .flip-card-back {
   color: brown;
   transform: rotateY(180deg);
+}
+
+.flip-card-inner:hover .flip-card-front{
+  transform: rotateY(180deg);
+  cursor: pointer;
+}
+
+.flip-card-inner:hover .flip-card-back{
+  transform: rotateY(0deg);
 }
 
 .btn-delete {

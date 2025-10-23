@@ -10,7 +10,7 @@ import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import { toast } from 'react-toastify';
 
 const CardItem = ({ data, removeItem }) => {
-    const [isHoverCard, setIsHoverCard] = useState(null);
+    // const [isHoverCard, setIsHoverCard] = useState(null);
     const [openModal, setOpenModal] = useState(false);
 
     const handleDeleteAndClose = () => {
@@ -25,16 +25,24 @@ const CardItem = ({ data, removeItem }) => {
                 <div className="btn-delete" onClick={() => setOpenModal(true)}>
                     <DeleteOutlinedIcon sx={{fontSize: '32px'}}/>
                 </div>
-                <div
-                    className={`flip-card-inner ${isHoverCard ? 'hovered' : ''}`}
-                    onMouseEnter={() => setIsHoverCard(data.card_id)}
-                    onMouseLeave={() => setIsHoverCard(null)}
-                >
+                <div className="flip-card-inner">
                     <div className="flip-card-front">
-                        <Typography variant="h5" gutterBottom>{data.text_english}</Typography>
+                        <Typography 
+                            variant="h5" 
+                            gutterBottom
+                            sx={{whiteSpace: 'wrap'}}
+                        >
+                            {data.text_english}
+                        </Typography>
                     </div>
                     <div className="flip-card-back">
-                        <Typography variant="h5" gutterBottom>{data.text_translation}</Typography>
+                        <Typography 
+                            variant="h5" 
+                            gutterBottom
+                            sx={{whiteSpace: 'wrap'}}
+                        >
+                            {data.text_translation}
+                        </Typography>
                     </div>
                 </div>
             </div>
