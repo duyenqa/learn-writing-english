@@ -1,13 +1,15 @@
 import Button from '@mui/material/Button';
 import SaveOutlinedIcon from '@mui/icons-material/SaveOutlined';
 
-const ButtonText = ({handleSubmit}) => {
+const ButtonText = ({status, handleSubmit}) => {
+    console.log("xem: " + status);
     return <Button
         variant="contained"
         startIcon={<SaveOutlinedIcon />}
         onClick={handleSubmit}
+        disabled={status}
         >
-        Lưu trữ
+        {status ? 'Vui lòng chờ...' : 'Lưu'}
     </Button>;
 }
 export default ButtonText;

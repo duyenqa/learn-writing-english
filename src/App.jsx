@@ -23,6 +23,7 @@ function App() {
   const [errorMsgField1, setErrorMsgField1] = useState('');
   const [errorMsgField2, setErrorMsgField2] = useState('');
   const [textSearch, setTextSearch] = useState('');
+  const [isDisabled, setIsDisabled] = useState(false);
 
   function onChangeTextEnglish(text) {
     setTextEnglish(text.trim());
@@ -76,6 +77,12 @@ function App() {
       toast("Thêm dữ liệu thành công!");
       setTextEnglish(" ");
       setTextTranslation(" ");
+      setIsDisabled(true);
+      
+      // Sau 5 giây, bật lại nút
+      setTimeout(() => {
+        setIsDisabled(false);
+      }, 5000);
     }
   }
 
@@ -116,12 +123,6 @@ function App() {
     setTextSearch(text);
   }
 
-  function handleClickActionsButton(event, newAction) {
-    if (newAction !== null) {
-      setActions(newAction);
-    }
-  }
-
   const fetchCards = async () => {
     const { data, error } = await supabase
       .from('cards')
@@ -151,7 +152,7 @@ function App() {
           {errorMsgField1 && (<p className="errorMessage">{errorMsgField1}</p>)}
           <TextInputTranslation text={textTranslation} handleChangeTextTranslation={onChangeTextTranslation} />
           {errorMsgField2 && (<p className="errorMessage">{errorMsgField2}</p>)}
-          <ButtonText handleSubmit={onSubmit} />
+          <ButtonText handleSubmit={onSubmit} status={isDisabled} />
         </div>
         <div className="menu">
           <div className="searchField">
