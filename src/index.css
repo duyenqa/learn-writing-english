@@ -21,16 +21,7 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  /* display: flex; */
-  /* place-items: center; */
-  /* min-width: 320px; */
-  /* min-height: 100vh; */
 }
-
-/* h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-} */
 
 @media (prefers-color-scheme: light) {
   :root {
