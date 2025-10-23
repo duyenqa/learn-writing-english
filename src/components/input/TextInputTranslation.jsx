@@ -3,7 +3,7 @@ import TextField from '@mui/material/TextField';
 const TextInputTranslation = ({text, handleChangeTextTranslation}) => {
     return <TextField
           id="outlined-multiline-flexible"
-          label="Nhập câu 2"
+          label="Nghĩa của từ"
           multiline
           maxRows={2}
           size="medium"

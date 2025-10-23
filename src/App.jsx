@@ -24,12 +24,12 @@ function App() {
   const [textSearch, setTextSearch] = useState('');
 
   function onChangeTextEnglish(text) {
-    setTextEnglish(text);
+    setTextEnglish(text.trim());
     setErrorMsgField1(" ");
   }
 
   function onChangeTextTranslation(text) {
-    setTextTranslation(text);
+    setTextTranslation(text.trim());
     setErrorMsgField2(" ");
   }
 
@@ -38,7 +38,7 @@ function App() {
       setErrorMsgField1('Không được để trống!!!');
       setErrorMsgField2('Không được để trống!!!');
       return;
-    } else if (!textEnglish.trim() && textTranslation.length < 75) {
+    } else if (!textEnglish.trim() && textTranslation.length <= 75) {
       setErrorMsgField1('Không được để trống!!!');
       return;
     } else if (!textTranslation.trim() && textEnglish.length <= 75) {
