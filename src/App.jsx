@@ -18,6 +18,7 @@ function App() {
   const [textEnglish, setTextEnglish] = useState(" ");
   const [textTranslation, setTextTranslation] = useState(" ");
   const [cards, setCards] = useState([]);
+  const [filteredCards, setFilteredCards] = useState([]);
   const [errorMsgField1, setErrorMsgField1] = useState('');
   const [errorMsgField2, setErrorMsgField2] = useState('');
   const [textSearch, setTextSearch] = useState('');
@@ -96,15 +97,8 @@ function App() {
     setCards(newCards);
   }
 
-  const onChangeTextSearch = async (text) => {
+  function onChangeTextSearch(text) {
     setTextSearch(text);
-
-    const { data, error } = await supabase
-      .from('cards')
-      .select('*')
-      .ilike('text_english', `%${text}%`);
-    if (error) console.error('Lỗi:', error)
-    else if (textSearch) setCards(data)
   }
 
   const fetchCards = async () => {
@@ -120,6 +114,13 @@ function App() {
   useEffect(() => {
     fetchCards();
   }, []);
+
+  useEffect(() => {
+    const filtered = cards.filter((card) =>
+      card.text_english.toLowerCase().includes(textSearch.toLowerCase())
+    );
+    setFilteredCards(filtered);
+  },[textSearch, cards]);
 
   return (
     <section className="home">
@@ -145,7 +146,7 @@ function App() {
           </div>
         </div>
         <div className="flip-card">
-          {cards.map((card) => (
+          {filteredCards.map((card) => (
             <CardItem key={card.card_id} data={card} removeItem={deleteOneCard} />
           ))}
         </div>
