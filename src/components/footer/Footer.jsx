@@ -1,9 +1,11 @@
+import Typography from '@mui/material/Typography';
+
 export default function Footer() {
  return (
    <footer className="footer">
-        <p className="textFooter">
-            Bản quyền &copy; của Ngô Thị Kim Duyên 2025 - {new Date().getFullYear()}
-        </p>
+        <Typography variant="subtitle2" gutterBottom>
+            2025 - {new Date().getFullYear()}
+        </Typography>
    </footer>
  );
 }
