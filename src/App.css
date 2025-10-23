@@ -103,12 +103,13 @@
 }
 
 .searchField {
-  width: 80%;
+  width: 60%;
   padding: 1rem 0;
 }
 
 .features {
   display: flex;
+  flex-wrap: wrap;
   gap: 20px;
 }
 
@@ -146,7 +147,6 @@
 
   .menu{
     gap: 5px;
-    justify-content: center;
   }
 
   .searchField {
