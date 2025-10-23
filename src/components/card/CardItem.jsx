@@ -25,9 +25,9 @@ const CardItem = ({ data, removeItem }) => {
             <div className="cardItem">
                 <div className="btn-delete">
                     <Tooltip title="Xóa" placement="top">
-                        <IconButton 
-                            size="small" 
-                            aria-label="delete" 
+                        <IconButton
+                            size="small"
+                            aria-label="delete"
                             onClick={() => setOpenModal(true)}
                             sx={{
                                 color: '#000',
@@ -35,25 +35,25 @@ const CardItem = ({ data, removeItem }) => {
                                     color: 'aqua'
                                 },
                             }}>
-                        <DeleteOutlinedIcon sx={{fontSize: '25px'}}/>
-                    </IconButton>
+                            <DeleteOutlinedIcon sx={{ fontSize: '25px' }} />
+                        </IconButton>
                     </Tooltip>
                 </div>
                 <div className="flip-card-inner">
                     <div className="flip-card-front">
-                        <Typography 
-                            variant="body1" 
+                        <Typography
+                            variant="body1"
                             gutterBottom
-                            sx={{whiteSpace: 'wrap', padding:'1rem'}}
+                            sx={{ whiteSpace: 'wrap', padding: '1rem' }}
                         >
                             {data.text_english}
                         </Typography>
                     </div>
                     <div className="flip-card-back">
-                        <Typography 
-                            variant="body1" 
+                        <Typography
+                            variant="body1"
                             gutterBottom
-                            sx={{whiteSpace: 'wrap', padding:'1rem'}}
+                            sx={{ whiteSpace: 'wrap', padding: '1rem' }}
                         >
                             {data.text_translation}
                         </Typography>
@@ -70,7 +70,7 @@ const CardItem = ({ data, removeItem }) => {
                 </DialogTitle>
                 <DialogContent>
                     <DialogContentText>
-                        Bạn có chắc là muốn xóa không ? 
+                        Bạn có chắc là muốn xóa không ?
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>

@@ -1,18 +1,19 @@
 import { useState, useEffect } from 'react';
+import { supabase } from './supabaseClient';
 import ButtonText from './components/button/ButtonText'
 import TextInputEglish from './components/input/TextInputEnglish'
 import TextInputTranslation from './components/input/TextInputTranslation';
 import CardItem from './components/card/CardItem';
-import Button from '@mui/material/Button';
-import Badge from '@mui/material/Badge';
-import FlipCameraAndroidIcon from '@mui/icons-material/FlipCameraAndroid';
-import ArticleIcon from '@mui/icons-material/Article';
-import { supabase } from './supabaseClient';
-import { ToastContainer, toast } from 'react-toastify';
-import './App.css'
 import Footer from './components/footer/Footer';
 import ShareSocial from './components/share/ShareSocial';
 import SearchBar from './components/searchbar/SearchBar';
+import Button from '@mui/material/Button';
+import Badge from '@mui/material/Badge';
+import { ToastContainer, toast } from 'react-toastify';
+import FlipCameraAndroidIcon from '@mui/icons-material/FlipCameraAndroid';
+import ClearAllIcon from '@mui/icons-material/ClearAll';
+import ArticleIcon from '@mui/icons-material/Article';
+import './App.css'
 
 function App() {
   const [textEnglish, setTextEnglish] = useState(" ");
@@ -88,6 +89,20 @@ function App() {
     }
   }
 
+  const onDeleteAllCards = async () => {
+    const { error } = await supabase
+      .from('cards')
+      .delete()
+      .not('card_id', 'is', null);
+    fetchCards();
+    if (error) {
+      console.error('Lỗi khi xóa:', error);
+    } else {
+      toast("Xóa tất cả dữ liệu thành công!");
+      console.log('Xóa tất cả dữ liệu thành công!');
+    }
+  }
+
   function handleRandomData(data) {
     return [...data].sort(() => Math.random() - 0.5);
   }
@@ -99,6 +114,12 @@ function App() {
 
   function onChangeTextSearch(text) {
     setTextSearch(text);
+  }
+
+  function handleClickActionsButton(event, newAction) {
+    if (newAction !== null) {
+      setActions(newAction);
+    }
   }
 
   const fetchCards = async () => {
@@ -140,8 +161,12 @@ function App() {
             <Badge color="primary" badgeContent={cards.length}>
               <ArticleIcon style={{ fontSize: '32px' }} />
             </Badge>
+            
             <Button startIcon={<FlipCameraAndroidIcon />} variant="contained" size="small" onClick={onChangeCards}>
               Xáo trộn
+            </Button>
+            <Button startIcon={<ClearAllIcon />} variant="contained" size="small" onClick={onDeleteAllCards}>
+              Xóa tất cả
             </Button>
           </div>
         </div>
