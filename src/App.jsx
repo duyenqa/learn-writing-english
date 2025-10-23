@@ -4,7 +4,6 @@ import TextInputEglish from './components/input/TextInputEnglish'
 import TextInputTranslation from './components/input/TextInputTranslation';
 import CardItem from './components/card/CardItem';
 import Button from '@mui/material/Button';
-import Stack from '@mui/material/Stack';
 import Badge from '@mui/material/Badge';
 import FlipCameraAndroidIcon from '@mui/icons-material/FlipCameraAndroid';
 import ArticleIcon from '@mui/icons-material/Article';
@@ -41,19 +40,19 @@ function App() {
     } else if (!textEnglish.trim() && textTranslation.length < 75) {
       setErrorMsgField1('Không được để trống!!!');
       return;
-    } else if (!textTranslation.trim() && textEnglish.length < 75) {
+    } else if (!textTranslation.trim() && textEnglish.length <= 75) {
       setErrorMsgField2('Không được để trống!!!');
       return;
     } else if (!textEnglish.trim() && !!textTranslation.trim()) {
       setErrorMsgField1('Không được để trống!!!');
       return;
-    } else if (textTranslation.length > 75 && textEnglish.length < 75) {
+    } else if (textTranslation.length > 75 && textEnglish.length <= 75) {
       setErrorMsgField2('Văn bản quá dài. Vui lòng nhập tối đa 75 ký tự!!!');
       return;
     } else if (!textTranslation.trim() && !!textEnglish.trim()) {
       setErrorMsgField2('Không được để trống!!!');
       return;
-    } else if (textEnglish.length > 75 && textTranslation.length < 75) {
+    } else if (textEnglish.length > 75 && textTranslation.length <= 75) {
       setErrorMsgField1('Văn bản quá dài. Vui lòng nhập tối đa 75 ký tự!!!');
       return;
     } else if (textEnglish.length > 75 && textTranslation.length > 75) {
