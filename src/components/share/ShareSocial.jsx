@@ -34,7 +34,7 @@ function ShareSocial() {
                     </Tooltip>
                 </div>
             </Collapse>
-            <Fab aria-label="like" color="warning" onClick={() => setShowApps(!showApps)}>
+            <Fab aria-label="like" color="info" onClick={() => setShowApps(!showApps)}>
                 <ShareIcon />
             </Fab>
         </div>
