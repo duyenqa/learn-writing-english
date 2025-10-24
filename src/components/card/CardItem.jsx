@@ -42,7 +42,7 @@ const CardItem = ({ data, removeItem }) => {
                 <div className="flip-card-inner">
                     <div className="flip-card-front">
                         <Typography
-                            variant="body1"
+                            variant="h6"
                             gutterBottom
                             sx={{ whiteSpace: 'wrap', padding: '1rem' }}
                         >
@@ -51,7 +51,7 @@ const CardItem = ({ data, removeItem }) => {
                     </div>
                     <div className="flip-card-back">
                         <Typography
-                            variant="body1"
+                            variant="subtitle2"
                             gutterBottom
                             sx={{ whiteSpace: 'wrap', padding: '1rem' }}
                         >
