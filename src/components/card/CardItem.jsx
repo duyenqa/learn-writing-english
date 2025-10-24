@@ -32,7 +32,7 @@ const CardItem = ({ data, removeItem }) => {
                             sx={{
                                 color: '#000',
                                 '&:hover': {
-                                    color: 'aqua'
+                                    color: '#ff6f61'
                                 },
                             }}>
                             <DeleteOutlinedIcon sx={{ fontSize: '25px' }} />
