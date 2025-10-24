@@ -1,6 +1,7 @@
 .home {
   width: 100%;
   min-height: 100vh;
+  height: auto;
   background-image: url('./assets/bg.jpg');
   background-repeat: no-repeat;
   background-size: cover;
@@ -139,7 +140,6 @@
 @media (max-width: 1200px) {
   .wrapper {
     max-width: 600px;
-    height: 100dvh;
   }
 
   .form {
