@@ -35,7 +35,7 @@ const CardItem = ({ data, removeItem }) => {
                                     color: '#ff6f61'
                                 },
                             }}>
-                            <DeleteOutlinedIcon sx={{ fontSize: '25px' }} />
+                            <DeleteOutlinedIcon sx={{ fontSize: '30px' }} />
                         </IconButton>
                     </Tooltip>
                 </div>
