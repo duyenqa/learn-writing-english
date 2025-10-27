@@ -26,12 +26,12 @@ function App() {
   const [isDisabled, setIsDisabled] = useState(false);
 
   function onChangeTextEnglish(text) {
-    setTextEnglish(text.trim());
+    setTextEnglish(text);
     setErrorMsgField1(" ");
   }
 
   function onChangeTextTranslation(text) {
-    setTextTranslation(text.trim());
+    setTextTranslation(text);
     setErrorMsgField2(" ");
   }
 
