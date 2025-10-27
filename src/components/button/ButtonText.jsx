@@ -2,7 +2,6 @@ import Button from '@mui/material/Button';
 import SaveOutlinedIcon from '@mui/icons-material/SaveOutlined';
 
 const ButtonText = ({status, handleSubmit}) => {
-    console.log("xem: " + status);
     return <Button
         variant="contained"
         startIcon={<SaveOutlinedIcon />}
