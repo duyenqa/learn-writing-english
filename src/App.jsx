@@ -1,5 +1,6 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { supabase } from './supabaseClient';
+import { utils, writeFile } from 'xlsx';
 import ButtonText from './components/button/ButtonText'
 import TextInputEglish from './components/input/TextInputEnglish'
 import TextInputTranslation from './components/input/TextInputTranslation';
@@ -10,7 +11,6 @@ import SearchBar from './components/searchbar/SearchBar';
 import MultipleButtons from './components/buttons/MultipleButtons';
 import Badge from '@mui/material/Badge';
 import { ToastContainer, toast } from 'react-toastify';
-import { useDownloadExcel } from "react-export-table-to-excel";
 import FlipCameraAndroidIcon from '@mui/icons-material/FlipCameraAndroid';
 import FileDownloadIcon from '@mui/icons-material/FileDownload';
 import ClearAllIcon from '@mui/icons-material/ClearAll';
@@ -26,7 +26,6 @@ function App() {
   const [errorMsgField2, setErrorMsgField2] = useState('');
   const [textSearch, setTextSearch] = useState('');
   const [isDisabled, setIsDisabled] = useState(false);
-  const tableRef = useRef(null);
 
   function onChangeTextEnglish(text) {
     setTextEnglish(text);
@@ -81,7 +80,7 @@ function App() {
       setTextEnglish(" ");
       setTextTranslation(" ");
       setIsDisabled(true);
-      
+
       // Sau 5 giây, bật lại nút
       setTimeout(() => {
         setIsDisabled(false);
@@ -126,11 +125,13 @@ function App() {
     setTextSearch(text);
   }
 
-  // const { onDownload } = useDownloadExcel({
-  //   currentTableRef: tableRef.current,
-  //   filename: "Users table",
-  //   sheet: "Users"
-  // });
+  function exportExcel() {
+    let wb = utils.book_new(),
+    ws = utils.json_to_sheet(cards);
+
+    utils.book_append_sheet(wb, ws, "vocabulary");
+    writeFile(wb, "vocabulary.xlsx");
+  }
 
   const fetchCards = async () => {
     const { data, error } = await supabase
@@ -151,7 +152,7 @@ function App() {
       card.text_english.toLowerCase().includes(textSearch.toLowerCase())
     );
     setFilteredCards(filtered);
-  },[textSearch, cards]);
+  }, [textSearch, cards]);
 
   return (
     <section className="home">
@@ -171,13 +172,14 @@ function App() {
             <Badge color="primary" badgeContent={cards.length}>
               <BookmarkBorderOutlinedIcon style={{ fontSize: '32px' }} />
             </Badge>
-            
-            <MultipleButtons 
+
+            <MultipleButtons
               nameIcon1={<FlipCameraAndroidIcon />}
               text1="Xáo trộn"
               randomData={onChangeCards}
               nameIcon2={<FileDownloadIcon />}
               text2="Tải file"
+              downloadFile={exportExcel}
               nameIcon3={<ClearAllIcon />}
               text3="Xóa tất cả"
               removeAllData={onDeleteAllCards}
