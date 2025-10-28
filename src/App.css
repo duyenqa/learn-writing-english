@@ -131,12 +131,6 @@
 
 .footer {
   width: 100%;
-  position: fixed;
-  bottom:0;
-}
-
-.shapeFooter{
-  width: 70%;
   height: 50px;
   display: flex;
   justify-content: center;
@@ -163,11 +157,6 @@
   .searchField {
     width: 100%;
   }
-  
-  .shapeFooter{
-    width: 100%;
-    max-width: 360px;
-  }
 }
 
 @media (min-width: 480px) and (max-width: 1068px) {
@@ -187,10 +176,6 @@
 
   .searchField {
     width: 100%;
-  }
-
-  .shapeFooter{
-    max-width: 600px;
   }
 }
 
