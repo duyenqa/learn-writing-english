@@ -10,6 +10,7 @@ import ShareSocial from './components/share/ShareSocial';
 import SearchBar from './components/searchbar/SearchBar';
 import MultipleButtons from './components/buttons/MultipleButtons';
 import Badge from '@mui/material/Badge';
+import Paper from '@mui/material/Paper';
 import { ToastContainer, toast } from 'react-toastify';
 import FlipCameraAndroidIcon from '@mui/icons-material/FlipCameraAndroid';
 import FileDownloadIcon from '@mui/icons-material/FileDownload';
@@ -166,7 +167,9 @@ function App() {
         </div>
         <div className="menu">
           <div className="searchField">
-            <SearchBar text={textSearch} handleChangeTextSearch={onChangeTextSearch} />
+            <Paper elevation={0}>
+              <SearchBar text={textSearch} handleChangeTextSearch={onChangeTextSearch} />
+            </Paper>
           </div>
           <div className="features">
             <Badge color="primary" badgeContent={cards.length}>
