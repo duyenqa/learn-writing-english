@@ -14,9 +14,8 @@ const MultipleButtons = ({nameIcon1, text1, nameIcon2, text2,nameIcon3, text3,ra
             },
             width: {
                 xs: '100%', 
-                sm: 'auto',
-            },
-            flexWrap: 'wrap'
+                sm: 'auto'
+            }
         }}>
             <Button startIcon={nameIcon1} onClick={() => randomData()}>{text1}</Button>
             <Button startIcon={nameIcon2} onClick={() => downloadFile()}>{text2}</Button>

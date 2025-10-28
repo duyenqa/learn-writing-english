@@ -112,6 +112,7 @@
 
 .features {
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   gap: 20px;
 }
@@ -152,6 +153,11 @@
 
   .form {
     max-width: 100%;
+  }
+
+  .menu{
+    gap: 5px;
+    justify-content: center;
   }
 
   .searchField {

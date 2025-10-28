@@ -195,6 +195,7 @@ function App() {
           ))}
         </div>
         <ShareSocial />
+        <br/>
         <Footer />
       </div>
       <ToastContainer
