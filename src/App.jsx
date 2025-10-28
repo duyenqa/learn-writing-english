@@ -7,12 +7,13 @@ import CardItem from './components/card/CardItem';
 import Footer from './components/footer/Footer';
 import ShareSocial from './components/share/ShareSocial';
 import SearchBar from './components/searchbar/SearchBar';
-import Button from '@mui/material/Button';
+import MultipleButtons from './components/buttons/MultipleButtons';
 import Badge from '@mui/material/Badge';
 import { ToastContainer, toast } from 'react-toastify';
 import FlipCameraAndroidIcon from '@mui/icons-material/FlipCameraAndroid';
+import FileDownloadIcon from '@mui/icons-material/FileDownload';
 import ClearAllIcon from '@mui/icons-material/ClearAll';
-import ArticleIcon from '@mui/icons-material/Article';
+import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlined';
 import './App.css'
 
 function App() {
@@ -160,15 +161,19 @@ function App() {
           </div>
           <div className="features">
             <Badge color="primary" badgeContent={cards.length}>
-              <ArticleIcon style={{ fontSize: '32px' }} />
+              <BookmarkBorderOutlinedIcon style={{ fontSize: '32px' }} />
             </Badge>
             
-            <Button startIcon={<FlipCameraAndroidIcon />} variant="contained" size="small" onClick={onChangeCards}>
-              Xáo trộn
-            </Button>
-            <Button startIcon={<ClearAllIcon />} variant="contained" size="small" onClick={onDeleteAllCards}>
-              Xóa tất cả
-            </Button>
+            <MultipleButtons 
+              nameIcon1={<FlipCameraAndroidIcon />}
+              text1="Xáo trộn"
+              randomData={onChangeCards}
+              nameIcon2={<FileDownloadIcon />}
+              text2="Tải file"
+              nameIcon3={<ClearAllIcon />}
+              text3="Xóa tất cả"
+              removeAllData={onDeleteAllCards}
+            />
           </div>
         </div>
         <div className="flip-card">
