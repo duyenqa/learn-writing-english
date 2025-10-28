@@ -1,7 +1,6 @@
 .home {
   width: 100%;
   min-height: 100vh;
-  height: auto;
   background-image: url('./assets/bg.jpg');
   background-repeat: no-repeat;
   background-size: cover;
@@ -107,7 +106,7 @@
 }
 
 .searchField {
-  width: 60%;
+  width: 50%;
   padding: 1rem 0;
 }
 
@@ -139,10 +138,11 @@
   background-color: rgba(255, 255, 255, 0.3);
 }
 
-@media (max-width: 992px) {
+@media (min-width: 480px) and (max-width: 1068px) {
   .wrapper {
     width: 100%;
     max-width: 800px;
+    background-color: beige;
   }
   .form {
     max-width: 100%;
@@ -156,4 +156,14 @@
   .searchField {
     width: 100%;
   }
+}
+
+@media (min-width: 1070px) {
+  .menu{
+    gap: 5px;
+    justify-content: center;
+  }
+  .searchField {
+    max-width: 40%;
+  } 
 }

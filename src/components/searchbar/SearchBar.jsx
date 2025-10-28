@@ -1,6 +1,6 @@
 import TextField from '@mui/material/TextField';
 
-const SearchBar = ({text, handleChangeTextSearch}) => {
+const SearchBar = ({ text, handleChangeTextSearch }) => {
     return (
         <TextField
             label="Tìm kiếm"
