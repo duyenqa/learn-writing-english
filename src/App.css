@@ -130,12 +130,11 @@
 
 .footer {
   width: 100%;
-  margin: 1rem 0;
   position: fixed;
   bottom:0;
 }
 
-.footer > .shapeFooter{
+.shapeFooter{
   width: 70%;
   height: 50px;
   display: flex;
@@ -145,11 +144,32 @@
   background-color: rgba(255, 255, 255, 0.3);
 }
 
+@media(max-width: 768px){
+  .wrapper {
+    width: 100%;
+    max-width: 800px;
+  }
+
+  .form {
+    max-width: 100%;
+  }
+
+  .searchField {
+    width: 100%;
+  }
+  
+  .shapeFooter{
+    width: 100%;
+    max-width: 360px;
+  }
+}
+
 @media (min-width: 480px) and (max-width: 1068px) {
   .wrapper {
     width: 100%;
     max-width: 800px;
   }
+
   .form {
     max-width: 100%;
   }
@@ -161,6 +181,10 @@
 
   .searchField {
     width: 100%;
+  }
+
+  .shapeFooter{
+    max-width: 600px;
   }
 }
 
