@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { supabase } from './supabaseClient';
 import ButtonText from './components/button/ButtonText'
 import TextInputEglish from './components/input/TextInputEnglish'
@@ -10,11 +10,12 @@ import SearchBar from './components/searchbar/SearchBar';
 import MultipleButtons from './components/buttons/MultipleButtons';
 import Badge from '@mui/material/Badge';
 import { ToastContainer, toast } from 'react-toastify';
+import { useDownloadExcel } from "react-export-table-to-excel";
 import FlipCameraAndroidIcon from '@mui/icons-material/FlipCameraAndroid';
 import FileDownloadIcon from '@mui/icons-material/FileDownload';
 import ClearAllIcon from '@mui/icons-material/ClearAll';
 import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlined';
-import './App.css'
+import './App.css';
 
 function App() {
   const [textEnglish, setTextEnglish] = useState(" ");
@@ -25,6 +26,7 @@ function App() {
   const [errorMsgField2, setErrorMsgField2] = useState('');
   const [textSearch, setTextSearch] = useState('');
   const [isDisabled, setIsDisabled] = useState(false);
+  const tableRef = useRef(null);
 
   function onChangeTextEnglish(text) {
     setTextEnglish(text);
@@ -123,6 +125,12 @@ function App() {
   function onChangeTextSearch(text) {
     setTextSearch(text);
   }
+
+  // const { onDownload } = useDownloadExcel({
+  //   currentTableRef: tableRef.current,
+  //   filename: "Users table",
+  //   sheet: "Users"
+  // });
 
   const fetchCards = async () => {
     const { data, error } = await supabase
