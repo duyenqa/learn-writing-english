@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { Collapse, Fab, Tooltip } from "@mui/material";
+import ShareIcon from '@mui/icons-material/Share';
 import {
     EmailShareButton,
     FacebookShareButton,
@@ -7,12 +9,11 @@ import {
     TwitterIcon,
     EmailIcon
 } from "react-share";
-import { Collapse, Fab, Tooltip } from "@mui/material";
-import ShareIcon from '@mui/icons-material/Share';
+import { shareUrl } from '../../utils/constant';
 
 function ShareSocial() {
     const [showApps, setShowApps] = useState(false);
-    const shareUrl='https://learn-writing-english.vercel.app/'
+    
     return (
         <div className="shareApps">
             <Collapse in={showApps}>
