@@ -15,6 +15,13 @@ const MultipleButtons = ({nameIcon1, text1, nameIcon2, text2,nameIcon3, text3,ra
             width: {
                 xs: '100%', 
                 sm: 'auto'
+            },
+            gap: {
+                xs: '10px',
+                sm: '10px',
+                md: '10px',
+                lg: '0px',
+                xl: '0px'
             }
         }}>
             <Button startIcon={nameIcon1} onClick={() => randomData()}>{text1}</Button>
