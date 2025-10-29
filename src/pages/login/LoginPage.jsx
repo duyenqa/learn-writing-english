@@ -46,6 +46,7 @@ function LoginPage() {
         <TextField
           id="standard-basic"
           label="Email"
+          placeholder="your_email@gmail.com"
           variant="standard"
           value={email}
           onChange={handleChangeEmail}
@@ -56,6 +57,7 @@ function LoginPage() {
         <TextField
           id="standard-password-input"
           label="Password"
+          placeholder='Enter password'
           type={showPassword ? 'text' : 'password'}
           autoComplete="off"
           variant="standard"

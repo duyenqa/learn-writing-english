@@ -55,7 +55,7 @@ function SignUpPage() {
       <div className="formSignup">
         <TextField
           label="Username"
-          placeholder='Vimeocon123'
+          placeholder='meocon123'
           variant="standard"
           value={username}
           onChange={handleChangeUsername}
@@ -65,6 +65,7 @@ function SignUpPage() {
         {errorUsername && (<p className="errorMessage">{errorUsername}</p>)}
         <TextField
           label="Email"
+          placeholder="your_email@gmail.com"
           variant="standard"
           value={email}
           onChange={handleChangeEmail}
@@ -75,6 +76,7 @@ function SignUpPage() {
         <TextField
           id="standard-password-input"
           label="Password"
+          placeholder='Enter password'
           type={showPassword ? 'text' : 'password'}
           autoComplete="off"
           variant="standard"
