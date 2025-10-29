@@ -3,9 +3,10 @@ import TextField from '@mui/material/TextField';
 const SearchBar = ({ text, handleChangeTextSearch }) => {
     return (
         <TextField
-            label="Tìm kiếm"
+            id="outlined-search" 
+            label="Tìm kiếm" 
+            type="search"
             placeholder='Nhập từ tiếng anh'
-            id="outlined-size-small"
             size="small"
             value={text}
             fullWidth
