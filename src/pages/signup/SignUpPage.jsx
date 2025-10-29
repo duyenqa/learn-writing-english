@@ -2,6 +2,10 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
+import InputAdornment from '@mui/material/InputAdornment';
+import IconButton from '@mui/material/IconButton';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import './styles.css';
 
 function SignUpPage() {
@@ -12,6 +16,7 @@ function SignUpPage() {
   const [errorUsername, setErrorUsername] = useState(" ");
   const [errorEmail, setErrorEmail] = useState(" ");
   const [errorPassword, setErrorPassword] = useState(" ");
+  const [showPassword, setShowPassword] = useState(false);
 
   function handleChangeUsername(event) {
     setUsername(event.target.value);
@@ -49,7 +54,8 @@ function SignUpPage() {
     <section className="signupPage">
       <div className="formSignup">
         <TextField
-          label="username"
+          label="Username"
+          placeholder='Vimeocon123'
           variant="standard"
           value={username}
           onChange={handleChangeUsername}
@@ -67,12 +73,22 @@ function SignUpPage() {
         />
         {errorEmail && (<p className="errorMessage">{errorEmail}</p>)}
         <TextField
-          label="Mật khẩu"
-          type="password"
+          id="standard-password-input"
+          label="Password"
+          type={showPassword ? 'text' : 'password'}
           autoComplete="off"
           variant="standard"
           value={password}
           onChange={handleChangePassword}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton onClick={() => setShowPassword((prev) => !prev)} edge="end">
+                  {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
+                </IconButton>
+              </InputAdornment>
+            ),
+          }}
           required
         />
         {errorPassword && (<p className="errorMessage">{errorPassword}</p>)}

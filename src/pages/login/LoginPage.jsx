@@ -2,6 +2,10 @@ import {useState} from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
+import InputAdornment from '@mui/material/InputAdornment';
+import IconButton from '@mui/material/IconButton';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import './styles.css';
 
 function LoginPage() {
@@ -10,6 +14,7 @@ function LoginPage() {
   const[password, setPassword] = useState("");
   const[errorEmail, setErrorEmail] = useState(" ");
   const[errorPassword, setErrorPassword] = useState(" ");
+  const [showPassword, setShowPassword] = useState(false);
 
   function handleChangeEmail(event) {
     setEmail(event.target.value);
@@ -51,11 +56,20 @@ function LoginPage() {
         <TextField
           id="standard-password-input"
           label="Password"
-          type="password"
+          type={showPassword ? 'text' : 'password'}
           autoComplete="off"
           variant="standard"
           value={password}
           onChange={handleChangePassword}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton onClick={() => setShowPassword((prev) => !prev)} edge="end">
+                  {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
+                </IconButton>
+              </InputAdornment>
+            ),
+          }}
           required
         />
         {errorPassword && (<p className="errorMessage">{errorPassword}</p>)}
