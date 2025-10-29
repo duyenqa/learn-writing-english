@@ -1,11 +1,11 @@
-.loginPage {
+.signupPage {
     width: 100%;
     min-height: 100vh;
     display: grid;
     place-items: center;
 }
 
-.formLogin {
+.formSignup {
     width: 40%;
     max-width: 400px;
     background-color: #fff;
@@ -27,7 +27,7 @@
 }
 
 @media(max-width: 768px){
-    .formLogin {
+    .formSignup {
         width: 80%;
     }
 }

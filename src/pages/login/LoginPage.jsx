@@ -1,5 +1,5 @@
-import { useNavigate } from 'react-router-dom';
 import {useState} from 'react';
+import { useNavigate, Link } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import './styles.css';
@@ -30,13 +30,13 @@ function LoginPage() {
     }else if(!!email.trim() && !password.trim()){
       setErrorPassword("Không được để trống!");
     }else{
-      navigate('/home');
+      navigate('/');
       console.log(email, password);
     }
   }
 
   return (
-    <div className="loginPage">
+    <section className="loginPage">
       <div className="formLogin">
         <TextField
           id="standard-basic"
@@ -59,9 +59,13 @@ function LoginPage() {
           required
         />
         {errorPassword && (<p className="errorMessage">{errorPassword}</p>)}
+
+        <div className="link">
+          <Link to="/sign-up">Đăng ký tài khoản</Link>
+        </div>
         <Button variant="contained" onClick={handleSubmit}>Đăng Nhập</Button>
       </div>
-    </div>
+    </section>
   )
 };
 
