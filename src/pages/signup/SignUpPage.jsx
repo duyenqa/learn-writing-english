@@ -49,7 +49,6 @@ function SignUpPage() {
     <section className="signupPage">
       <div className="formSignup">
         <TextField
-          // id="standard-basic"
           label="username"
           variant="standard"
           value={username}
@@ -59,7 +58,6 @@ function SignUpPage() {
         />
         {errorUsername && (<p className="errorMessage">{errorUsername}</p>)}
         <TextField
-          // id="standard-basic"
           label="Email"
           variant="standard"
           value={email}
@@ -69,7 +67,6 @@ function SignUpPage() {
         />
         {errorEmail && (<p className="errorMessage">{errorEmail}</p>)}
         <TextField
-          // id="standard-password-input"
           label="Mật khẩu"
           type="password"
           autoComplete="off"
