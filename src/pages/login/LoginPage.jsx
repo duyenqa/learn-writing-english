@@ -6,8 +6,8 @@ import './styles.css';
 
 function LoginPage() {
   const navigate = useNavigate();
-  const[email, setEmail] = useState(" ");
-  const[password, setPassword] = useState(" ");
+  const[email, setEmail] = useState("");
+  const[password, setPassword] = useState("");
   const[errorEmail, setErrorEmail] = useState(" ");
   const[errorPassword, setErrorPassword] = useState(" ");
 
@@ -44,6 +44,7 @@ function LoginPage() {
           variant="standard"
           value={email}
           onChange={handleChangeEmail}
+          autoComplete='off'
           required
         />
         {errorEmail && (<p className="errorMessage">{errorEmail}</p>)}
@@ -51,7 +52,7 @@ function LoginPage() {
           id="standard-password-input"
           label="Password"
           type="password"
-          autoComplete="current-password"
+          autoComplete="off"
           variant="standard"
           value={password}
           onChange={handleChangePassword}

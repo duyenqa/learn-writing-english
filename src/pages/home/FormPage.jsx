@@ -19,8 +19,8 @@ import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlin
 import './styles.css';
 
 function FormPage() {
-    const [textEnglish, setTextEnglish] = useState(" ");
-    const [textTranslation, setTextTranslation] = useState(" ");
+    const [textEnglish, setTextEnglish] = useState("");
+    const [textTranslation, setTextTranslation] = useState("");
     const [cards, setCards] = useState([]);
     const [filteredCards, setFilteredCards] = useState([]);
     const [errorMsgField1, setErrorMsgField1] = useState('');
