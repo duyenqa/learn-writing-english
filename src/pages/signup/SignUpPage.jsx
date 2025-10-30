@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { supabase } from "../../supabaseClient";
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import Button from '@mui/material/Button';

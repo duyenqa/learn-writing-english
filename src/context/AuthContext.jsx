@@ -16,6 +16,12 @@ export const AuthContextProvider = ({ children }) => {
         }
         return { success: true, data };
     }
+
+    const signOut = async () => {
+        const {error} = await supabase.auth.signOut();
+        if(error) console.error(error.message);
+    }
+
     useEffect(() => {
         const getInformationSignIn = async () => {
             const { data } = await supabase.auth.getSession();
@@ -36,7 +42,7 @@ export const AuthContextProvider = ({ children }) => {
     }, []);
 
     return (
-        <AuthContext.Provider value={{ session, signUpUser }}>{children}</AuthContext.Provider>
+        <AuthContext.Provider value={{ session, signUpUser, signOut }}>{children}</AuthContext.Provider>
     )
 }
 export const useAuth = () => {

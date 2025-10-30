@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { supabase } from '../../supabaseClient';
 import { useAuth } from "../../context/AuthContext";
 import { utils, writeFile } from 'xlsx';
@@ -35,7 +36,8 @@ function FormPage() {
     const [textSearch, setTextSearch] = useState('');
     const [isDisabled, setIsDisabled] = useState(false);
     const [anchorEl, setAnchorEl] = useState(null);
-    const { session } = useAuth();
+    const { session, signOut } = useAuth();
+    const navigate = useNavigate();
 
     function onChangeTextEnglish(text) {
         setTextEnglish(text);
@@ -143,6 +145,16 @@ function FormPage() {
         writeFile(wb, "vocabulary.xlsx");
     }
 
+    const handleSignOut = async (event) => {
+        event.preventDefault();
+        try{
+            await signOut();
+            navigate('/');
+        }catch(error){
+            console.error(error);
+        }
+    }
+
     const fetchCards = async () => {
         const { data, error } = await supabase
             .from('cards')
@@ -196,7 +208,7 @@ function FormPage() {
                         <MenuItem onClick={() => setAnchorEl(null)}>
                             <Chip icon={<FaceIcon />} label={JSON.stringify(session?.user?.email)} />
                         </MenuItem>
-                        <MenuItem onClick={() => setAnchorEl(null)}>Đăng xuất</MenuItem>
+                        <MenuItem onClick={handleSignOut}>Đăng xuất</MenuItem>
                     </Menu>
                 </div>
             </div>
