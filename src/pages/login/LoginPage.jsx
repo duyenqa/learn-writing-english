@@ -1,6 +1,7 @@
 import {useState} from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
+import {useNotification} from '../../context/MessageContext';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
@@ -17,6 +18,7 @@ function LoginPage() {
   const[errorPassword, setErrorPassword] = useState(" ");
   const[showPassword, setShowPassword] = useState(false);
   const{ signInUser } = useAuth();
+  const {toast} = useNotification();
 
   function handleChangeEmail(event) {
     setEmail(event.target.value);
@@ -36,11 +38,15 @@ function LoginPage() {
       setErrorEmail("Không được để trống!");
     }else if(!!email.trim() && !password.trim()){
       setErrorPassword("Không được để trống!");
+    }else if (password.length < 8) {
+      setErrorPassword("Mật khẩu phải tối thiểu 8 ký tự!");
     }else{
       try {
         const result = await signInUser(email, password);
         if (result.success) {
           navigate("/home");
+        }else{
+          toast(result.error);
         }
       } catch (error) {
         console.error(error.message);

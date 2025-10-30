@@ -26,14 +26,18 @@ export const AuthContextProvider = ({ children }) => {
         try{
             const {data, error} = await supabase.auth.signInWithPassword({email, password});
             if(error){
+                console.error("sign in error occurred: ", error);
                 return {
                     success: false,
-                    error: error.message
+                    error: "Đăng nhập thất bại!!!"
                 }
             }
             return {success: true, data};
         }catch(error){
-            console.error(error);
+            return {
+                success: false,
+                error: "Lỗi không xác định!!!"
+            }
         }
     }
 
