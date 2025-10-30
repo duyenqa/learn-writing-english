@@ -1,5 +1,6 @@
 import {useState} from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
@@ -14,7 +15,8 @@ function LoginPage() {
   const[password, setPassword] = useState("");
   const[errorEmail, setErrorEmail] = useState(" ");
   const[errorPassword, setErrorPassword] = useState(" ");
-  const [showPassword, setShowPassword] = useState(false);
+  const[showPassword, setShowPassword] = useState(false);
+  const{ signInUser } = useAuth();
 
   function handleChangeEmail(event) {
     setEmail(event.target.value);
@@ -26,7 +28,7 @@ function LoginPage() {
     setErrorPassword(" ");
   }
 
-  function handleSubmit() {
+  const handleSubmit = async () => {
     if(!email.trim() && !password.trim()){
       setErrorEmail("Không được để trống!");
       setErrorPassword("Không được để trống!");
@@ -35,8 +37,14 @@ function LoginPage() {
     }else if(!!email.trim() && !password.trim()){
       setErrorPassword("Không được để trống!");
     }else{
-      navigate('/');
-      console.log(email, password);
+      try {
+        const result = await signInUser(email, password);
+        if (result.success) {
+          navigate("/home");
+        }
+      } catch (error) {
+        console.error(error.message);
+      }
     }
   }
 
