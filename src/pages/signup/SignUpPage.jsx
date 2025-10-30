@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
+import { useNotification } from '../../context/MessageContext';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
@@ -18,7 +19,8 @@ function SignUpPage() {
   const [errorEmail, setErrorEmail] = useState(" ");
   const [errorPassword, setErrorPassword] = useState(" ");
   const [showPassword, setShowPassword] = useState(false);
-  const { session, signUpUser } = useAuth();
+  const { signUpUser } = useAuth();
+  const {toast} = useNotification();
 
   function handleChangeUsername(event) {
     setUsername(event.target.value);
@@ -51,9 +53,13 @@ function SignUpPage() {
       try {
         const result = await signUpUser(email, password);
         if (result.success) {
-          navigate("/home");
+          toast("Đăng ký thành công");
+          setTimeout(() => {
+            navigate("/home");
+          }, 5000)
         }
       } catch (error) {
+        toast("Đăng ký thất bại!!!");
         console.error(error.message);
       }
     }
