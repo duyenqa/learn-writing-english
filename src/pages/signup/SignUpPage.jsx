@@ -1,5 +1,7 @@
 import { useState } from 'react';
+import { supabase } from "../../supabaseClient";
 import { useNavigate, Link } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
@@ -17,6 +19,10 @@ function SignUpPage() {
   const [errorEmail, setErrorEmail] = useState(" ");
   const [errorPassword, setErrorPassword] = useState(" ");
   const [showPassword, setShowPassword] = useState(false);
+  const { session, signUpUser } = useAuth();
+
+  console.log(JSON.stringify(session));
+
 
   function handleChangeUsername(event) {
     setUsername(event.target.value);
@@ -33,7 +39,7 @@ function SignUpPage() {
     setErrorPassword(" ");
   }
 
-  function handleSubmit() {
+  const handleSubmit = async () => {
     if (!username.trim() && !email.trim() && !password.trim()) {
       setErrorUsername("Không được để trống!");
       setErrorEmail("Không được để trống!");
@@ -46,10 +52,17 @@ function SignUpPage() {
     } else if (!username.trim() && !!email.trim() && !!password.trim()) {
       setErrorUsername("Không được để trống!");
     } else {
-      navigate('/');
-      console.log(username, email, password);
+      try {
+        const result = await signUpUser(email, password);
+        if (result.success) {
+          navigate("/home");
+        }
+      } catch (error) {
+        console.error(error.message);
+      }
     }
   }
+
   return (
     <section className="signupPage">
       <div className="formSignup">

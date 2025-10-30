@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '../../supabaseClient';
+import { useAuth } from "../../context/AuthContext";
 import { utils, writeFile } from 'xlsx';
 import ButtonText from '../../components/button/ButtonText';
 import TextInputEglish from '../../components/input/TextInputEnglish'
@@ -11,11 +12,17 @@ import SearchBar from '../../components/searchbar/SearchBar';
 import MultipleButtons from '../../components/buttons/MultipleButtons';
 import Badge from '@mui/material/Badge';
 import Paper from '@mui/material/Paper';
+import Chip from '@mui/material/Chip';
+import IconButton from '@mui/material/IconButton';
+import MenuItem from '@mui/material/MenuItem';
+import Menu from '@mui/material/Menu';
+import AccountCircle from '@mui/icons-material/AccountCircle';
 import { ToastContainer, toast } from 'react-toastify';
 import FlipCameraAndroidIcon from '@mui/icons-material/FlipCameraAndroid';
 import FileDownloadIcon from '@mui/icons-material/FileDownload';
 import ClearAllIcon from '@mui/icons-material/ClearAll';
 import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlined';
+import FaceIcon from '@mui/icons-material/Face';
 import './styles.css';
 
 function FormPage() {
@@ -27,6 +34,8 @@ function FormPage() {
     const [errorMsgField2, setErrorMsgField2] = useState('');
     const [textSearch, setTextSearch] = useState('');
     const [isDisabled, setIsDisabled] = useState(false);
+    const [anchorEl, setAnchorEl] = useState(null);
+    const { session } = useAuth();
 
     function onChangeTextEnglish(text) {
         setTextEnglish(text);
@@ -154,8 +163,43 @@ function FormPage() {
         );
         setFilteredCards(filtered);
     }, [textSearch, cards]);
+    
     return (
         <section className="home">
+            <div className="mainMenu">
+                <div className="navbar">
+                    <IconButton
+                        size="large"
+                        aria-label="account of current user"
+                        aria-controls="menu-appbar"
+                        aria-haspopup="true"
+                        onClick={(event) => setAnchorEl(event.currentTarget)}
+                        color="inherit"
+                    >
+                        <AccountCircle />
+                    </IconButton>
+                    <Menu
+                        id="menu-appbar"
+                        anchorEl={anchorEl}
+                        anchorOrigin={{
+                            vertical: 'top',
+                            horizontal: 'right',
+                        }}
+                        keepMounted
+                        transformOrigin={{
+                            vertical: 'top',
+                            horizontal: 'right',
+                        }}
+                        open={Boolean(anchorEl)}
+                        onClose={() => setAnchorEl(null)}
+                    >
+                        <MenuItem onClick={() => setAnchorEl(null)}>
+                            <Chip icon={<FaceIcon />} label={JSON.stringify(session?.user?.email)} />
+                        </MenuItem>
+                        <MenuItem onClick={() => setAnchorEl(null)}>Đăng xuất</MenuItem>
+                    </Menu>
+                </div>
+            </div>
             <div className="wrapper">
                 <div className="form">
                     <TextInputEglish text={textEnglish} handleChangeTextEngField={onChangeTextEnglish} />
