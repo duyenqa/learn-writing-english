@@ -20,9 +20,6 @@ function SignUpPage() {
   const [showPassword, setShowPassword] = useState(false);
   const { session, signUpUser } = useAuth();
 
-  console.log(JSON.stringify(session));
-
-
   function handleChangeUsername(event) {
     setUsername(event.target.value);
     setErrorUsername(" ");

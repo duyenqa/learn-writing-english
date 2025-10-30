@@ -3,6 +3,7 @@ import Login from "./pages/login/LoginPage";
 import SignUp from "./pages/signup/SignUpPage";
 import Home from "./pages/home/FormPage";
 import PrivateRoute from "./routes/PrivateRoute";
+import { ToastContainer } from 'react-toastify';
 
 function App() {
   return (
@@ -12,6 +13,10 @@ function App() {
         <Route path="/home" element={<PrivateRoute><Home /></PrivateRoute>} />
         <Route path="/sign-up" element={<SignUp />} />
       </Routes>
+      <ToastContainer
+          position="top-right"
+          autoClose={3000}
+      />
     </>
   )
 }

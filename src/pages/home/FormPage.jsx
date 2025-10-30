@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../../supabaseClient';
 import { useAuth } from "../../context/AuthContext";
+import { useNotification } from '../../context/MessageContext';
 import { utils, writeFile } from 'xlsx';
 import ButtonText from '../../components/button/ButtonText';
 import TextInputEglish from '../../components/input/TextInputEnglish'
@@ -18,7 +19,6 @@ import IconButton from '@mui/material/IconButton';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import AccountCircle from '@mui/icons-material/AccountCircle';
-import { ToastContainer, toast } from 'react-toastify';
 import FlipCameraAndroidIcon from '@mui/icons-material/FlipCameraAndroid';
 import FileDownloadIcon from '@mui/icons-material/FileDownload';
 import ClearAllIcon from '@mui/icons-material/ClearAll';
@@ -37,6 +37,7 @@ function FormPage() {
     const [isDisabled, setIsDisabled] = useState(false);
     const [anchorEl, setAnchorEl] = useState(null);
     const { session, signOut } = useAuth();
+    const {toast} = useNotification();
     const navigate = useNavigate();
 
     function onChangeTextEnglish(text) {
@@ -253,10 +254,6 @@ function FormPage() {
                 <br />
                 <Footer />
             </div>
-            <ToastContainer
-                position="top-right"
-                autoClose={3000}
-            />
         </section>
     )
 };
