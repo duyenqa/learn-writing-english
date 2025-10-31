@@ -79,6 +79,9 @@ function SignUpPage() {
     <section className="signupPage">
       {showPopup == false ? (
       <div className="formSignup">
+        <div className="title">
+          <Typography variant="h4">Đăng ký</Typography>
+        </div>
         <TextField
           label="Username"
           placeholder='meocon123'

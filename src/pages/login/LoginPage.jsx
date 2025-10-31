@@ -6,6 +6,8 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
 import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import LoginIcon from '@mui/icons-material/Login';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import './styles.css';
@@ -64,6 +66,9 @@ function LoginPage() {
   return (
     <section className="loginPage">
       <div className="formLogin">
+        <div className="title">
+          <Typography variant="h4">Đăng nhập</Typography>
+        </div>
         <TextField
           id="standard-basic"
           label="Email"

@@ -16,6 +16,10 @@
     gap: 20px;
 }
 
+.title{
+    text-align: center;
+}
+
 .errorMessage {
   color: red;
   font-weight: 600;
