@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { supabase } from '../../supabaseClient';
 import { useAuth } from "../../context/AuthContext";
 import { useNotification } from '../../context/MessageContext';
+import { itemsOfOnePage } from '../../utils/constant';
 import { utils, writeFile } from 'xlsx';
 import ButtonText from '../../components/button/ButtonText';
 import TextInputEglish from '../../components/input/TextInputEnglish'
@@ -38,7 +39,7 @@ function FormPage() {
     const [isDisabled, setIsDisabled] = useState(false);
     const [anchorEl, setAnchorEl] = useState(null);
     const [currentPage, setCurrentPage] = useState(1);
-    let itemsPage = 6;
+    let itemsPage = itemsOfOnePage;
     let totalPages = Math.ceil(cards.length / itemsPage);
     let start = (currentPage - 1) * itemsPage;
     let end = start + itemsPage;
