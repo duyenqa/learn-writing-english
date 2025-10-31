@@ -90,20 +90,15 @@ function FormPage() {
 
         fetchCards();
 
-        if (error) {
-            setErrorMsg('Lỗi khi lưu:', error.message);
-            toast.warning("Thêm dữ liệu thất bại!");
-        } else {
-            toast.success("Thêm dữ liệu thành công!");
-            setTextEnglish(" ");
-            setTextTranslation(" ");
-            setIsDisabled(true);
+        toast.success("Thêm dữ liệu thành công!");
+        setTextEnglish(" ");
+        setTextTranslation(" ");
+        setIsDisabled(true);
 
-            // Sau 5 giây, bật lại nút
-            setTimeout(() => {
-                setIsDisabled(false);
-            }, 5000);
-        }
+        // Sau 5 giây, bật lại nút
+        setTimeout(() => {
+            setIsDisabled(false);
+        }, 5000);
     }
 
     const deleteOneCard = async (id) => {
@@ -250,11 +245,13 @@ function FormPage() {
                         />
                     </div>
                 </div>
+                
                 <div className="flip-card">
                     {filteredCards.map((card) => (
                         <CardItem key={card.card_id} data={card} removeItem={deleteOneCard} />
                     ))}
                 </div>
+                
                 <ShareSocial />
                 <br />
                 <Footer />
