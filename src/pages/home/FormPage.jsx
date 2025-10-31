@@ -13,7 +13,7 @@ import Footer from '../../components/footer/Footer';
 import ShareSocial from '../../components/share/ShareSocial';
 import SearchBar from '../../components/searchbar/SearchBar';
 import MultipleButtons from '../../components/buttons/MultipleButtons';
-import Badge from '@mui/material/Badge';
+import BadgeNumber from '../../components/badge/BadgeNumber';
 import Paper from '@mui/material/Paper';
 import Chip from '@mui/material/Chip';
 import IconButton from '@mui/material/IconButton';
@@ -24,7 +24,6 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import FlipCameraAndroidIcon from '@mui/icons-material/FlipCameraAndroid';
 import FileDownloadIcon from '@mui/icons-material/FileDownload';
 import ClearAllIcon from '@mui/icons-material/ClearAll';
-import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlined';
 import FaceIcon from '@mui/icons-material/Face';
 import './styles.css';
 
@@ -239,9 +238,7 @@ function FormPage() {
                         </Paper>
                     </div>
                     <div className="features">
-                        <Badge color="primary" badgeContent={cards.length}>
-                            <BookmarkBorderOutlinedIcon style={{ fontSize: '32px' }} />
-                        </Badge>
+                        <BadgeNumber data={cards} />
 
                         <MultipleButtons
                             nameIcon1={<FlipCameraAndroidIcon />}
