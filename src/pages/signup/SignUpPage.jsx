@@ -1,17 +1,19 @@
 import { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { useNotification } from '../../context/MessageContext';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
 import IconButton from '@mui/material/IconButton';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import Typography from '@mui/material/Typography';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import './styles.css';
 
 function SignUpPage() {
-  const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -19,6 +21,7 @@ function SignUpPage() {
   const [errorEmail, setErrorEmail] = useState(" ");
   const [errorPassword, setErrorPassword] = useState(" ");
   const [showPassword, setShowPassword] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
   const { signUpUser } = useAuth();
   const {toast} = useNotification();
 
@@ -63,9 +66,7 @@ function SignUpPage() {
         const result = await signUpUser(email, password);
         if (result.success) {
           toast("Đăng ký thành công");
-          setTimeout(() => {
-            navigate("/home");
-          }, 5000)
+          setShowPopup(true);
         }
       } catch (error) {
         toast("Đăng ký thất bại!!!");
@@ -76,6 +77,7 @@ function SignUpPage() {
 
   return (
     <section className="signupPage">
+      {showPopup == false ? (
       <div className="formSignup">
         <TextField
           label="Username"
@@ -124,6 +126,15 @@ function SignUpPage() {
         </div>
         <Button variant="contained" onClick={handleSubmit}>Đăng Ký</Button>
       </div>
+      ) : (
+        <Card>
+          <CardContent sx={{ height: '100%' }}>
+            <Typography variant="body2" color="text.secondary">
+                Bạn đi đến hộp thư email để xác thực và đăng nhập. Cảm ơn!!!
+              </Typography>
+          </CardContent>
+        </Card>
+      )}
     </section>
   )
 };
