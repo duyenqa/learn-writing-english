@@ -65,11 +65,11 @@ function SignUpPage() {
       try {
         const result = await signUpUser(email, password);
         if (result.success) {
-          toast("Đăng ký thành công");
+          toast.success("Đăng ký thành công");
           setShowPopup(true);
         }
       } catch (error) {
-        toast("Đăng ký thất bại!!!");
+        toast.warning("Đăng ký thất bại!!!");
         console.error(error.message);
       }
     }

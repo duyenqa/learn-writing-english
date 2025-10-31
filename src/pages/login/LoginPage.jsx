@@ -53,7 +53,7 @@ function LoginPage() {
         if (result.success) {
           navigate("/home");
         }else{
-          toast(result.error);
+          toast.warning(result.error);
         }
       } catch (error) {
         console.error(error.message);

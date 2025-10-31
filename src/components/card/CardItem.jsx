@@ -17,7 +17,7 @@ const CardItem = ({ data, removeItem }) => {
     const handleDeleteAndClose = () => {
         removeItem(data.card_id);
         setOpenModal(false);
-        toast("Xóa dữ liệu thành công!");
+        toast.success("Xóa dữ liệu thành công!");
     };
 
     return (

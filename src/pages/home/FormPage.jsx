@@ -87,9 +87,9 @@ function FormPage() {
 
         if (error) {
             setErrorMsg('Lỗi khi lưu:', error.message);
-            toast("Thêm dữ liệu thất bại!");
+            toast.warning("Thêm dữ liệu thất bại!");
         } else {
-            toast("Thêm dữ liệu thành công!");
+            toast.success("Thêm dữ liệu thành công!");
             setTextEnglish(" ");
             setTextTranslation(" ");
             setIsDisabled(true);
@@ -120,7 +120,7 @@ function FormPage() {
         if (error) {
             console.error('Lỗi khi xóa:', error);
         } else {
-            toast("Xóa tất cả dữ liệu thành công!");
+            toast.success("Xóa tất cả dữ liệu thành công!");
             console.log('Xóa tất cả dữ liệu thành công!');
         }
     }
