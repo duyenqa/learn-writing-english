@@ -18,6 +18,7 @@ import Chip from '@mui/material/Chip';
 import IconButton from '@mui/material/IconButton';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
+import Pagination from '@mui/material/Pagination';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import FlipCameraAndroidIcon from '@mui/icons-material/FlipCameraAndroid';
 import FileDownloadIcon from '@mui/icons-material/FileDownload';
@@ -36,6 +37,11 @@ function FormPage() {
     const [textSearch, setTextSearch] = useState('');
     const [isDisabled, setIsDisabled] = useState(false);
     const [anchorEl, setAnchorEl] = useState(null);
+    const [currentPage, setCurrentPage] = useState(1);
+    let itemsPage = 6;
+    let totalPages = Math.ceil(cards.length / itemsPage);
+    let start = (currentPage - 1) * itemsPage;
+    let end = start + itemsPage;
     const { session, signOut } = useAuth();
     const {toast} = useNotification();
     const navigate = useNavigate();
@@ -146,6 +152,10 @@ function FormPage() {
         writeFile(wb, "vocabulary.xlsx");
     }
 
+    function handleChangePageNumbers(event, value) {
+        setCurrentPage(value);
+    }
+
     const handleSignOut = async (event) => {
         event.preventDefault();
         try{
@@ -245,9 +255,20 @@ function FormPage() {
                         />
                     </div>
                 </div>
-                
+
+                <div className="numberPages">
+                    <p>Page: {currentPage}</p>
+                    <Pagination 
+                        count={totalPages} 
+                        variant="outlined" 
+                        shape="rounded" 
+                        page={currentPage} 
+                        onChange={handleChangePageNumbers}
+                    />
+                </div>
+
                 <div className="flip-card">
-                    {filteredCards.map((card) => (
+                    {filteredCards.slice(start, end).map((card) => (
                         <CardItem key={card.card_id} data={card} removeItem={deleteOneCard} />
                     ))}
                 </div>
