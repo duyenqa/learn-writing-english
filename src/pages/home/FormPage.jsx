@@ -79,9 +79,14 @@ function FormPage() {
             return;
         }
 
-        const { data, error } = await supabase
+        const { data: { user } } = await supabase.auth.getUser();
+            await supabase
             .from('cards')
-            .insert([{ text_english: textEnglish, text_translation: textTranslation }]);
+            .insert([{ 
+                text_english: textEnglish, 
+                text_translation: textTranslation,
+                user_id: user.id 
+            }]);
 
         fetchCards();
 
