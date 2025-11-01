@@ -15,16 +15,17 @@ import SearchBar from '../../components/searchbar/SearchBar';
 import MultipleButtons from '../../components/buttons/MultipleButtons';
 import BadgeNumber from '../../components/badge/BadgeNumber';
 import Paper from '@mui/material/Paper';
-import Chip from '@mui/material/Chip';
 import IconButton from '@mui/material/IconButton';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
+import ListItemIcon from '@mui/material/ListItemIcon';
 import Pagination from '@mui/material/Pagination';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import FlipCameraAndroidIcon from '@mui/icons-material/FlipCameraAndroid';
 import FileDownloadIcon from '@mui/icons-material/FileDownload';
 import ClearAllIcon from '@mui/icons-material/ClearAll';
 import FaceIcon from '@mui/icons-material/Face';
+import LogoutIcon from '@mui/icons-material/Logout';
 import './styles.css';
 
 function FormPage() {
@@ -43,7 +44,7 @@ function FormPage() {
     let start = (currentPage - 1) * itemsPage;
     let end = start + itemsPage;
     const { session, signOut } = useAuth();
-    const {toast} = useNotification();
+    const { toast } = useNotification();
     const navigate = useNavigate();
 
     function onChangeTextEnglish(text) {
@@ -86,12 +87,12 @@ function FormPage() {
         }
 
         const { data: { user } } = await supabase.auth.getUser();
-            await supabase
+        await supabase
             .from('cards')
-            .insert([{ 
-                text_english: textEnglish, 
+            .insert([{
+                text_english: textEnglish,
                 text_translation: textTranslation,
-                user_id: user.id 
+                user_id: user.id
             }]);
 
         fetchCards();
@@ -158,10 +159,10 @@ function FormPage() {
 
     const handleSignOut = async (event) => {
         event.preventDefault();
-        try{
+        try {
             await signOut();
             navigate('/');
-        }catch(error){
+        } catch (error) {
             console.error(error);
         }
     }
@@ -186,10 +187,10 @@ function FormPage() {
         );
         setFilteredCards(filtered);
     }, [textSearch, cards]);
-    
+
     return (
         <section className="home">
-            <div className="mainMenu">
+            <div className="wrapper">
                 <div className="navbar">
                     <IconButton
                         size="large"
@@ -199,13 +200,14 @@ function FormPage() {
                         onClick={(event) => setAnchorEl(event.currentTarget)}
                         color="inherit"
                     >
-                        <AccountCircle />
+                        <AccountCircle sx={{ fontSize: '32px' }} />
                     </IconButton>
                     <Menu
-                        id="menu-appbar"
+                        id="demo-positioned-menu"
+                        aria-labelledby="demo-positioned-button"
                         anchorEl={anchorEl}
                         anchorOrigin={{
-                            vertical: 'top',
+                            vertical: 'bottom',
                             horizontal: 'right',
                         }}
                         keepMounted
@@ -217,13 +219,19 @@ function FormPage() {
                         onClose={() => setAnchorEl(null)}
                     >
                         <MenuItem onClick={() => setAnchorEl(null)}>
-                            <Chip icon={<FaceIcon />} label={JSON.stringify(session?.user?.email)} />
+                            <ListItemIcon>
+                                <FaceIcon fontSize="small" />
+                            </ListItemIcon>
+                            {JSON.stringify(session?.user?.email)}
                         </MenuItem>
-                        <MenuItem onClick={handleSignOut}>Đăng xuất</MenuItem>
+                        <MenuItem onClick={handleSignOut}>
+                            <ListItemIcon>
+                                <LogoutIcon fontSize="small" />
+                            </ListItemIcon>
+                            Đăng xuất
+                        </MenuItem>
                     </Menu>
                 </div>
-            </div>
-            <div className="wrapper">
                 <div className="form">
                     <TextInputEglish text={textEnglish} handleChangeTextEngField={onChangeTextEnglish} />
                     {errorMsgField1 && (<p className="errorMessage">{errorMsgField1}</p>)}
@@ -256,11 +264,11 @@ function FormPage() {
 
                 <div className="numberPages">
                     <p>Page: {currentPage}</p>
-                    <Pagination 
-                        count={totalPages} 
-                        variant="outlined" 
-                        shape="rounded" 
-                        page={currentPage} 
+                    <Pagination
+                        count={totalPages}
+                        variant="outlined"
+                        shape="rounded"
+                        page={currentPage}
                         onChange={handleChangePageNumbers}
                     />
                 </div>
@@ -270,7 +278,7 @@ function FormPage() {
                         <CardItem key={card.card_id} data={card} removeItem={deleteOneCard} />
                     ))}
                 </div>
-                
+
                 <ShareSocial />
                 <br />
                 <Footer />
