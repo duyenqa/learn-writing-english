@@ -15,10 +15,6 @@
   box-sizing: border-box;
 }
 
-.mainMenu{
-  width: 100%;
-}
-
 .navbar{
   height: 48px;
   width: 100%;
@@ -132,6 +128,7 @@
 .numberPages{
   display: flex;
   justify-content: flex-end;
+  align-items: center;
   gap: 5px;
   margin: 1rem 0;
 }
