@@ -147,7 +147,11 @@ function FormPage() {
 
     function exportExcel() {
         let wb = utils.book_new(),
-            ws = utils.json_to_sheet(cards);
+            ws = utils.json_to_sheet(cards.map(item => ({
+            "STT": item.card_id,
+            "Từ": item.text_english,
+            "Nghĩa của từ": item.text_translation
+        })));
 
         utils.book_append_sheet(wb, ws, "vocabulary");
         writeFile(wb, "vocabulary.xlsx");
