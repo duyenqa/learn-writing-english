@@ -147,8 +147,8 @@ function FormPage() {
 
     function exportExcel() {
         let wb = utils.book_new(),
-            ws = utils.json_to_sheet(cards.map(item => ({
-            "STT": item.card_id,
+            ws = utils.json_to_sheet(cards.map((item, index) => ({
+            "STT": `${index + 1}`,
             "Từ": item.text_english,
             "Nghĩa của từ": item.text_translation
         })));
