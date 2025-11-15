@@ -3,7 +3,7 @@
     min-height: 100vh;
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-evenly;
     gap: 20px;
     background-color: #f1f1f1;
 }
@@ -16,6 +16,7 @@
 img {
     max-width: 100%;
     height: auto;
+    object-fit: cover;
 }
 
 .headingText{
@@ -23,8 +24,10 @@ img {
     width: 500px;
     letter-spacing: 0.25em;
     white-space: wrap;
-    font-size: clamp(1.5rem, 2vw, 2rem);
+    font-size: clamp(2rem, 2vw, 3rem);
     text-align: center;
+    color:#f80;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 
 .formLogin {
@@ -52,15 +55,20 @@ img {
     text-align: right;
 }
 
-@media(max-width: 768px){
+@media(max-width: 1180px){
     .loginPage{
         flex-direction: column;
+        justify-content: center;
     }
 
     .headingText{
         font-weight: 700;
         width: auto;
         letter-spacing: 0.05em;
+    }
+
+    img {
+        width: 100%;
     }
 
     .formLogin {
