@@ -1,8 +1,20 @@
 .loginPage {
     width: 100%;
     min-height: 100vh;
-    display: grid;
-    place-items: center;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: row;
+    gap: 20px;
+    background-color: #f1f1f1;
+}
+
+.headingText{
+    width: 500px;
+    letter-spacing: 0.25em;
+    white-space: wrap;
+    font-size: clamp(1.5rem, 2vw, 2rem);
+    text-align: center;
 }
 
 .formLogin {
@@ -31,6 +43,9 @@
 }
 
 @media(max-width: 768px){
+    .loginPage{
+        flex-direction: column;
+    }
     .formLogin {
         width: 80%;
     }

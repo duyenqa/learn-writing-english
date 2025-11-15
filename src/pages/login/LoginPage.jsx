@@ -7,7 +7,7 @@ import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import LoginIcon from '@mui/icons-material/Login';
+import imageFlashcard from "../../assets/flashcard.png";
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import './styles.css';
@@ -65,6 +65,10 @@ function LoginPage() {
 
   return (
     <section className="loginPage">
+      <div className="introduceApp">
+        <h1 className="headingText">Chào mừng đến trang tạo flashcard</h1>
+        <img src={imageFlashcard} className="thumbnail flashcard" alt="flashcard" />
+      </div>
       <div className="formLogin">
         <div className="title">
           <Typography variant="h4">Đăng nhập</Typography>
