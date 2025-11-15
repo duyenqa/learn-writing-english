@@ -67,12 +67,17 @@ img {
         letter-spacing: 0.05em;
     }
 
+    .introduceApp{
+        text-align: center;
+    }
+
     img {
-        width: 100%;
+        width: 80%;
+        object-fit: contain;
     }
     
     .formSignup {
         width: 100%;
-        min-width: 200px;
+        max-width: 500px;
     }
 }
