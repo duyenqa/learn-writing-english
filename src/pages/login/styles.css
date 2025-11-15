@@ -4,12 +4,22 @@
     display: flex;
     align-items: center;
     justify-content: space-around;
-    flex-direction: row;
     gap: 20px;
     background-color: #f1f1f1;
 }
 
+.loginPage > * {
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
 .headingText{
+    font-weight: 700;
     width: 500px;
     letter-spacing: 0.25em;
     white-space: wrap;
@@ -18,8 +28,8 @@
 }
 
 .formLogin {
-    width: 40%;
-    max-width: 400px;
+    width: 30%;
+    max-width: 100%;
     background-color: #fff;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     padding: 1rem;
@@ -46,7 +56,15 @@
     .loginPage{
         flex-direction: column;
     }
+
+    .headingText{
+        font-weight: 700;
+        width: auto;
+        letter-spacing: 0.05em;
+    }
+
     .formLogin {
-        width: 80%;
+        width: 100%;
+        min-width: 200px;
     }
 }

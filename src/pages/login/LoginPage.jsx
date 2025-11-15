@@ -66,7 +66,7 @@ function LoginPage() {
   return (
     <section className="loginPage">
       <div className="introduceApp">
-        <h1 className="headingText">Chào mừng đến trang tạo flashcard</h1>
+        <p className="headingText">Chào mừng đến trang tạo flashcard</p>
         <img src={imageFlashcard} className="thumbnail flashcard" alt="flashcard" />
       </div>
       <div className="formLogin">
