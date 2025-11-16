@@ -147,21 +147,11 @@ function FormPage() {
 
     function exportExcel() {
         let wb = utils.book_new();
-        let changeNameColumns = cards.map((item, index) => ({
+        let ws = utils.json_to_sheet(cards.map((item, index) => ({
             "STT": `${index + 1}`,
             "Từ": item.text_english,
             "Nghĩa của từ": item.text_translation
-        }));
-        
-        let ws = utils.json_to_sheet(changeNameColumns);
-        let headers = Object.keys(changeNameColumns[0]);
-        console.log("xem headers: " + headers);
-        
-        headers.map((_, index) => {
-            const columns = utils.encode_cell({ r: 0, c: index });
-            console.log("xem columns: " + columns);
-            ws[columns].font = { bold: true };
-        });
+        })));
 
         utils.book_append_sheet(wb, ws, "vocabulary");
         writeFile(wb, "vocabulary.xlsx");
