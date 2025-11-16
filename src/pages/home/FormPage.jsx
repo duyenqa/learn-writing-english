@@ -22,6 +22,7 @@ import Menu from '@mui/material/Menu';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import Pagination from '@mui/material/Pagination';
 import AccountCircle from '@mui/icons-material/AccountCircle';
+import Slider from '@mui/material/Slider';
 import FlipCameraAndroidIcon from '@mui/icons-material/FlipCameraAndroid';
 import FileDownloadIcon from '@mui/icons-material/FileDownload';
 import ClearAllIcon from '@mui/icons-material/ClearAll';
@@ -40,6 +41,7 @@ function FormPage() {
     const [textSearch, setTextSearch] = useState('');
     const [isDisabled, setIsDisabled] = useState(false);
     const [anchorEl, setAnchorEl] = useState(null);
+    const [numberSlider, setNumberSlider] = useState(2);
     const [currentPage, setCurrentPage] = useState(1);
     let itemsPage = itemsOfOnePage;
     let totalPages = Math.ceil(cards.length / itemsPage);
@@ -48,6 +50,10 @@ function FormPage() {
     const { session, signOut } = useAuth();
     const { toast } = useNotification();
     const navigate = useNavigate();
+
+    const handleChangeSlider = (_, newValue) => {
+        setNumberSlider(newValue);
+    };
 
     function onChangeTextEnglish(text) {
         setTextEnglish(text);
@@ -59,7 +65,7 @@ function FormPage() {
         setErrorMsgField2(" ");
     }
 
-    function onChangeTextIPA(text){
+    function onChangeTextIPA(text) {
         setTextIPA(text);
     }
 
@@ -200,6 +206,11 @@ function FormPage() {
         setFilteredCards(filtered);
     }, [textSearch, cards]);
 
+    useEffect(() => {
+        const sliderCards = cards.slice(0,numberSlider).map(item => item);
+        setFilteredCards(sliderCards);
+    },[numberSlider, cards])
+
     return (
         <section className="home">
             <div className="wrapper">
@@ -273,6 +284,19 @@ function FormPage() {
                             removeAllData={onDeleteAllCards}
                         />
                     </div>
+                </div>
+
+                <div className="sliderNumberCards">
+                    <Slider
+                        marks={cards}
+                        aria-label="Always visible"
+                        step={1}
+                        value={numberSlider}
+                        valueLabelDisplay="on"
+                        min={0}
+                        max={100}
+                        onChange={handleChangeSlider}
+                    />
                 </div>
 
                 <div className="numberPages">
