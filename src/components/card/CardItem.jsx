@@ -46,7 +46,7 @@ const CardItem = ({ data, removeItem }) => {
                             gutterBottom
                             sx={{ whiteSpace: 'wrap', padding: '1rem' }}
                         >
-                            {data.text_english}
+                            {data.text_english} {data.text_ipa ? <span>/{data.text_ipa}/</span> : null}
                         </Typography>
                     </div>
                     <div className="flip-card-back">

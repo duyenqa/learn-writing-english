@@ -8,6 +8,7 @@ import { utils, writeFile } from 'xlsx';
 import ButtonText from '../../components/button/ButtonText';
 import TextInputEglish from '../../components/input/TextInputEnglish'
 import TextInputTranslation from '../../components/input/TextInputTranslation';
+import TextInputIPA from '../../components/input/TextInputIPA';
 import CardItem from '../../components/card/CardItem';
 import Footer from '../../components/footer/Footer';
 import ShareSocial from '../../components/share/ShareSocial';
@@ -31,6 +32,7 @@ import './styles.css';
 function FormPage() {
     const [textEnglish, setTextEnglish] = useState("");
     const [textTranslation, setTextTranslation] = useState("");
+    const [textIPA, setTextIPA] = useState("");
     const [cards, setCards] = useState([]);
     const [filteredCards, setFilteredCards] = useState([]);
     const [errorMsgField1, setErrorMsgField1] = useState('');
@@ -55,6 +57,10 @@ function FormPage() {
     function onChangeTextTranslation(text) {
         setTextTranslation(text);
         setErrorMsgField2(" ");
+    }
+
+    function onChangeTextIPA(text){
+        setTextIPA(text);
     }
 
     const onSubmit = async () => {
@@ -92,6 +98,7 @@ function FormPage() {
             .insert([{
                 text_english: textEnglish,
                 text_translation: textTranslation,
+                text_ipa: textIPA,
                 user_id: user.id
             }]);
 
@@ -100,6 +107,7 @@ function FormPage() {
         toast.success("Thêm dữ liệu thành công!");
         setTextEnglish(" ");
         setTextTranslation(" ");
+        setTextIPA(" ");
         setIsDisabled(true);
 
         // Sau 5 giây, bật lại nút
@@ -113,7 +121,7 @@ function FormPage() {
         if (error) {
             console.error('Lỗi khi xóa:', error.message);
         } else {
-            console.log('Đã xóa thành công');
+            // console.log('Đã xóa thành công');
             fetchCards();
         }
     }
@@ -128,7 +136,6 @@ function FormPage() {
             console.error('Lỗi khi xóa:', error);
         } else {
             toast.success("Xóa tất cả dữ liệu thành công!");
-            console.log('Xóa tất cả dữ liệu thành công!');
         }
     }
 
@@ -150,6 +157,7 @@ function FormPage() {
         let ws = utils.json_to_sheet(cards.map((item, index) => ({
             "STT": `${index + 1}`,
             "Từ": item.text_english,
+            "IPA": item.text_ipa,
             "Nghĩa của từ": item.text_translation
         })));
 
@@ -241,6 +249,7 @@ function FormPage() {
                     {errorMsgField1 && (<p className="errorMessage">{errorMsgField1}</p>)}
                     <TextInputTranslation text={textTranslation} handleChangeTextTranslation={onChangeTextTranslation} />
                     {errorMsgField2 && (<p className="errorMessage">{errorMsgField2}</p>)}
+                    <TextInputIPA text={textIPA} handleChangeTextIPA={onChangeTextIPA} />
                     <ButtonText handleSubmit={onSubmit} status={isDisabled} />
                 </div>
                 <div className="menu">
