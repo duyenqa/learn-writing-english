@@ -11,7 +11,7 @@ import Tooltip from '@mui/material/Tooltip';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import { toast } from 'react-toastify';
 
-const CardItem = ({ data, removeItem }) => {
+const CardItem = ({ data, removeItem, isExistTextIPA }) => {
     const [openModal, setOpenModal] = useState(false);
 
     const handleDeleteAndClose = () => {
@@ -46,7 +46,7 @@ const CardItem = ({ data, removeItem }) => {
                             gutterBottom
                             sx={{ whiteSpace: 'wrap', padding: '1rem' }}
                         >
-                            {data.text_english} {data.text_ipa ? <span>/{data.text_ipa}/</span> : null}
+                            {data.text_english} {data.text_ipa?.trim().length > 0 ? <span>/{data.text_ipa}/</span> : null}
                         </Typography>
                     </div>
                     <div className="flip-card-back">
