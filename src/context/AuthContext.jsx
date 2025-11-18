@@ -8,12 +8,17 @@ export const AuthContextProvider = ({ children }) => {
     const [loading, setLoading] = useState(true);
 
     const signUpUser = async (email, password) => {
+        const { data: loginData, error: loginError } = await supabase.auth.signInWithPassword({ email, password });
+
+        if (!loginError) {
+            return { success: false, message: "Email đã được đăng ký, vui lòng đăng nhập!" };
+        }
+
         const { data, error } = await supabase
             .auth.signUp({ email, password });
 
         if (error) {
-            console.error(error.message);
-            return { success: false, error };
+            return { success: false, message: error.message };
         }
         return { success: true, data };
     }

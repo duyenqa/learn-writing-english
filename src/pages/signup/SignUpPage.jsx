@@ -63,15 +63,13 @@ function SignUpPage() {
     } else if (!isValidEmail(email)) {
       setErrorEmail("Định dạng email không hợp lệ!");
     } else {
-      try {
-        const result = await signUpUser(email, password);
-        if (result.success) {
-          toast.success("Đăng ký thành công");
-          setShowPopup(true);
-        }
-      } catch (error) {
-        toast.warning("Đăng ký thất bại!!!");
-        console.error(error.message);
+      const result = await signUpUser(email, password);
+      if (!result.success) {
+        setShowPopup(false);
+        toast.warning(result.message);
+      } else {
+        setShowPopup(true);
+        toast.success("Đăng ký thành công");
       }
     }
   }
@@ -80,10 +78,10 @@ function SignUpPage() {
     <section className="signupPage">
       {showPopup == false ? (
         <>
-        <div className="introduceApp">
-                <h1 className="headingText">Chào mừng đến trang tạo flashcard</h1>
-                <img src={imageFlashcard} className="thumbnail flashcard" alt="flashcard" />
-              </div>
+          <div className="introduceApp">
+            <h1 className="headingText">Chào mừng đến trang tạo flashcard</h1>
+            <img src={imageFlashcard} className="thumbnail flashcard" alt="flashcard" />
+          </div>
           <div className="formSignup">
             <div className="title">
               <Typography variant="h4">Đăng ký</Typography>
