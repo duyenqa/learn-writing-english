@@ -35,7 +35,7 @@ export const AuthContextProvider = ({ children }) => {
                 console.error("sign in error occurred: ", error);
                 return {
                     success: false,
-                    error: "Đăng nhập thất bại!!!"
+                    error: "Tài khoản không tồn tại!Bạn chưa đăng ký!!!"
                 }
             }
             return { success: true, data };
