@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router";
 import Login from "./pages/login/LoginPage";
 import SignUp from "./pages/signup/SignUpPage";
 import Home from "./pages/home/FormPage";
+import Notes from "./pages/notes/NotesPage";
 import PrivateRoute from "./routes/PrivateRoute";
 import { ToastContainer } from 'react-toastify';
 
@@ -11,6 +12,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/home" element={<PrivateRoute><Home /></PrivateRoute>} />
+        <Route path="/notes" element={<PrivateRoute><Notes /></PrivateRoute>}/>
         <Route path="/sign-up" element={<SignUp />} />
       </Routes>
       <ToastContainer

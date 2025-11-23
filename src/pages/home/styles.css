@@ -136,7 +136,7 @@
 .shareApps {
   position: fixed;
   bottom: 8rem;
-  left: 10px;
+  right: 10px;
 }
 
 .apps {

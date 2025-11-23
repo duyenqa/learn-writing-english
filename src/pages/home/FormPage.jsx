@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { supabase } from '../../supabaseClient';
 import { useAuth } from "../../context/AuthContext";
 import { useNotification } from '../../context/MessageContext';
@@ -27,6 +27,7 @@ import FlipCameraAndroidIcon from '@mui/icons-material/FlipCameraAndroid';
 import FileDownloadIcon from '@mui/icons-material/FileDownload';
 import ClearAllIcon from '@mui/icons-material/ClearAll';
 import FaceIcon from '@mui/icons-material/Face';
+import EventNoteIcon from '@mui/icons-material/EventNote';
 import LogoutIcon from '@mui/icons-material/Logout';
 import './styles.css';
 
@@ -246,6 +247,12 @@ function FormPage() {
                                 <FaceIcon fontSize="small" />
                             </ListItemIcon>
                             {JSON.stringify(session?.user?.email)}
+                        </MenuItem>
+                        <MenuItem>
+                            <ListItemIcon>
+                                <EventNoteIcon fontSize="small" />
+                            </ListItemIcon>
+                            <Link to="/notes">Ghi chú</Link>
                         </MenuItem>
                         <MenuItem onClick={handleSignOut}>
                             <ListItemIcon>

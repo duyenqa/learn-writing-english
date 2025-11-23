@@ -1,0 +1,46 @@
+.notes {
+  width: 100%;
+  min-height: 100vh;
+}
+
+.wrapper {
+  width: 70%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+.myTable{
+    border-collapse: collapse;
+    width: 30%;
+}
+
+.rowTable{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    text-align: left;
+}
+
+.bodyTable{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    text-align: left;
+}
+
+td{
+    display: block;
+}
+
+.backHome{
+  position: fixed;
+  bottom: 8rem;
+  right: 10px;
+}
+
+@media(max-width: 768px){
+  .wrapper {
+    width: 100%;
+    max-width: 800px;
+  }
+}
