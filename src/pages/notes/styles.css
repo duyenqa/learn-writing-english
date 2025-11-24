@@ -11,9 +11,19 @@
   box-sizing: border-box;
 }
 
-.myTable{
+.wordTypes{
     border-collapse: collapse;
     width: 30%;
+}
+
+.ipaTable{
+    border-collapse: collapse;
+    width: 96%;
+}
+
+.tableWrapper{
+  width: 100%;
+  overflow-x: auto;
 }
 
 .rowTable{
@@ -22,10 +32,22 @@
     text-align: left;
 }
 
+.rowIPATable{
+  display:grid;
+  grid-template-columns: repeat(8, 1fr);
+  text-align: left;
+}
+
 .bodyTable{
     display:grid;
     grid-template-columns: repeat(3, 1fr);
     text-align: left;
+}
+
+.bodyIPATable{
+  display:grid;
+  grid-template-columns: repeat(8, 1fr);
+  text-align: left;
 }
 
 td{

@@ -12,6 +12,7 @@ import "./styles.css";
 function NotesPage() {
     const [tabIndex, setTabIndex] = useState('1');
     const [typesOfword, setTypesOfWord] = useState([]);
+    const [soundIPA, setSoundIPA] = useState([]);
 
     const handleChangeTabs = (event, newValue) => {
         setTabIndex(newValue);
@@ -29,6 +30,38 @@ function NotesPage() {
         return typesOfword.map((item) => <td key={item.id}>{"-" + item.adjective}</td>);
     }
 
+    const getSingleVowels = () => {
+        return soundIPA.map((item) => <td key={item.id}>{item.single_vowel}</td>)
+    }
+
+    const getDescriptionSingleVowels = () => {
+        return soundIPA.map((item) => <td key={item.id}>{item.detail_single_vowel}</td>)
+    }
+
+    const getDoubleVowels = () => {
+        return soundIPA.map((item) => <td key={item.id}>{item.double_vowel}</td>)
+    }
+
+    const getDescriptionDoubleVowels = () => {
+        return soundIPA.map((item) => <td key={item.id}>{item.detail_double_vowel}</td>)
+    }
+
+    const getVoicelessConsonant = () => {
+        return soundIPA.map((item) => <td key={item.id}>{item.voiceless_consonant}</td>)
+    }
+
+    const getDescriptionVoicelessConsonant = () => {
+        return soundIPA.map((item) => <td key={item.id}>{item.detail_voiceless_consonant}</td>)
+    }
+
+    const getVoicedConsonant = () => {
+        return soundIPA.map((item) => <td key={item.id}>{item.voiced_consonant}</td>)
+    }
+
+    const getDescriptionVoicedConsonant = () => {
+        return soundIPA.map((item) => <td key={item.id}>{item.detail_voiced_consonant}</td>)
+    }
+
     const fetchTypesOfWords = async () => {
         const { data, error } = await supabase
             .from('word_types')
@@ -38,8 +71,18 @@ function NotesPage() {
         else setTypesOfWord(data);
     }
 
+    const fetchIPAEnglish = async () => {
+        const { data, error } = await supabase
+            .from('ipa')
+            .select('*')
+
+        if (error) console.error('Lỗi:', error);
+        else setSoundIPA(data);
+    }
+
     useEffect(() => {
         fetchTypesOfWords();
+        fetchIPAEnglish();
     }, [])
 
     return (
@@ -61,7 +104,7 @@ function NotesPage() {
                             </TabList>
                         </Box>
                         <TabPanel value="1">
-                            <table className="myTable">
+                            <table className="wordTypes">
                                 <thead>
                                     <tr className="rowTable">
                                         <th><Chip label="Danh từ" variant="outlined" /></th>
@@ -76,12 +119,39 @@ function NotesPage() {
                                 </tbody>
                             </table>
                         </TabPanel>
-                        <TabPanel value="2">Item Two</TabPanel>
+                        <TabPanel value="2">
+                            <div className="tableWrapper">
+                                <table className="ipaTable">
+                                    <thead>
+                                        <tr className="rowIPATable">
+                                            <th>Nguyên âm đơn</th>
+                                            <th>Cách đọc</th>
+                                            <th>Nguyên âm đôi</th>
+                                            <th>Cách đọc</th>
+                                            <th>Phụ âm vô thanh</th>
+                                            <th>Cách đọc</th>
+                                            <th>Phụ âm hữu thanh</th>
+                                            <th>Cách đọc</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody className="bodyIPATable">
+                                        <tr>{getSingleVowels()}</tr>
+                                        <tr>{getDescriptionSingleVowels()}</tr>
+                                        <tr>{getDoubleVowels()}</tr>
+                                        <tr>{getDescriptionDoubleVowels()}</tr>
+                                        <tr>{getVoicelessConsonant()}</tr>
+                                        <tr>{getDescriptionVoicelessConsonant()}</tr>
+                                        <tr>{getVoicedConsonant()}</tr>
+                                        <tr>{getDescriptionVoicedConsonant()}</tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </TabPanel>
                         <TabPanel value="3">Item Three</TabPanel>
                     </TabContext>
                 </Box>
 
-                <ButtonBackHome/>
+                <ButtonBackHome />
             </div>
         </section>
     )
