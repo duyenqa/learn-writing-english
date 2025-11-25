@@ -11,18 +11,18 @@ import Tooltip from '@mui/material/Tooltip';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import { toast } from 'react-toastify';
 
-const CardItem = ({ data, removeItem }) => {
+const NoteItem = ({ data, removeItemNote }) => {
     const [openModal, setOpenModal] = useState(false);
 
     const handleDeleteAndClose = () => {
-        removeItem(data.card_id);
+        removeItemNote(data.id);
         setOpenModal(false);
         toast.success("Xóa dữ liệu thành công!");
     };
 
     return (
         <>
-            <div className="cardItem">
+            <div className="noteItem">
                 <div className="btn-delete">
                     <Tooltip title="Xóa" placement="top">
                         <IconButton
@@ -39,25 +39,15 @@ const CardItem = ({ data, removeItem }) => {
                         </IconButton>
                     </Tooltip>
                 </div>
-                <div className="flip-card-inner">
-                    <div className="flip-card-front">
-                        <Typography
-                            variant="h6"
-                            gutterBottom
-                            sx={{ whiteSpace: 'wrap', padding: '1rem' }}
-                        >
-                            {data.text_english} {data.text_ipa?.trim().length > 0 ? <span>/{data.text_ipa}/</span> : null}
-                        </Typography>
-                    </div>
-                    <div className="flip-card-back">
-                        <Typography
-                            variant="subtitle2"
-                            gutterBottom
-                            sx={{ whiteSpace: 'wrap', padding: '1rem' }}
-                        >
-                            {data.text_translation}
-                        </Typography>
-                    </div>
+                <div className="textNote">
+                    <Typography
+                        variant="h6"
+                        gutterBottom
+                        sx={{ whiteSpace: 'wrap', padding: '1rem' }}
+                        style={{ whiteSpace: 'pre-line' }}
+                    >
+                        {data.text_note}
+                    </Typography>
                 </div>
             </div>
             <Dialog
@@ -66,7 +56,7 @@ const CardItem = ({ data, removeItem }) => {
                 aria-labelledby="responsive-dialog-title"
             >
                 <DialogTitle id="responsive-dialog-title">
-                    Xóa từ
+                    Xóa Ghi Chú
                 </DialogTitle>
                 <DialogContent>
                     <DialogContentText>
@@ -77,12 +67,15 @@ const CardItem = ({ data, removeItem }) => {
                     <Button autoFocus onClick={() => setOpenModal(false)}>
                         Thoát
                     </Button>
-                    <Button onClick={handleDeleteAndClose} autoFocus>
+                    <Button 
+                    onClick={handleDeleteAndClose} 
+                    autoFocus>
                         Xóa
                     </Button>
                 </DialogActions>
             </Dialog>
         </>
-    );
-}
-export default CardItem;
+    )
+};
+
+export default NoteItem;
