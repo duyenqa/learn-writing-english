@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { supabase } from "../../supabaseClient";
 import { useNotification } from '../../context/MessageContext';
 import ButtonBackHome from "../../components/buttonback/ButtonBackHome";
-import TextInputNote from "../../components/input/TextInputNote";
+import TextInput from "../../components/input/TextInput";
 import ButtonText from "../../components/button/ButtonText";
 import NoteItem from "../../components/note/NoteItem";
 import Box from '@mui/material/Box';
@@ -151,7 +151,13 @@ function NotesPage() {
         <section className="notes">
             <div className="wrapper">
                 <div className="form">
-                    <TextInputNote text={note} handleChangeTextNoteField={onChangeTextNote} />
+                    <TextInput 
+                        textLabel="Nhập ghi chú" 
+                        numberRows="3"
+                        text={note}
+                        handleChangeText={onChangeTextNote}
+                        mandatory={true}
+                    />
                     {errorMsgNote && (<p className="errorMessage">{errorMsgNote}</p>)}
                     <ButtonText handleSubmit={onSubmit} status={isDisabled} />
                 </div>

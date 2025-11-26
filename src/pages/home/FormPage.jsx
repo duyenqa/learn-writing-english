@@ -6,9 +6,7 @@ import { useNotification } from '../../context/MessageContext';
 import { itemsOfOnePage } from '../../utils/constant';
 import { utils, writeFile } from 'xlsx';
 import ButtonText from '../../components/button/ButtonText';
-import TextInputEglish from '../../components/input/TextInputEnglish'
-import TextInputTranslation from '../../components/input/TextInputTranslation';
-import TextInputIPA from '../../components/input/TextInputIPA';
+import TextInput from '../../components/input/TextInput';
 import CardItem from '../../components/card/CardItem';
 import Footer from '../../components/footer/Footer';
 import ShareSocial from '../../components/share/ShareSocial';
@@ -128,7 +126,6 @@ function FormPage() {
         if (error) {
             console.error('Lỗi khi xóa:', error.message);
         } else {
-            // console.log('Đã xóa thành công');
             fetchCards();
         }
     }
@@ -263,11 +260,31 @@ function FormPage() {
                     </Menu>
                 </div>
                 <div className="form">
-                    <TextInputEglish text={textEnglish} handleChangeTextEngField={onChangeTextEnglish} />
+                    <TextInput 
+                        textLabel= "Nhập từ mới" 
+                        numberRows= "2" 
+                        text ={textEnglish} 
+                        handleChangeText={onChangeTextEnglish}
+                        mandatory={true}
+                    />
                     {errorMsgField1 && (<p className="errorMessage">{errorMsgField1}</p>)}
-                    <TextInputTranslation text={textTranslation} handleChangeTextTranslation={onChangeTextTranslation} />
+            
+                    <TextInput
+                        textLabel= "Nghĩa của từ" 
+                        numberRows= "2" 
+                        text ={textTranslation} 
+                        handleChangeText={onChangeTextTranslation}
+                        mandatory={true}
+                    />
                     {errorMsgField2 && (<p className="errorMessage">{errorMsgField2}</p>)}
-                    <TextInputIPA text={textIPA} handleChangeTextIPA={onChangeTextIPA} />
+
+                    <TextInput
+                        textLabel="Nhập phiên âm quốc tế"
+                        numberRows= "2" 
+                        text ={textIPA} 
+                        handleChangeText={onChangeTextIPA}
+                        mandatory={false}
+                    />
                     <ButtonText handleSubmit={onSubmit} status={isDisabled} />
                 </div>
                 <div className="menu">
