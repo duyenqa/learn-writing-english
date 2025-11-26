@@ -11,6 +11,7 @@ import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
+import Pagination from '@mui/material/Pagination';
 import "./styles.css";
 
 function NotesPage() {
@@ -21,6 +22,11 @@ function NotesPage() {
     const [errorMsgNote, setErrorMsgNote] = useState('');
     const [isDisabled, setIsDisabled] = useState(false);
     const [notes, setNotes] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    let itemsPage = 3;
+    let totalPages = Math.ceil(notes.length / itemsPage);
+    let start = (currentPage - 1) * itemsPage;
+    let end = start + itemsPage;
     const { toast } = useNotification();
 
     const handleChangeTabs = (event, newValue) => {
@@ -147,6 +153,10 @@ function NotesPage() {
         }
     }
 
+    function handleChangePageNumbers(event, value) {
+        setCurrentPage(value);
+    }
+
     return (
         <section className="notes">
             <div className="wrapper">
@@ -221,8 +231,18 @@ function NotesPage() {
                             </div>
                         </TabPanel>
                         <TabPanel value="3">
+                            <div className="numberPages">
+                                <p>Page: {currentPage}</p>
+                                <Pagination
+                                    count={totalPages}
+                                    variant="outlined"
+                                    shape="rounded"
+                                    page={currentPage}
+                                    onChange={handleChangePageNumbers}
+                                />
+                            </div>
                             <div className="notes">
-                                {notes.map((note) => (
+                                {notes.slice(start, end).map((note) => (
                                     <NoteItem key={note.id} data={note} removeItemNote={handleDeleteOneNote}/>
                                 ))}
                             </div>
