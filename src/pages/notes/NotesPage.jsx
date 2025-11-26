@@ -5,6 +5,7 @@ import ButtonBackHome from "../../components/buttonback/ButtonBackHome";
 import TextInput from "../../components/input/TextInput";
 import ButtonText from "../../components/button/ButtonText";
 import NoteItem from "../../components/note/NoteItem";
+import Footer from "../../components/footer/Footer";
 import Box from '@mui/material/Box';
 import Chip from '@mui/material/Chip';
 import Tab from '@mui/material/Tab';
@@ -251,6 +252,7 @@ function NotesPage() {
                 </Box>
 
                 <ButtonBackHome />
+                <Footer/>
             </div>
         </section>
     )
