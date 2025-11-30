@@ -244,11 +244,11 @@ function FormPage() {
                             </ListItemIcon>
                             {JSON.stringify(session?.user?.email)}
                         </MenuItem>
-                        <MenuItem>
+                        <MenuItem onClick={() => navigate("/notes")}>
                             <ListItemIcon>
                                 <EventNoteIcon fontSize="small" />
                             </ListItemIcon>
-                            <Link to="/notes">Ghi chú</Link>
+                            Ghi chú
                         </MenuItem>
                         <MenuItem onClick={handleSignOut}>
                             <ListItemIcon>
