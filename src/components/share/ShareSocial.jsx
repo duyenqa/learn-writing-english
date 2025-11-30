@@ -25,7 +25,7 @@ function ShareSocial() {
                             <FacebookIcon size={40} round={true} />
                         </FacebookShareButton>
                     </Tooltip>
-                    <Tooltip title="Facebook Messenger">
+                    <Tooltip title="Messenger" placement="left">
                         <FacebookMessengerShareButton url={shareUrl}>
                             <FacebookMessengerIcon size={40} round={true} />
                         </FacebookMessengerShareButton>
