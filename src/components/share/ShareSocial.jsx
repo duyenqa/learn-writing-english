@@ -4,8 +4,10 @@ import ShareIcon from '@mui/icons-material/Share';
 import {
     EmailShareButton,
     FacebookShareButton,
+    FacebookMessengerShareButton,
     TwitterShareButton,
     FacebookIcon,
+    FacebookMessengerIcon,
     TwitterIcon,
     EmailIcon
 } from "react-share";
@@ -22,6 +24,11 @@ function ShareSocial() {
                         <FacebookShareButton url={shareUrl}>
                             <FacebookIcon size={40} round={true} />
                         </FacebookShareButton>
+                    </Tooltip>
+                    <Tooltip title="Facebook Messenger">
+                        <FacebookMessengerShareButton url={shareUrl}>
+                            <FacebookMessengerIcon size={40} round={true} />
+                        </FacebookMessengerShareButton>
                     </Tooltip>
                     <Tooltip title="Twitter" placement="left">
                         <TwitterShareButton url={shareUrl}>
