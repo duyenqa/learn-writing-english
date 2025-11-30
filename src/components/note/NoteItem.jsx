@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { toast } from 'react-toastify';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
@@ -9,10 +10,10 @@ import DialogTitle from '@mui/material/DialogTitle';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
-import { toast } from 'react-toastify';
 
-const NoteItem = ({ data, removeItemNote }) => {
+const NoteItem = ({ data, removeItemNote, idx, indexSlider }) => {
     const [openModal, setOpenModal] = useState(false);
+    
 
     const handleDeleteAndClose = () => {
         removeItemNote(data.id);
@@ -22,7 +23,7 @@ const NoteItem = ({ data, removeItemNote }) => {
 
     return (
         <>
-            <div className="noteItem">
+            <div className={indexSlider == idx ? "noteItem" : "noteItem slide-hidden"}>
                 <div className="btn-delete">
                     <Tooltip title="Xóa" placement="top">
                         <IconButton
@@ -50,6 +51,7 @@ const NoteItem = ({ data, removeItemNote }) => {
                     </Typography>
                 </div>
             </div>
+            
             <Dialog
                 open={openModal}
                 onClose={() => setOpenModal(false)}

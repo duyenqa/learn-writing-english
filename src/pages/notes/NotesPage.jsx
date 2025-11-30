@@ -13,6 +13,8 @@ import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import Pagination from '@mui/material/Pagination';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import "./styles.css";
 
 function NotesPage() {
@@ -23,6 +25,7 @@ function NotesPage() {
     const [errorMsgNote, setErrorMsgNote] = useState('');
     const [isDisabled, setIsDisabled] = useState(false);
     const [notes, setNotes] = useState([]);
+    const [slideIndex, setSlideIndex] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
     let itemsPage = 3;
     let totalPages = Math.ceil(notes.length / itemsPage);
@@ -158,6 +161,14 @@ function NotesPage() {
         setCurrentPage(value);
     }
 
+    function prevSlider(){
+        setSlideIndex(slideIndex == 0 ? notes.length - 1 : slideIndex - 1);
+    }
+
+    function nextSlider(){
+        setSlideIndex(slideIndex == notes.length - 1 ? 0 : slideIndex + 1);
+    }
+
     return (
         <section className="notes">
             <div className="wrapper">
@@ -243,9 +254,30 @@ function NotesPage() {
                                 />
                             </div>
                             <div className="notes">
-                                {notes.slice(start, end).map((note) => (
-                                    <NoteItem key={note.id} data={note} removeItemNote={handleDeleteOneNote}/>
+                                {notes.slice(start, end).map((note, index) => (
+                                    <NoteItem 
+                                        key={note.id} 
+                                        idx={index}
+                                        data={note} 
+                                        removeItemNote={handleDeleteOneNote}
+                                        indexSlider={slideIndex}
+                                    />
                                 ))}
+                            </div>
+                            <div className="arrows">
+                                <Chip 
+                                    color="warning"
+                                    variant="outlined" 
+                                    icon={<ArrowBackIcon />}
+                                    onClick={prevSlider} 
+                                />
+
+                                <Chip 
+                                    color="warning"
+                                    variant="outlined" 
+                                    icon={<ArrowForwardIcon />}
+                                    onClick={nextSlider} 
+                                />
                             </div>
                         </TabPanel>
                     </TabContext>
