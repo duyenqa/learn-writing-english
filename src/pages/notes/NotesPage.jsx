@@ -26,11 +26,6 @@ function NotesPage() {
     const [isDisabled, setIsDisabled] = useState(false);
     const [notes, setNotes] = useState([]);
     const [slideIndex, setSlideIndex] = useState(0);
-    const [currentPage, setCurrentPage] = useState(1);
-    let itemsPage = 3;
-    let totalPages = Math.ceil(notes.length / itemsPage);
-    let start = (currentPage - 1) * itemsPage;
-    let end = start + itemsPage;
     const { toast } = useNotification();
 
     const handleChangeTabs = (event, newValue) => {
@@ -124,8 +119,8 @@ function NotesPage() {
         if(!note.trim()){
             setErrorMsgNote("Không được để trống!!!");
             return;
-        } else if(note.length > 200){
-            setErrorMsgNote('Văn bản quá dài. Vui lòng nhập tối đa 200 ký tự!!!');
+        } else if(note.length > 250){
+            setErrorMsgNote('Văn bản quá dài. Vui lòng nhập tối đa 250 ký tự!!!');
             return;
         }
 
@@ -155,10 +150,6 @@ function NotesPage() {
         } else {
             fetchNotes();
         }
-    }
-
-    function handleChangePageNumbers(event, value) {
-        setCurrentPage(value);
     }
 
     function prevSlider(){
@@ -243,7 +234,7 @@ function NotesPage() {
                             </div>
                         </TabPanel>
                         <TabPanel value="3">
-                            <div className="numberPages">
+                            {/* <div className="numberPages">
                                 <p>Page: {currentPage}</p>
                                 <Pagination
                                     count={totalPages}
@@ -252,9 +243,9 @@ function NotesPage() {
                                     page={currentPage}
                                     onChange={handleChangePageNumbers}
                                 />
-                            </div>
+                            </div> */}
                             <div className="notes">
-                                {notes.slice(start, end).map((note, index) => (
+                                {notes.map((note, index) => (
                                     <NoteItem 
                                         key={note.id} 
                                         idx={index}
