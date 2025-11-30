@@ -11,9 +11,9 @@ import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 
-const NoteItem = ({ data, removeItemNote, idx, indexSlider }) => {
+const NoteItem = ({ data, removeItemNote, idx, indexSlider, totalNumber }) => {
     const [openModal, setOpenModal] = useState(false);
-    
+
 
     const handleDeleteAndClose = () => {
         removeItemNote(data.id);
@@ -50,8 +50,11 @@ const NoteItem = ({ data, removeItemNote, idx, indexSlider }) => {
                         {data.text_note}
                     </Typography>
                 </div>
+                <div className="number-text">
+                    {`${idx + 1}/${totalNumber}`}
+                </div>
             </div>
-            
+
             <Dialog
                 open={openModal}
                 onClose={() => setOpenModal(false)}
@@ -69,9 +72,9 @@ const NoteItem = ({ data, removeItemNote, idx, indexSlider }) => {
                     <Button autoFocus onClick={() => setOpenModal(false)}>
                         Thoát
                     </Button>
-                    <Button 
-                    onClick={handleDeleteAndClose} 
-                    autoFocus>
+                    <Button
+                        onClick={handleDeleteAndClose}
+                        autoFocus>
                         Xóa
                     </Button>
                 </DialogActions>

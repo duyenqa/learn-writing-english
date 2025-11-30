@@ -234,22 +234,13 @@ function NotesPage() {
                             </div>
                         </TabPanel>
                         <TabPanel value="3">
-                            {/* <div className="numberPages">
-                                <p>Page: {currentPage}</p>
-                                <Pagination
-                                    count={totalPages}
-                                    variant="outlined"
-                                    shape="rounded"
-                                    page={currentPage}
-                                    onChange={handleChangePageNumbers}
-                                />
-                            </div> */}
                             <div className="notes">
                                 {notes.map((note, index) => (
                                     <NoteItem 
                                         key={note.id} 
                                         idx={index}
                                         data={note} 
+                                        totalNumber={notes.length}
                                         removeItemNote={handleDeleteOneNote}
                                         indexSlider={slideIndex}
                                     />
