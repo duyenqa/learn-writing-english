@@ -12,6 +12,7 @@ import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
+import IconButton from '@mui/material/IconButton';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import "./styles.css";
@@ -116,10 +117,10 @@ function NotesPage() {
     }
 
     const onSubmit = async () => {
-        if(!note.trim()){
+        if (!note.trim()) {
             setErrorMsgNote("Không được để trống!!!");
             return;
-        } else if(note.length > 250){
+        } else if (note.length > 250) {
             setErrorMsgNote('Văn bản quá dài. Vui lòng nhập tối đa 250 ký tự!!!');
             return;
         }
@@ -152,21 +153,32 @@ function NotesPage() {
         }
     }
 
-    function prevSlider(){
+    function prevSlider() {
         setSlideIndex(slideIndex == 0 ? notes.length - 1 : slideIndex - 1);
     }
 
-    function nextSlider(){
+    function nextSlider() {
         setSlideIndex(slideIndex == notes.length - 1 ? 0 : slideIndex + 1);
     }
 
     return (
         <section className="notes">
             <div className="wrapper">
-                <ArrowBackIcon onClick={() => navigate(-1)} />
+                <IconButton
+                    size="small"
+                    aria-label="delete"
+                    onClick={() => navigate(-1)}
+                    sx={{
+                        color: '#000',
+                        '&:hover': {
+                            color: '#ff6f61'
+                        },
+                    }}>
+                    <ArrowBackIcon  />
+                </IconButton>
                 <div className="form">
-                    <TextInput 
-                        textLabel="Nhập ghi chú" 
+                    <TextInput
+                        textLabel="Nhập ghi chú"
                         numberRows="3"
                         text={note}
                         handleChangeText={onChangeTextNote}
@@ -237,36 +249,36 @@ function NotesPage() {
                         <TabPanel value="3">
                             <div className="notes">
                                 {notes.map((note, index) => (
-                                    <NoteItem 
-                                        key={note.id} 
+                                    <NoteItem
+                                        key={note.id}
                                         idx={index}
-                                        data={note} 
+                                        data={note}
                                         removeItemNote={handleDeleteOneNote}
                                         indexSlider={slideIndex}
                                     />
                                 ))}
                             </div>
                             <div className="arrows">
-                                <Chip 
+                                <Chip
                                     color="warning"
-                                    variant="outlined" 
+                                    variant="outlined"
                                     icon={<ArrowBackIcon />}
-                                    onClick={prevSlider} 
+                                    onClick={prevSlider}
                                 />
                                 <div className="number-text">
                                     {`${slideIndex + 1}/${notes.length}`}
                                 </div>
-                                <Chip 
+                                <Chip
                                     color="warning"
-                                    variant="outlined" 
+                                    variant="outlined"
                                     icon={<ArrowForwardIcon />}
-                                    onClick={nextSlider} 
+                                    onClick={nextSlider}
                                 />
                             </div>
                         </TabPanel>
                     </TabContext>
                 </Box>
-                <Footer/>
+                <Footer />
             </div>
         </section>
     )
