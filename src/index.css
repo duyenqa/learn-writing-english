@@ -25,6 +25,18 @@ html, body {
   overflow-x: hidden;
 }
 
+.shareApps {
+  position: fixed;
+  bottom: 8rem;
+  right: 10px;
+}
+
+.apps {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;

@@ -9,7 +9,6 @@ import ButtonText from '../../components/button/ButtonText';
 import TextInput from '../../components/input/TextInput';
 import CardItem from '../../components/card/CardItem';
 import Footer from '../../components/footer/Footer';
-import ShareSocial from '../../components/share/ShareSocial';
 import SearchBar from '../../components/searchbar/SearchBar';
 import MultipleButtons from '../../components/buttons/MultipleButtons';
 import BadgeNumber from '../../components/badge/BadgeNumber';
@@ -340,7 +339,6 @@ function FormPage() {
                     ))}
                 </div>
 
-                <ShareSocial />
                 <br />
                 <Footer />
             </div>

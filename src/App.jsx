@@ -4,6 +4,7 @@ import SignUp from "./pages/signup/SignUpPage";
 import Home from "./pages/home/FormPage";
 import Notes from "./pages/notes/NotesPage";
 import PrivateRoute from "./routes/PrivateRoute";
+import ShareSocial from './components/share/ShareSocial';
 import { ToastContainer } from 'react-toastify';
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
         <Route path="/notes" element={<PrivateRoute><Notes /></PrivateRoute>}/>
         <Route path="/sign-up" element={<SignUp />} />
       </Routes>
+      <ShareSocial />
       <ToastContainer
           position="top-right"
           autoClose={3000}

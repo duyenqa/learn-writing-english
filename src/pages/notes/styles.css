@@ -8,7 +8,7 @@
 
 .wordTypes {
   border-collapse: collapse;
-  width: 30%;
+  width: 50%;
 }
 
 .ipaTable {
@@ -79,7 +79,6 @@ td {
   max-height: 100%;
   background-color: #ffe4f1;
   padding: 16px;
-  position: relative;
 }
 
 .slide-hidden {
@@ -94,23 +93,15 @@ td {
 }
 
 .number-text{
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
   font-weight: 600;
 }
 
 .arrows {
   display: flex;
   justify-content: center;
+  align-items: center;
   gap: 10px;
   margin: 1rem 0;
-}
-
-.backHome {
-  position: fixed;
-  bottom: 8rem;
-  right: 10px;
 }
 
 @media(max-width: 768px) {

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { supabase } from "../../supabaseClient";
 import { useNotification } from '../../context/MessageContext';
-import ButtonBackHome from "../../components/buttonback/ButtonBackHome";
+import { useNavigate } from 'react-router-dom';
 import TextInput from "../../components/input/TextInput";
 import ButtonText from "../../components/button/ButtonText";
 import NoteItem from "../../components/note/NoteItem";
@@ -12,7 +12,6 @@ import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
-import Pagination from '@mui/material/Pagination';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import "./styles.css";
@@ -26,6 +25,7 @@ function NotesPage() {
     const [isDisabled, setIsDisabled] = useState(false);
     const [notes, setNotes] = useState([]);
     const [slideIndex, setSlideIndex] = useState(0);
+    const navigate = useNavigate();
     const { toast } = useNotification();
 
     const handleChangeTabs = (event, newValue) => {
@@ -163,6 +163,7 @@ function NotesPage() {
     return (
         <section className="notes">
             <div className="wrapper">
+                <ArrowBackIcon onClick={() => navigate(-1)} />
                 <div className="form">
                     <TextInput 
                         textLabel="Nhập ghi chú" 
@@ -240,7 +241,6 @@ function NotesPage() {
                                         key={note.id} 
                                         idx={index}
                                         data={note} 
-                                        totalNumber={notes.length}
                                         removeItemNote={handleDeleteOneNote}
                                         indexSlider={slideIndex}
                                     />
@@ -253,7 +253,9 @@ function NotesPage() {
                                     icon={<ArrowBackIcon />}
                                     onClick={prevSlider} 
                                 />
-
+                                <div className="number-text">
+                                    {`${slideIndex + 1}/${notes.length}`}
+                                </div>
                                 <Chip 
                                     color="warning"
                                     variant="outlined" 
@@ -264,8 +266,6 @@ function NotesPage() {
                         </TabPanel>
                     </TabContext>
                 </Box>
-
-                <ButtonBackHome />
                 <Footer/>
             </div>
         </section>

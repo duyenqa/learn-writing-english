@@ -11,7 +11,7 @@ import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 
-const NoteItem = ({ data, removeItemNote, idx, indexSlider, totalNumber }) => {
+const NoteItem = ({ data, removeItemNote, idx, indexSlider }) => {
     const [openModal, setOpenModal] = useState(false);
 
 
@@ -49,9 +49,6 @@ const NoteItem = ({ data, removeItemNote, idx, indexSlider, totalNumber }) => {
                     >
                         {data.text_note}
                     </Typography>
-                </div>
-                <div className="number-text">
-                    {`${idx + 1}/${totalNumber}`}
                 </div>
             </div>
 
