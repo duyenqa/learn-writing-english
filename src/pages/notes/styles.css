@@ -25,28 +25,34 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   text-align: left;
+  color: #000;
 }
 
 .rowIPATable {
   display: grid;
   grid-template-columns: repeat(8, 1fr);
   text-align: left;
+  color: #000;
 }
 
 .bodyTable {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   text-align: left;
+  color: #000;
 }
 
 .bodyIPATable {
   display: grid;
   grid-template-columns: repeat(8, 1fr);
   text-align: left;
+  color: #000;
 }
 
 td {
   display: block;
+  box-shadow: inset 4px 4px 10px #bcbcbc, inset -4px -4px 10px #ffffff;
+  margin: 0.25rem;
 }
 
 .form {
@@ -70,15 +76,30 @@ td {
 .notes {
   width: 100%;
   display: flex;
-  background-color: #f1f1f1;
+  background-image: url('../../assets/beach.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .noteItem {
   width: 100%;
   height: 400px;
   max-height: 100%;
-  background-color: #ffe4f1;
+  background: linear-gradient(to top left, #fff 35px, #ffe4f1 0);
   padding: 16px;
+  border-radius: 8px;
+  position: relative;
+  color: #b76e79;
+}
+
+.noteItem:before{
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 85px;
+  height: 40px;
+  background: linear-gradient(to top left, transparent 50%, #ffcce5 0);
 }
 
 .slide-hidden {
@@ -102,6 +123,10 @@ td {
   align-items: center;
   gap: 10px;
   margin: 1rem 0;
+}
+
+.textNote{
+
 }
 
 @media(max-width: 768px) {

@@ -7,6 +7,7 @@ import ButtonText from "../../components/button/ButtonText";
 import NoteItem from "../../components/note/NoteItem";
 import Footer from "../../components/footer/Footer";
 import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
 import Chip from '@mui/material/Chip';
 import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
@@ -38,27 +39,27 @@ function NotesPage() {
     }
 
     const getAllVerbWords = () => {
-        return typesOfword.map((item) => <td key={item.id}>{"-" + item.verb}</td>);
+        return typesOfword.map((item) => <td key={item.id}>{item.verb?.trim().length > 0 ? "-" + item.verb : "/"}</td>)
     }
 
     const getAllAdjectiveWords = () => {
-        return typesOfword.map((item) => <td key={item.id}>{"-" + item.adjective}</td>);
+        return typesOfword.map((item) => <td key={item.id}>{item.adjective?.trim().length > 0 ? "-" + item.adjective : "/"}</td>)
     }
 
     const getSingleVowels = () => {
-        return soundIPA.map((item) => <td key={item.id}>{item.single_vowel}</td>)
+        return soundIPA.map((item) => <td key={item.id}>{item.single_vowel?.trim().length > 0 ? item.single_vowel : "/"}</td>)
     }
 
     const getDescriptionSingleVowels = () => {
-        return soundIPA.map((item) => <td key={item.id}>{item.detail_single_vowel}</td>)
+        return soundIPA.map((item) => <td key={item.id}>{item.detail_single_vowel?.trim().length > 0 ? item.detail_single_vowel : "/"}</td>)
     }
 
     const getDoubleVowels = () => {
-        return soundIPA.map((item) => <td key={item.id}>{item.double_vowel}</td>)
+        return soundIPA.map((item) => <td key={item.id}>{item.double_vowel?.trim().length > 0 ? item.double_vowel : "/"}</td>)
     }
 
     const getDescriptionDoubleVowels = () => {
-        return soundIPA.map((item) => <td key={item.id}>{item.detail_double_vowel}</td>)
+        return soundIPA.map((item) => <td key={item.id}>{item.detail_double_vowel?.trim().length > 0 ? item.detail_double_vowel : "/"}</td>)
     }
 
     const getVoicelessConsonant = () => {
@@ -70,11 +71,11 @@ function NotesPage() {
     }
 
     const getVoicedConsonant = () => {
-        return soundIPA.map((item) => <td key={item.id}>{item.voiced_consonant}</td>)
+        return soundIPA.map((item) => <td key={item.id}>{item.voiced_consonant?.trim().length > 0 ? item.voiced_consonant : "/"}</td>)
     }
 
     const getDescriptionVoicedConsonant = () => {
-        return soundIPA.map((item) => <td key={item.id}>{item.detail_voiced_consonant}</td>)
+        return soundIPA.map((item) => <td key={item.id}>{item.detail_voiced_consonant?.trim().length > 0 ? item.detail_voiced_consonant : "/"}</td>)
     }
 
     const fetchTypesOfWords = async () => {
@@ -174,7 +175,7 @@ function NotesPage() {
                             color: '#ff6f61'
                         },
                     }}>
-                    <ArrowBackIcon  />
+                    <ArrowBackIcon />
                 </IconButton>
                 <div className="form">
                     <TextInput
@@ -203,48 +204,48 @@ function NotesPage() {
                             </TabList>
                         </Box>
                         <TabPanel value="1">
-                            <table className="wordTypes">
-                                <thead>
-                                    <tr className="rowTable">
-                                        <th><Chip label="Danh từ" variant="outlined" /></th>
-                                        <th><Chip label="Động từ" variant="outlined" /></th>
-                                        <th><Chip label="Tính từ" variant="outlined" /></th>
-                                    </tr>
-                                </thead>
-                                <tbody className="bodyTable">
-                                    <tr>{getAllNounWords()}</tr>
-                                    <tr>{getAllVerbWords()}</tr>
-                                    <tr>{getAllAdjectiveWords()}</tr>
-                                </tbody>
-                            </table>
-                        </TabPanel>
-                        <TabPanel value="2">
-                            <div className="tableWrapper">
-                                <table className="ipaTable">
+                                <table className="wordTypes">
                                     <thead>
-                                        <tr className="rowIPATable">
-                                            <th>Nguyên âm đơn</th>
-                                            <th>Cách đọc</th>
-                                            <th>Nguyên âm đôi</th>
-                                            <th>Cách đọc</th>
-                                            <th>Phụ âm vô thanh</th>
-                                            <th>Cách đọc</th>
-                                            <th>Phụ âm hữu thanh</th>
-                                            <th>Cách đọc</th>
+                                        <tr className="rowTable">
+                                            <th><Chip label="Danh từ" variant="outlined" /></th>
+                                            <th><Chip label="Động từ" variant="outlined" /></th>
+                                            <th><Chip label="Tính từ" variant="outlined" /></th>
                                         </tr>
                                     </thead>
-                                    <tbody className="bodyIPATable">
-                                        <tr>{getSingleVowels()}</tr>
-                                        <tr>{getDescriptionSingleVowels()}</tr>
-                                        <tr>{getDoubleVowels()}</tr>
-                                        <tr>{getDescriptionDoubleVowels()}</tr>
-                                        <tr>{getVoicelessConsonant()}</tr>
-                                        <tr>{getDescriptionVoicelessConsonant()}</tr>
-                                        <tr>{getVoicedConsonant()}</tr>
-                                        <tr>{getDescriptionVoicedConsonant()}</tr>
+                                    <tbody className="bodyTable">
+                                        <tr>{getAllNounWords()}</tr>
+                                        <tr>{getAllVerbWords()}</tr>
+                                        <tr>{getAllAdjectiveWords()}</tr>
                                     </tbody>
                                 </table>
-                            </div>
+                        </TabPanel>
+                        <TabPanel value="2">
+                                <div className="tableWrapper">
+                                    <table className="ipaTable">
+                                        <thead>
+                                            <tr className="rowIPATable">
+                                                <th>Nguyên âm đơn</th>
+                                                <th>Cách đọc</th>
+                                                <th>Nguyên âm đôi</th>
+                                                <th>Cách đọc</th>
+                                                <th>Phụ âm vô thanh</th>
+                                                <th>Cách đọc</th>
+                                                <th>Phụ âm hữu thanh</th>
+                                                <th>Cách đọc</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody className="bodyIPATable">
+                                            <tr>{getSingleVowels()}</tr>
+                                            <tr>{getDescriptionSingleVowels()}</tr>
+                                            <tr>{getDoubleVowels()}</tr>
+                                            <tr>{getDescriptionDoubleVowels()}</tr>
+                                            <tr>{getVoicelessConsonant()}</tr>
+                                            <tr>{getDescriptionVoicelessConsonant()}</tr>
+                                            <tr>{getVoicedConsonant()}</tr>
+                                            <tr>{getDescriptionVoicedConsonant()}</tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                         </TabPanel>
                         <TabPanel value="3">
                             <div className="notes">
