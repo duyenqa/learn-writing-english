@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { supabase } from "../../supabaseClient";
 import { useNotification } from '../../context/MessageContext';
 import { useNavigate } from 'react-router-dom';
+import Container from '@mui/material/Container';
 import TextInput from "../../components/input/TextInput";
 import ButtonText from "../../components/button/ButtonText";
 import NoteItem from "../../components/note/NoteItem";
@@ -187,22 +188,24 @@ function NotesPage() {
                     {errorMsgNote && (<p className="errorMessage">{errorMsgNote}</p>)}
                     <ButtonText handleSubmit={onSubmit} status={isDisabled} />
                 </div>
-                <Box sx={{ width: '100%', typography: 'body1', bgcolor: 'rgba(255, 255, 255, 0.2)' }}>
-                    <TabContext value={tabIndex}>
-                        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                            <TabList
-                                onChange={handleChangeTabs}
-                                aria-label="lab API tabs example"
-                                variant="scrollable"
-                                scrollButtons
-                                allowScrollButtonsMobile
-                            >
-                                <Tab value="1" label="Nhận biết loại từ" />
-                                <Tab value="2" label="Cách phát âm" />
-                                <Tab value="3" label="Ghi chú" />
-                            </TabList>
-                        </Box>
-                        <TabPanel value="1">
+
+                <Container maxWidth={false} disableGutters>
+                    <Box sx={{ width: '100%', typography: 'body1', bgcolor: 'rgba(255, 255, 255, 0.2)' }}>
+                        <TabContext value={tabIndex}>
+                            <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                                <TabList
+                                    onChange={handleChangeTabs}
+                                    aria-label="lab API tabs example"
+                                    variant="scrollable"
+                                    scrollButtons
+                                    allowScrollButtonsMobile
+                                >
+                                    <Tab value="1" label="Nhận biết loại từ" />
+                                    <Tab value="2" label="Cách phát âm" />
+                                    <Tab value="3" label="Ghi chú" />
+                                </TabList>
+                            </Box>
+                            <TabPanel value="1">
                                 <table className="wordTypes">
                                     <thead>
                                         <tr className="rowTable">
@@ -217,8 +220,8 @@ function NotesPage() {
                                         <tr>{getAllAdjectiveWords()}</tr>
                                     </tbody>
                                 </table>
-                        </TabPanel>
-                        <TabPanel value="2">
+                            </TabPanel>
+                            <TabPanel value="2">
                                 <div className="tableWrapper">
                                     <table className="ipaTable">
                                         <thead>
@@ -245,39 +248,40 @@ function NotesPage() {
                                         </tbody>
                                     </table>
                                 </div>
-                        </TabPanel>
-                        <TabPanel value="3">
-                            <div className="notes">
-                                {notes.map((note, index) => (
-                                    <NoteItem
-                                        key={note.id}
-                                        idx={index}
-                                        data={note}
-                                        removeItemNote={handleDeleteOneNote}
-                                        indexSlider={slideIndex}
-                                    />
-                                ))}
-                            </div>
-                            <div className="arrows">
-                                <Chip
-                                    color="warning"
-                                    variant="outlined"
-                                    icon={<ArrowBackIcon />}
-                                    onClick={prevSlider}
-                                />
-                                <div className="number-text">
-                                    {`${slideIndex + 1}/${notes.length}`}
+                            </TabPanel>
+                            <TabPanel value="3">
+                                <div className="notes">
+                                    {notes.map((note, index) => (
+                                        <NoteItem
+                                            key={note.id}
+                                            idx={index}
+                                            data={note}
+                                            removeItemNote={handleDeleteOneNote}
+                                            indexSlider={slideIndex}
+                                        />
+                                    ))}
                                 </div>
-                                <Chip
-                                    color="warning"
-                                    variant="outlined"
-                                    icon={<ArrowForwardIcon />}
-                                    onClick={nextSlider}
-                                />
-                            </div>
-                        </TabPanel>
-                    </TabContext>
-                </Box>
+                                <div className="arrows">
+                                    <Chip
+                                        color="warning"
+                                        variant="outlined"
+                                        icon={<ArrowBackIcon />}
+                                        onClick={prevSlider}
+                                    />
+                                    <div className="number-text">
+                                        {`${slideIndex + 1}/${notes.length}`}
+                                    </div>
+                                    <Chip
+                                        color="warning"
+                                        variant="outlined"
+                                        icon={<ArrowForwardIcon />}
+                                        onClick={nextSlider}
+                                    />
+                                </div>
+                            </TabPanel>
+                        </TabContext>
+                    </Box>
+                </Container>
                 <Footer />
             </div>
         </section>
