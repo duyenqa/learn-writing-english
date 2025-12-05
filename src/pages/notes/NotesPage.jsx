@@ -264,7 +264,7 @@ function NotesPage() {
                                 <div className="arrows">
                                     <Chip
                                         color="warning"
-                                        variant="outlined"
+                                        variant="filled"
                                         icon={<ArrowBackIcon />}
                                         onClick={prevSlider}
                                     />
@@ -273,7 +273,7 @@ function NotesPage() {
                                     </div>
                                     <Chip
                                         color="warning"
-                                        variant="outlined"
+                                        variant="filled"
                                         icon={<ArrowForwardIcon />}
                                         onClick={nextSlider}
                                     />
