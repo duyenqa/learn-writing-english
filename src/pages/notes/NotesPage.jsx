@@ -187,7 +187,7 @@ function NotesPage() {
                     {errorMsgNote && (<p className="errorMessage">{errorMsgNote}</p>)}
                     <ButtonText handleSubmit={onSubmit} status={isDisabled} />
                 </div>
-                <Box sx={{ width: '100%', typography: 'body1' }}>
+                <Box sx={{ width: '100%', typography: 'body1', bgcolor: 'rgba(255, 255, 255, 0.2)' }}>
                     <TabContext value={tabIndex}>
                         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                             <TabList
