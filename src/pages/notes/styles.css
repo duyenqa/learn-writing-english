@@ -1,8 +1,13 @@
 .wrapper {
+  width: 95%;
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
   box-sizing: border-box;
+}
+
+.tableWrapper {
+  overflow-x: auto;
 }
 
 .wordTypes {
@@ -13,11 +18,6 @@
 .ipaTable {
   border-collapse: collapse;
   width: 96%;
-}
-
-.tableWrapper {
-  width: 100%;
-  overflow-x: auto;
 }
 
 .rowTable {
@@ -156,6 +156,7 @@ td {
     max-width: 70%;
     width: 100%;
   }
+
   .noteItem:before {
     content: "";
     position: absolute;

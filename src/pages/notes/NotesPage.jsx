@@ -2,13 +2,13 @@ import { useEffect, useState } from "react";
 import { supabase } from "../../supabaseClient";
 import { useNotification } from '../../context/MessageContext';
 import { useNavigate } from 'react-router-dom';
-import Container from '@mui/material/Container';
 import TextInput from "../../components/input/TextInput";
 import ButtonText from "../../components/button/ButtonText";
 import NoteItem from "../../components/note/NoteItem";
 import Footer from "../../components/footer/Footer";
 import Box from '@mui/material/Box';
 import Chip from '@mui/material/Chip';
+import AppBar from '@mui/material/AppBar';
 import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
@@ -189,23 +189,25 @@ function NotesPage() {
                     <ButtonText handleSubmit={onSubmit} status={isDisabled} />
                 </div>
 
-                <Container maxWidth={false} disableGutters>
-                    <Box sx={{ width: '100%', typography: 'body1', bgcolor: 'rgba(255, 255, 255, 0.2)' }}>
-                        <TabContext value={tabIndex}>
-                            <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                                <TabList
-                                    onChange={handleChangeTabs}
-                                    aria-label="lab API tabs example"
-                                    variant="scrollable"
-                                    scrollButtons
-                                    allowScrollButtonsMobile
-                                >
-                                    <Tab value="1" label="Nhận biết loại từ" />
-                                    <Tab value="2" label="Cách phát âm" />
-                                    <Tab value="3" label="Ghi chú" />
-                                </TabList>
-                            </Box>
-                            <TabPanel value="1">
+                <Box sx={{ width: '100%', typography: 'body1' }}>
+                    <TabContext value={tabIndex}>
+                        <Box sx={{ borderBottom: 1, borderColor: 'divider', bgcolor: 'warning.light' }}>
+                            <TabList
+                                onChange={handleChangeTabs}
+                                aria-label="lab API tabs example"
+                                indicatorColor="primary"
+                                textColor="inherit"
+                                variant="scrollable"
+                                scrollButtons
+                                allowScrollButtonsMobile
+                            >
+                                <Tab value="1" label="Nhận biết loại từ" />
+                                <Tab value="2" label="Cách phát âm" />
+                                <Tab value="3" label="Ghi chú" />
+                            </TabList>
+                        </Box>
+                        <TabPanel value="1">
+                            <div className="tableWrapper">
                                 <table className="wordTypes">
                                     <thead>
                                         <tr className="rowTable">
@@ -220,68 +222,68 @@ function NotesPage() {
                                         <tr>{getAllAdjectiveWords()}</tr>
                                     </tbody>
                                 </table>
-                            </TabPanel>
-                            <TabPanel value="2">
-                                <div className="tableWrapper">
-                                    <table className="ipaTable">
-                                        <thead>
-                                            <tr className="rowIPATable">
-                                                <th>Nguyên âm đơn</th>
-                                                <th>Cách đọc</th>
-                                                <th>Nguyên âm đôi</th>
-                                                <th>Cách đọc</th>
-                                                <th>Phụ âm vô thanh</th>
-                                                <th>Cách đọc</th>
-                                                <th>Phụ âm hữu thanh</th>
-                                                <th>Cách đọc</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody className="bodyIPATable">
-                                            <tr>{getSingleVowels()}</tr>
-                                            <tr>{getDescriptionSingleVowels()}</tr>
-                                            <tr>{getDoubleVowels()}</tr>
-                                            <tr>{getDescriptionDoubleVowels()}</tr>
-                                            <tr>{getVoicelessConsonant()}</tr>
-                                            <tr>{getDescriptionVoicelessConsonant()}</tr>
-                                            <tr>{getVoicedConsonant()}</tr>
-                                            <tr>{getDescriptionVoicedConsonant()}</tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </TabPanel>
-                            <TabPanel value="3">
-                                <div className="notes">
-                                    {notes.map((note, index) => (
-                                        <NoteItem
-                                            key={note.id}
-                                            idx={index}
-                                            data={note}
-                                            removeItemNote={handleDeleteOneNote}
-                                            indexSlider={slideIndex}
-                                        />
-                                    ))}
-                                </div>
-                                <div className="arrows">
-                                    <Chip
-                                        color="warning"
-                                        variant="filled"
-                                        icon={<ArrowBackIcon />}
-                                        onClick={prevSlider}
+                            </div>
+                        </TabPanel>
+                        <TabPanel value="2">
+                            <div className="tableWrapper">
+                                <table className="ipaTable">
+                                    <thead>
+                                        <tr className="rowIPATable">
+                                            <th>Nguyên âm đơn</th>
+                                            <th>Cách đọc</th>
+                                            <th>Nguyên âm đôi</th>
+                                            <th>Cách đọc</th>
+                                            <th>Phụ âm vô thanh</th>
+                                            <th>Cách đọc</th>
+                                            <th>Phụ âm hữu thanh</th>
+                                            <th>Cách đọc</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody className="bodyIPATable">
+                                        <tr>{getSingleVowels()}</tr>
+                                        <tr>{getDescriptionSingleVowels()}</tr>
+                                        <tr>{getDoubleVowels()}</tr>
+                                        <tr>{getDescriptionDoubleVowels()}</tr>
+                                        <tr>{getVoicelessConsonant()}</tr>
+                                        <tr>{getDescriptionVoicelessConsonant()}</tr>
+                                        <tr>{getVoicedConsonant()}</tr>
+                                        <tr>{getDescriptionVoicedConsonant()}</tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </TabPanel>
+                        <TabPanel value="3">
+                            <div className="notes">
+                                {notes.map((note, index) => (
+                                    <NoteItem
+                                        key={note.id}
+                                        idx={index}
+                                        data={note}
+                                        removeItemNote={handleDeleteOneNote}
+                                        indexSlider={slideIndex}
                                     />
-                                    <div className="number-text">
-                                        {`${slideIndex + 1}/${notes.length}`}
-                                    </div>
-                                    <Chip
-                                        color="warning"
-                                        variant="filled"
-                                        icon={<ArrowForwardIcon />}
-                                        onClick={nextSlider}
-                                    />
+                                ))}
+                            </div>
+                            <div className="arrows">
+                                <Chip
+                                    color="warning"
+                                    variant="filled"
+                                    icon={<ArrowBackIcon />}
+                                    onClick={prevSlider}
+                                />
+                                <div className="number-text">
+                                    {`${slideIndex + 1}/${notes.length}`}
                                 </div>
-                            </TabPanel>
-                        </TabContext>
-                    </Box>
-                </Container>
+                                <Chip
+                                    color="warning"
+                                    variant="filled"
+                                    icon={<ArrowForwardIcon />}
+                                    onClick={nextSlider}
+                                />
+                            </div>
+                        </TabPanel>
+                    </TabContext>
+                </Box>
                 <Footer />
             </div>
         </section>
