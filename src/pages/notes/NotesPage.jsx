@@ -7,7 +7,6 @@ import ButtonText from "../../components/button/ButtonText";
 import NoteItem from "../../components/note/NoteItem";
 import Footer from "../../components/footer/Footer";
 import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
 import Chip from '@mui/material/Chip';
 import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
