@@ -1,5 +1,4 @@
 .wrapper {
-  width: 70%;
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
@@ -122,6 +121,7 @@ td {
 
   .form {
     max-width: 100%;
+    width: 100%;
   }
 
   .noteItem {
@@ -152,6 +152,10 @@ td {
 }
 
 @media screen and (max-width: 1024px) {
+  .form {
+    max-width: 70%;
+    width: 100%;
+  }
   .noteItem:before {
     content: "";
     position: absolute;

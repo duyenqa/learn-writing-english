@@ -8,7 +8,6 @@
 }
 
 .wrapper {
-  width: 70%;
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
@@ -146,12 +145,13 @@
 
 @media(max-width: 768px){
   .wrapper {
-    width: 100%;
+    width: auto;
     max-width: 800px;
   }
 
   .form {
     max-width: 100%;
+    width: 100%;
   }
 
   .menu{
@@ -172,6 +172,7 @@
 
   .form {
     max-width: 100%;
+    width: 100%;
   }
 
   .menu{
