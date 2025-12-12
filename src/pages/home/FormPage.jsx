@@ -39,7 +39,7 @@ function FormPage() {
     const [textSearch, setTextSearch] = useState('');
     const [isDisabled, setIsDisabled] = useState(false);
     const [anchorEl, setAnchorEl] = useState(null);
-    const [numberSlider, setNumberSlider] = useState(2);
+    const [numberSlider, setNumberSlider] = useState(10);
     const [currentPage, setCurrentPage] = useState(1);
     let itemsPage = itemsOfOnePage;
     let totalPages = Math.ceil(cards.length / itemsPage);
