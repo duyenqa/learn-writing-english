@@ -16,6 +16,7 @@ import Paper from '@mui/material/Paper';
 import IconButton from '@mui/material/IconButton';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
+import Chip from '@mui/material/Chip';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import Pagination from '@mui/material/Pagination';
 import AccountCircle from '@mui/icons-material/AccountCircle';
@@ -23,7 +24,6 @@ import Slider from '@mui/material/Slider';
 import FlipCameraAndroidIcon from '@mui/icons-material/FlipCameraAndroid';
 import FileDownloadIcon from '@mui/icons-material/FileDownload';
 import ClearAllIcon from '@mui/icons-material/ClearAll';
-import FaceIcon from '@mui/icons-material/Face';
 import EventNoteIcon from '@mui/icons-material/EventNote';
 import LogoutIcon from '@mui/icons-material/Logout';
 import './styles.css';
@@ -212,6 +212,7 @@ function FormPage() {
         <section className="home">
             <div className="wrapper">
                 <div className="navbar">
+                    <Chip label={session?.user?.email.split("@")[0]} color="warning" />
                     <IconButton
                         size="large"
                         aria-label="account of current user"
@@ -238,12 +239,6 @@ function FormPage() {
                         open={Boolean(anchorEl)}
                         onClose={() => setAnchorEl(null)}
                     >
-                        <MenuItem onClick={() => setAnchorEl(null)}>
-                            <ListItemIcon>
-                                <FaceIcon fontSize="small" />
-                            </ListItemIcon>
-                            {JSON.stringify(session?.user?.email)}
-                        </MenuItem>
                         <MenuItem onClick={() => navigate("/notes")}>
                             <ListItemIcon>
                                 <EventNoteIcon fontSize="small" />
