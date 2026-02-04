@@ -9,7 +9,7 @@ const PrivateRoute = ({ children }) => {
         return <CircularProgress size="3rem" />;
     }
     return <>
-        {session ? <>{children}</> : <Navigate to="/sign-up" />}
+        {session ? <>{children}</> : <Navigate to="/" />}
     </>
 }
 export default PrivateRoute;

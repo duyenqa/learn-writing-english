@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { supabase } from '../../supabaseClient';
 import { useAuth } from "../../context/AuthContext";
 import { useNotification } from '../../context/MessageContext';
@@ -47,7 +46,6 @@ function FormPage() {
     let end = start + itemsPage;
     const { session, signOut } = useAuth();
     const { toast } = useNotification();
-    const navigate = useNavigate();
 
     const handleChangeSlider = (_, newValue) => {
         setNumberSlider(newValue);
@@ -176,7 +174,6 @@ function FormPage() {
         event.preventDefault();
         try {
             await signOut();
-            navigate('/');
         } catch (error) {
             console.error(error);
         }
@@ -212,7 +209,7 @@ function FormPage() {
         <section className="home">
             <div className="wrapper">
                 <div className="navbar">
-                    <Chip label={session?.user?.email.split("@")[0]} color="warning" />
+                    <Chip label={session?.user?.email} />
                     <IconButton
                         size="large"
                         aria-label="account of current user"
