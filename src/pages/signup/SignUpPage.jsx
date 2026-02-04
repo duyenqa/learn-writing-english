@@ -40,8 +40,20 @@ function SignUpPage() {
   }
 
   function isValidEmail(email) {
-    const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return emailRegex.test(email);
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@gmail+\.com$/;
+
+    if (!emailRegex.test(email)) return false;
+
+    // Lấy chuỗi local
+    const localPart = email.split("@")[0];
+    //chuỗi local 3 ký tự
+    if (localPart.length <= 3) return false;
+    // Toàn số
+    if (/^\d+$/.test(localPart)) return false;
+
+    const textFake = ["abc", "test", "demo", "user", "demouser"];
+    if(textFake.includes(localPart.toLowerCase())) return false;
+    return true;
   }
 
   const handleSubmit = async () => {
@@ -58,7 +70,7 @@ function SignUpPage() {
       setErrorUsername("Không được để trống!");
     } else if (password.length < 8) {
       setErrorPassword("Mật khẩu phải tối thiểu 8 ký tự!");
-    } else if (!isValidEmail(email)) {
+    } else if (!isValidEmail(!!email.trim())) {
       setErrorEmail("Định dạng email không hợp lệ!");
     } else {
       const result = await signUpUser(email, password);
