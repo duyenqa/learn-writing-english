@@ -70,9 +70,9 @@ function SignUpPage() {
       setErrorUsername("Không được để trống!");
     } else if (password.length < 8) {
       setErrorPassword("Mật khẩu phải tối thiểu 8 ký tự!");
-    } else if (!isValidEmail(!!email.trim())) {
+    } else if (isValidEmail(email) == false) {
       setErrorEmail("Định dạng email không hợp lệ!");
-    } else {
+    }else {
       const result = await signUpUser(email, password);
       if (!result.success) {
         toast.warning(result.message);
