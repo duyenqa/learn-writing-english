@@ -253,7 +253,7 @@ function NotesPage() {
                             </div>
                         </TabPanel>
                         <TabPanel value="3">
-                            <div className="notes">
+                            <div className="listNotes">
                                 {notes.map((note, index) => (
                                     <NoteItem
                                         key={note.id}
