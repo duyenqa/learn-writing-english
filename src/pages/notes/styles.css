@@ -1,3 +1,12 @@
+.notes {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  background-image: url('../../assets/beach.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .wrapper {
   width: 95%;
   max-width: 1200px;
@@ -70,14 +79,6 @@ td {
   color: red;
   font-weight: 600;
   margin: 0;
-}
-
-.notes {
-  width: 100%;
-  display: flex;
-  background-image: url('../../assets/beach.jpg');
-  background-repeat: no-repeat;
-  background-size: cover;
 }
 
 .noteItem {
