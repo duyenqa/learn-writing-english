@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { supabase } from '../../supabaseClient';
 import { useAuth } from "../../context/AuthContext";
 import { useNotification } from '../../context/MessageContext';
@@ -46,6 +47,7 @@ function FormPage() {
     let end = start + itemsPage;
     const { session, signOut } = useAuth();
     const { toast } = useNotification();
+    const navigate = useNavigate();
 
     const handleChangeSlider = (_, newValue) => {
         setNumberSlider(newValue);
