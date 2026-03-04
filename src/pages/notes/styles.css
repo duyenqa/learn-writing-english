@@ -32,11 +32,14 @@
 
 .tableWrapper {
   overflow-x: auto;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
 }
 
 .wordTypes {
   border-collapse: collapse;
-  width: 50%;
+  width: 80%;
 }
 
 .ipaTable {
@@ -60,9 +63,10 @@
 
 .bodyTable {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, 2.5fr);
   text-align: left;
   color: #000;
+  gap: 40px;
 }
 
 .bodyIPATable {
