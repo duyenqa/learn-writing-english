@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { supabase } from '../../supabaseClient';
 import { useAuth } from "../../context/AuthContext";
 import { useNotification } from '../../context/MessageContext';
@@ -277,6 +277,10 @@ function FormPage() {
                         handleChangeText={onChangeTextIPA}
                         mandatory={false}
                     />
+                    <Link to="https://dictionary.cambridge.org/vi/dictionary/english">
+                    Đi đến trang tìm từ để lấy phiên âm quốc tế chuẩn
+                    </Link>
+
                     <ButtonText handleSubmit={onSubmit} status={isDisabled} />
                 </div>
                 <div className="menu">
