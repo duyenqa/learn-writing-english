@@ -147,8 +147,7 @@ function FormPage() {
     }
 
     function onChangeCards() {
-        const newCards = handleRandomData(cards);
-        setCards(newCards);
+        setCards(prevCards => handleRandomData(prevCards));
     }
 
     function onChangeTextSearch(text) {
