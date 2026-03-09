@@ -3,6 +3,7 @@ import { supabase } from "../../supabaseClient";
 import { useNotification } from '../../context/MessageContext';
 import { useNavigate } from 'react-router-dom';
 import TextInput from "../../components/input/TextInput";
+import Typography from '@mui/material/Typography';
 import ButtonText from "../../components/button/ButtonText";
 import ButtonCancel from "../../components/button/ButtonCancel";
 import NoteItem from "../../components/note/NoteItem";
@@ -285,6 +286,11 @@ function NotesPage() {
                                         </Item>
                                     </Stack>
                                 </div>
+                                <div style={{ textAlign: 'center' }}> 
+                                    <Typography variant="h5" gutterBottom>
+                                        <strong>Tổng số ghi chú: {notes?.length}</strong>
+                                    </Typography>
+                                </div>
                                 {notes.map((note, index) => (
                                     <NoteItem
                                         key={note.id}
@@ -303,7 +309,7 @@ function NotesPage() {
                                     onClick={prevSlider}
                                 />
                                 <div className="number-text">
-                                    {`${slideIndex + 1}/${notes.length}`}
+                                    {notes?.length == 0 ? `${slideIndex}` :  `${slideIndex + 1}/${notes.length}`}
                                 </div>
                                 <Chip
                                     color="warning"
