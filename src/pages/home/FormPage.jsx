@@ -6,12 +6,14 @@ import { useNotification } from '../../context/MessageContext';
 import { itemsOfOnePage } from '../../utils/constant';
 import { utils, writeFile } from 'xlsx';
 import ButtonText from '../../components/button/ButtonText';
+import ButtonCancel from '../../components/button/ButtonCancel';
 import TextInput from '../../components/input/TextInput';
 import CardItem from '../../components/card/CardItem';
 import Footer from '../../components/footer/Footer';
 import SearchBar from '../../components/searchbar/SearchBar';
 import MultipleButtons from '../../components/buttons/MultipleButtons';
 import BadgeNumber from '../../components/badge/BadgeNumber';
+import Stack from '@mui/material/Stack';
 import Paper from '@mui/material/Paper';
 import IconButton from '@mui/material/IconButton';
 import MenuItem from '@mui/material/MenuItem';
@@ -26,6 +28,7 @@ import FileDownloadIcon from '@mui/icons-material/FileDownload';
 import ClearAllIcon from '@mui/icons-material/ClearAll';
 import EventNoteIcon from '@mui/icons-material/EventNote';
 import LogoutIcon from '@mui/icons-material/Logout';
+import { styled } from '@mui/material/styles';
 import './styles.css';
 
 function FormPage() {
@@ -65,6 +68,12 @@ function FormPage() {
 
     function onChangeTextIPA(text) {
         setTextIPA(text);
+    }
+
+    function onCancel() {
+        setTextEnglish(" ");
+        setTextTranslation(" ");
+        setTextIPA(" ");
     }
 
     const onSubmit = async () => {
@@ -202,9 +211,21 @@ function FormPage() {
     }, [textSearch, cards]);
 
     useEffect(() => {
-        const sliderCards = cards.slice(0,numberSlider).map(item => item);
+        const sliderCards = cards.slice(0, numberSlider).map(item => item);
         setFilteredCards(sliderCards);
-    },[numberSlider, cards])
+    }, [numberSlider, cards])
+
+    const Item = styled(Paper)(({ theme }) => ({
+        backgroundColor: 'transparent',
+        ...theme.typography.body2,
+        padding: theme.spacing(1),
+        textAlign: 'center',
+        color: (theme.vars ?? theme).palette.text.secondary,
+        flexGrow: 1,
+        ...theme.applyStyles('dark', {
+            backgroundColor: '#1A2027',
+        }),
+    }));
 
     return (
         <section className="home">
@@ -252,19 +273,19 @@ function FormPage() {
                     </Menu>
                 </div>
                 <div className="form">
-                    <TextInput 
-                        textLabel= "Nhập từ mới" 
-                        numberRows= "2" 
-                        text ={textEnglish} 
+                    <TextInput
+                        textLabel="Nhập từ mới"
+                        numberRows="2"
+                        text={textEnglish}
                         handleChangeText={onChangeTextEnglish}
                         mandatory={true}
                     />
                     {errorMsgField1 && (<p className="errorMessage">{errorMsgField1}</p>)}
-            
+
                     <TextInput
-                        textLabel= "Nghĩa của từ" 
-                        numberRows= "2" 
-                        text ={textTranslation} 
+                        textLabel="Nghĩa của từ"
+                        numberRows="2"
+                        text={textTranslation}
                         handleChangeText={onChangeTextTranslation}
                         mandatory={true}
                     />
@@ -272,16 +293,29 @@ function FormPage() {
 
                     <TextInput
                         textLabel="Nhập phiên âm quốc tế"
-                        numberRows= "2" 
-                        text ={textIPA} 
+                        numberRows="2"
+                        text={textIPA}
                         handleChangeText={onChangeTextIPA}
                         mandatory={false}
                     />
                     <Link to="https://dictionary.cambridge.org/vi/dictionary/english">
-                    Đi đến trang tìm từ để lấy phiên âm quốc tế chuẩn
+                        Đi đến trang tìm từ để lấy phiên âm quốc tế chuẩn
                     </Link>
 
-                    <ButtonText handleSubmit={onSubmit} status={isDisabled} />
+                    <Stack 
+                        spacing={{ xs: 1, sm: 2 }}
+                        direction="row"
+                        useFlexGap
+                        sx={{ flexWrap: 'wrap' }}
+                    >
+                        <Item>
+                            <ButtonText handleSubmit={onSubmit} status={isDisabled} />
+                        </Item>
+                        <Item>
+                            <ButtonCancel handleCancel={onCancel} />
+                        </Item>
+                    </Stack>
+                    
                 </div>
                 <div className="menu">
                     <div className="searchField">

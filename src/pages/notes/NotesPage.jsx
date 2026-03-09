@@ -281,7 +281,7 @@ function NotesPage() {
                                             <ButtonText handleSubmit={onSubmit} status={isDisabled} />
                                         </Item>
                                         <Item>
-                                            <ButtonCancel handleCancelNote={onCancel} />
+                                            <ButtonCancel handleCancel={onCancel} />
                                         </Item>
                                     </Stack>
                                 </div>
