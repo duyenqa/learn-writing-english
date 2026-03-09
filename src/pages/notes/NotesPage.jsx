@@ -4,18 +4,21 @@ import { useNotification } from '../../context/MessageContext';
 import { useNavigate } from 'react-router-dom';
 import TextInput from "../../components/input/TextInput";
 import ButtonText from "../../components/button/ButtonText";
+import ButtonCancel from "../../components/button/ButtonCancel";
 import NoteItem from "../../components/note/NoteItem";
 import Footer from "../../components/footer/Footer";
 import Box from '@mui/material/Box';
 import Chip from '@mui/material/Chip';
-import AppBar from '@mui/material/AppBar';
 import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
+import Stack from '@mui/material/Stack';
 import IconButton from '@mui/material/IconButton';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import Paper from '@mui/material/Paper';
+import { styled } from '@mui/material/styles';
 import "./styles.css";
 
 function NotesPage() {
@@ -115,6 +118,10 @@ function NotesPage() {
     function onChangeTextNote(text) {
         setNote(text);
         setErrorMsgNote(" ");
+    }   
+
+    function onCancel(){
+        setNote(" ");
     }
 
     const onSubmit = async () => {
@@ -162,6 +169,17 @@ function NotesPage() {
         setSlideIndex(slideIndex == notes.length - 1 ? 0 : slideIndex + 1);
     }
 
+    const Item = styled(Paper)(({ theme }) => ({
+        backgroundColor: '#fff',
+        ...theme.typography.body2,
+        padding: theme.spacing(1),
+        textAlign: 'center',
+        color: (theme.vars ?? theme).palette.text.secondary,
+        flexGrow: 1,
+        ...theme.applyStyles('dark', {
+            backgroundColor: '#1A2027',
+        }),
+    }));
     return (
         <section className="notes">
             <div className="wrapper">
@@ -252,7 +270,20 @@ function NotesPage() {
                                         mandatory={true}
                                     />
                                     {errorMsgNote && (<p className="errorMessage">{errorMsgNote}</p>)}
-                                    <ButtonText handleSubmit={onSubmit} status={isDisabled} />
+
+                                    <Stack 
+                                        spacing={{ xs: 1, sm: 2 }}
+                                        direction="row"
+                                        useFlexGap
+                                        sx={{ flexWrap: 'wrap' }}
+                                    >
+                                        <Item>
+                                            <ButtonText handleSubmit={onSubmit} status={isDisabled} />
+                                        </Item>
+                                        <Item>
+                                            <ButtonCancel handleCancelNote={onCancel} />
+                                        </Item>
+                                    </Stack>
                                 </div>
                                 {notes.map((note, index) => (
                                     <NoteItem
