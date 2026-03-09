@@ -170,7 +170,7 @@ function NotesPage() {
     }
 
     const Item = styled(Paper)(({ theme }) => ({
-        backgroundColor: '#fff',
+        backgroundColor: 'transparent',
         ...theme.typography.body2,
         padding: theme.spacing(1),
         textAlign: 'center',
