@@ -6,6 +6,7 @@ import TextInput from "../../components/input/TextInput";
 import Typography from '@mui/material/Typography';
 import ButtonText from "../../components/button/ButtonText";
 import ButtonCancel from "../../components/button/ButtonCancel";
+import Button from '@mui/material/Button';
 import NoteItem from "../../components/note/NoteItem";
 import Footer from "../../components/footer/Footer";
 import Box from '@mui/material/Box';
@@ -16,9 +17,10 @@ import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import Stack from '@mui/material/Stack';
 import IconButton from '@mui/material/IconButton';
+import Paper from '@mui/material/Paper';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import Paper from '@mui/material/Paper';
+import ClearAllIcon from '@mui/icons-material/ClearAll';
 import { styled } from '@mui/material/styles';
 import "./styles.css";
 
@@ -119,9 +121,9 @@ function NotesPage() {
     function onChangeTextNote(text) {
         setNote(text);
         setErrorMsgNote(" ");
-    }   
+    }
 
-    function onCancel(){
+    function onCancel() {
         setNote(" ");
     }
 
@@ -159,6 +161,19 @@ function NotesPage() {
             console.error('Lỗi khi xóa:', error.message);
         } else {
             fetchNotes();
+        }
+    }
+
+    const onDeleteAllNotes = async () => {
+        const { error } = await supabase
+            .from('notes')
+            .delete()
+            .not('id', 'is', null);
+        fetchNotes();
+        if (error) {
+            console.error('Lỗi khi xóa:', error);
+        } else {
+            toast.success("Xóa tất cả dữ liệu thành công!");
         }
     }
 
@@ -272,7 +287,7 @@ function NotesPage() {
                                     />
                                     {errorMsgNote && (<p className="errorMessage">{errorMsgNote}</p>)}
 
-                                    <Stack 
+                                    <Stack
                                         spacing={{ xs: 1, sm: 2 }}
                                         direction="row"
                                         useFlexGap
@@ -286,10 +301,19 @@ function NotesPage() {
                                         </Item>
                                     </Stack>
                                 </div>
-                                <div style={{ textAlign: 'center' }}> 
+                                <div style={{ textAlign: 'center' }}>
                                     <Typography variant="h5" gutterBottom>
                                         <strong>Tổng số ghi chú: {notes?.length}</strong>
                                     </Typography>
+                                </div>
+                                <div style={{ textAlign: 'right' }}>
+                                    <Button 
+                                        variant="contained"
+                                        startIcon={<ClearAllIcon />}
+                                        onClick={onDeleteAllNotes}
+                                    >
+                                        Xóa tất cả
+                                    </Button>
                                 </div>
                                 {notes.map((note, index) => (
                                     <NoteItem
@@ -309,7 +333,7 @@ function NotesPage() {
                                     onClick={prevSlider}
                                 />
                                 <div className="number-text">
-                                    {notes?.length == 0 ? `${slideIndex}` :  `${slideIndex + 1}/${notes.length}`}
+                                    {notes?.length == 0 ? `${slideIndex}` : `${slideIndex + 1}/${notes.length}`}
                                 </div>
                                 <Chip
                                     color="warning"
