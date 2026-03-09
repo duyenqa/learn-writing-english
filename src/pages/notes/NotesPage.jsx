@@ -177,17 +177,6 @@ function NotesPage() {
                     }}>
                     <ArrowBackIcon />
                 </IconButton>
-                <div className="form">
-                    <TextInput
-                        textLabel="Nhập ghi chú"
-                        numberRows="3"
-                        text={note}
-                        handleChangeText={onChangeTextNote}
-                        mandatory={true}
-                    />
-                    {errorMsgNote && (<p className="errorMessage">{errorMsgNote}</p>)}
-                    <ButtonText handleSubmit={onSubmit} status={isDisabled} />
-                </div>
 
                 <Box sx={{ width: '100%', typography: 'body1' }}>
                     <TabContext value={tabIndex}>
@@ -254,6 +243,17 @@ function NotesPage() {
                         </TabPanel>
                         <TabPanel value="3">
                             <div className="listNotes">
+                                <div className="form">
+                                    <TextInput
+                                        textLabel="Nhập ghi chú"
+                                        numberRows="3"
+                                        text={note}
+                                        handleChangeText={onChangeTextNote}
+                                        mandatory={true}
+                                    />
+                                    {errorMsgNote && (<p className="errorMessage">{errorMsgNote}</p>)}
+                                    <ButtonText handleSubmit={onSubmit} status={isDisabled} />
+                                </div>
                                 {notes.map((note, index) => (
                                     <NoteItem
                                         key={note.id}
