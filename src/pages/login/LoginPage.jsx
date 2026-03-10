@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useState, useRef} from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import {useNotification} from '../../context/MessageContext';
@@ -19,6 +19,8 @@ function LoginPage() {
   const[errorEmail, setErrorEmail] = useState(" ");
   const[errorPassword, setErrorPassword] = useState(" ");
   const[showPassword, setShowPassword] = useState(false);
+  const inputEmailRef = useRef(null);
+  const inputPasswordRef = useRef(null);
   const{ signInUser } = useAuth();
   const {toast} = useNotification();
 
@@ -30,6 +32,22 @@ function LoginPage() {
   function handleChangePassword(event) {
     setPassword(event.target.value);
     setErrorPassword(" ");
+  }
+
+  function checkValidEmail(){
+    if(!email.trim()){
+      setErrorEmail("Không được để trống!");
+    }else if(!isValidEmail(email)){
+      setErrorEmail("Định dạng email không hợp lệ!");
+    }
+  }
+
+  function checkValidPassword(){
+    if(!password.trim()){
+      setErrorPassword("Không được để trống!");
+    }else if (password.length < 8) {
+      setErrorPassword("Mật khẩu phải tối thiểu 8 ký tự!");
+    }
   }
 
   function isValidEmail(email) {
@@ -80,8 +98,16 @@ function LoginPage() {
           variant="standard"
           value={email}
           onChange={handleChangeEmail}
+          inputRef={inputEmailRef}
           autoComplete='off'
           required
+          onKeyDown={(event) => {
+            if (event.key === "Enter") {
+              event.preventDefault(); 
+              checkValidEmail();
+              inputPasswordRef.current.focus();
+            }
+          }}  
         />
         {errorEmail && (<p className="errorMessage">{errorEmail}</p>)}
         <TextField
@@ -93,6 +119,14 @@ function LoginPage() {
           variant="standard"
           value={password}
           onChange={handleChangePassword}
+          inputRef={inputPasswordRef}
+          onKeyDown={(event) => {
+            if(event.key === 'Enter'){
+              event.preventDefault();
+              checkValidPassword();
+              inputPasswordRef.current.focus();
+            }
+          }}
           InputProps={{
             endAdornment: (
               <InputAdornment position="end">
