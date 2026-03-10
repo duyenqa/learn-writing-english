@@ -13,6 +13,7 @@ import Footer from '../../components/footer/Footer';
 import SearchBar from '../../components/searchbar/SearchBar';
 import MultipleButtons from '../../components/buttons/MultipleButtons';
 import BadgeNumber from '../../components/badge/BadgeNumber';
+import ShareSocial from '../../components/share/ShareSocial';
 import Stack from '@mui/material/Stack';
 import Paper from '@mui/material/Paper';
 import IconButton from '@mui/material/IconButton';
@@ -371,6 +372,7 @@ function FormPage() {
                 </div>
 
                 <br />
+                <ShareSocial />
                 <Footer />
             </div>
         </section>

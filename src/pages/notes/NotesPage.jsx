@@ -8,6 +8,7 @@ import ButtonText from "../../components/button/ButtonText";
 import ButtonCancel from "../../components/button/ButtonCancel";
 import Button from '@mui/material/Button';
 import NoteItem from "../../components/note/NoteItem";
+import ShareSocial from '../../components/share/ShareSocial';
 import Footer from "../../components/footer/Footer";
 import Box from '@mui/material/Box';
 import Chip from '@mui/material/Chip';
@@ -345,6 +346,7 @@ function NotesPage() {
                         </TabPanel>
                     </TabContext>
                 </Box>
+                <ShareSocial/>
                 <Footer />
             </div>
         </section>
