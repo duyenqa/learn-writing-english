@@ -180,7 +180,7 @@ function SignUpPage() {
             if (event.key === 'Enter') {
               event.preventDefault();
               checkValidPassword();
-              inputPasswordRef.current.focus();
+              handleSubmit();
             }
           }}
           InputProps={{

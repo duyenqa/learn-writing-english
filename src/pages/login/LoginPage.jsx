@@ -55,6 +55,19 @@ function LoginPage() {
     return emailRegex.test(email);
   }
 
+  const handlePressEnterLogIn = async() =>{
+    try {
+        const result = await signInUser(email, password);
+        if (result.success) {
+          navigate("/home");
+        }else{
+          toast.warning(result.error);
+        }
+      } catch (error) {
+        console.error(error.message);
+      }
+  }
+
   const handleSubmit = async () => {
     if(!email.trim() && !password.trim()){
       setErrorEmail("Không được để trống!");
@@ -124,7 +137,7 @@ function LoginPage() {
             if(event.key === 'Enter'){
               event.preventDefault();
               checkValidPassword();
-              inputPasswordRef.current.focus();
+              handleSubmit();
             }
           }}
           InputProps={{
@@ -143,7 +156,12 @@ function LoginPage() {
         <div className="link">
           <Link to="/sign-up">Đăng ký tài khoản</Link>
         </div>
-        <Button variant="contained" onClick={handleSubmit}>Đăng Nhập</Button>
+        <Button 
+          variant="contained" 
+          onClick={handleSubmit}
+          >
+            Đăng Nhập
+          </Button>
       </div>
     </section>
   )
