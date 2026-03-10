@@ -50,11 +50,12 @@ function SignUpPage() {
     //chuỗi local 3 ký tự
     if (localPart.length <= 3) return false;
 
-    // Toàn số
-    if (/^\d+$/.test(localPart)) return false;
+    // Toàn số hoặc toàn chữ lặp lại liên tục
+    if(/^(.)\1+$/.test(localPart)) return false;
+    
 
     const localFake = ["abc", "abc123", "test", "demo", "user", "demouser"];
-    const domainFake = ["gmail.vn", "facebook.vn", "facebook.com", "example.com"];
+    const domainFake = ["gmail.vn", "facebook.vn", "facebook.com", "example.com", "email"];
     if(localFake.includes(localPart.toLowerCase())) return false;
     if(domainFake.includes(domainPart.toLowerCase())) return false;
     return true;
