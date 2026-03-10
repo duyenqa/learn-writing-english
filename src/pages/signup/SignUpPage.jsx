@@ -52,6 +52,10 @@ function SignUpPage() {
 
     // Toàn số hoặc toàn chữ lặp lại liên tục
     if(/^(.)\1+$/.test(localPart)) return false;
+
+    //Có ít nhất một chữ cái, một nguyên âm, và dài >= 5 ==> chuỗi không có nghĩa
+    const regex = /^(?=.*[a-zA-Z])(?=.*[aeiouAEIOU])[a-zA-Z0-9._-]{5,}$/;
+    if(!regex.test(localPart)) return false;
     
 
     const localFake = ["abc", "abc123", "test", "demo", "user", "demouser"];
