@@ -46,6 +46,7 @@ function SignUpPage() {
 
     // Lấy chuỗi local
     const localPart = email.split("@")[0];
+    //Lấy chuỗi domain
     const domainPart = email.split("@")[1];
     //chuỗi local 3 ký tự
     if (localPart.length <= 3) return false;
