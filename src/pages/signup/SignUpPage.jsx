@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { useNotification } from '../../context/MessageContext';
@@ -20,6 +20,9 @@ function SignUpPage() {
   const [errorEmail, setErrorEmail] = useState(" ");
   const [errorPassword, setErrorPassword] = useState(" ");
   const [showPassword, setShowPassword] = useState(false);
+  const inputUsernameRef = useRef(null);
+  const inputEmailRef = useRef(null);
+  const inputPasswordRef = useRef(null);
   const { signUpUser } = useAuth();
   const { toast } = useNotification();
   const navigate = useNavigate();
@@ -66,6 +69,30 @@ function SignUpPage() {
     return true;
   }
 
+  function checkValidUsername() {
+    if (!username.trim()){
+      setErrorUsername("Không được để trống!");
+    }else if (username?.length < 5) {
+      setErrorUsername("Ít nhất 5 ký tự hoặc hơn!!!");
+    }
+  }
+
+  function checkValidEmail(){
+    if (!email.trim()){
+      setErrorEmail("Không được để trống!");
+    }else if (isValidEmail(email) == false) {
+      setErrorEmail("Định dạng email không hợp lệ!");
+    }
+  }
+
+  function checkValidPassword() {
+    if (!password.trim()){
+      setErrorPassword("Không được để trống!");
+    }else if (password.length < 8) {
+      setErrorPassword("Mật khẩu phải tối thiểu 8 ký tự!");
+    }
+  }
+
   const handleSubmit = async () => {
     if (!username.trim() && !email.trim() && !password.trim()) {
       setErrorUsername("Không được để trống!");
@@ -109,6 +136,14 @@ function SignUpPage() {
           variant="standard"
           value={username}
           onChange={handleChangeUsername}
+          inputRef={inputUsernameRef}
+          onKeyDown={(event) => {
+            if (event.key === 'Enter') {
+              event.preventDefault();
+              checkValidUsername();
+              inputEmailRef.current.focus();
+            }
+          }}
           autoComplete='off'
           required
         />
@@ -119,6 +154,14 @@ function SignUpPage() {
           variant="standard"
           value={email}
           onChange={handleChangeEmail}
+          inputRef={inputEmailRef}
+          onKeyDown={(event) => {
+            if (event.key === 'Enter') {
+              event.preventDefault();
+              checkValidEmail();
+              inputPasswordRef.current.focus();
+            }
+          }}
           autoComplete='off'
           required
         />
@@ -132,6 +175,14 @@ function SignUpPage() {
           variant="standard"
           value={password}
           onChange={handleChangePassword}
+          inputRef={inputPasswordRef}
+          onKeyDown={(event) => {
+            if (event.key === 'Enter') {
+              event.preventDefault();
+              checkValidPassword();
+              inputPasswordRef.current.focus();
+            }
+          }}
           InputProps={{
             endAdornment: (
               <InputAdornment position="end">
