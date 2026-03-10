@@ -46,13 +46,17 @@ function SignUpPage() {
 
     // Lấy chuỗi local
     const localPart = email.split("@")[0];
+    const domainPart = email.split("@")[1];
     //chuỗi local 3 ký tự
     if (localPart.length <= 3) return false;
+
     // Toàn số
     if (/^\d+$/.test(localPart)) return false;
 
-    const textFake = ["abc", "test", "demo", "user", "demouser"];
-    if(textFake.includes(localPart.toLowerCase())) return false;
+    const localFake = ["abc", "abc123", "test", "demo", "user", "demouser"];
+    const domainFake = ["gmail.vn", "facebook.vn", "facebook.com", "example.com"];
+    if(localFake.includes(localPart.toLowerCase())) return false;
+    if(domainFake.includes(domainPart.toLowerCase())) return false;
     return true;
   }
 
