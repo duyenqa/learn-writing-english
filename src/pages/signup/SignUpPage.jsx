@@ -45,7 +45,7 @@ function SignUpPage() {
     setErrorPassword(" ");
   }
 
-  function isValidUsernameWithSpecialCharaters(username){
+  function isValidUsernameWithSpecialCharaters(username) {
     //Lọc các kí tự đặc biệt
     const regex = /^[a-zA-Z0-9\s]+$/;
 
@@ -53,11 +53,11 @@ function SignUpPage() {
     return true;
   }
 
-  function isValidUsernameWithTextandNumbers(){
+  function isValidUsernameWithTextandNumbers() {
     //Chỉ chữ và số
     const regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z0-9]+$/;
 
-    if(!regex.test(username)) return false;
+    if (!regex.test(username)) return false;
     return true;
   }
 
@@ -87,7 +87,11 @@ function SignUpPage() {
   function checkValidUsername() {
     if (!username.trim()) {
       setErrorUsername("Không được để trống!");
-    } else{
+    } else if (username?.length < 5) {
+      setErrorUsername("Ít nhất 5 ký tự!!!");
+    } else if (username?.length > 20) {
+      setErrorUsername("Tối đa 20 ký tự!!!");
+    } else {
       if (!isValidUsernameWithSpecialCharaters(username)) {
         setErrorUsername("Username không chứa ký tự đặc biệt!!!");
       }
@@ -95,15 +99,7 @@ function SignUpPage() {
       if (!isValidUsernameWithTextandNumbers(username)) {
         setErrorUsername("Username chứa vừa chữ và số!!!");
       }
-
-      if(username?.length < 5){
-          setErrorUsername("Ít nhất 5 ký tự!!!");
-      }
-
-      if(username?.length > 20){
-          setErrorUsername("Tối đa 20 ký tự!!!");
-      }
-    } 
+    }
   }
 
   function checkValidEmail() {
@@ -134,11 +130,11 @@ function SignUpPage() {
       setErrorPassword("Không được để trống!");
     } else if (!username.trim() && !!email.trim() && !!password.trim()) {
       setErrorUsername("Không được để trống!");
-    } else if(username?.length < 5){
-          setErrorUsername("Ít nhất 5 ký tự!!!");
-    }else if(username?.length > 20){
-          setErrorUsername("Tối đa 20 ký tự!!!");
-    }else{
+    } else if (username?.length < 5) {
+      setErrorUsername("Ít nhất 5 ký tự!!!");
+    } else if (username?.length > 20) {
+      setErrorUsername("Tối đa 20 ký tự!!!");
+    } else {
       if (!isValidUsernameWithSpecialCharaters(username)) {
         setErrorUsername("Username không chứa ký tự đặc biệt!!!");
       }
@@ -154,7 +150,7 @@ function SignUpPage() {
       if (password?.length < 8) {
         setErrorPassword("Mật khẩu phải tối thiểu 8 ký tự!");
       }
-      
+
       if ((username?.length >= 5 && username?.length <= 20) && isValidEmail(email) == true && password?.length >= 8) {
         const result = await signUpUser(email, password);
         if (!result.success) {
