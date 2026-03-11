@@ -1,7 +1,7 @@
-import {useState, useRef} from 'react';
+import { useState, useRef } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
-import {useNotification} from '../../context/MessageContext';
+import { useNotification } from '../../context/MessageContext';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
@@ -14,15 +14,15 @@ import './styles.css';
 
 function LoginPage() {
   const navigate = useNavigate();
-  const[email, setEmail] = useState("");
-  const[password, setPassword] = useState("");
-  const[errorEmail, setErrorEmail] = useState(" ");
-  const[errorPassword, setErrorPassword] = useState(" ");
-  const[showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errorEmail, setErrorEmail] = useState(" ");
+  const [errorPassword, setErrorPassword] = useState(" ");
+  const [showPassword, setShowPassword] = useState(false);
   const inputEmailRef = useRef(null);
   const inputPasswordRef = useRef(null);
-  const{ signInUser } = useAuth();
-  const {toast} = useNotification();
+  const { signInUser } = useAuth();
+  const { toast } = useNotification();
 
   function handleChangeEmail(event) {
     setEmail(event.target.value);
@@ -34,18 +34,18 @@ function LoginPage() {
     setErrorPassword(" ");
   }
 
-  function checkValidEmail(){
-    if(!email.trim()){
+  function checkValidEmail() {
+    if (!email.trim()) {
       setErrorEmail("Không được để trống!");
-    }else if(!isValidEmail(email)){
+    } else if (!isValidEmail(email)) {
       setErrorEmail("Định dạng email không hợp lệ!");
     }
   }
 
-  function checkValidPassword(){
-    if(!password.trim()){
+  function checkValidPassword() {
+    if (!password.trim()) {
       setErrorPassword("Không được để trống!");
-    }else if (password.length < 8) {
+    } else if (password.length < 8) {
       setErrorPassword("Mật khẩu phải tối thiểu 8 ký tự!");
     }
   }
@@ -55,41 +55,34 @@ function LoginPage() {
     return emailRegex.test(email);
   }
 
-  const handlePressEnterLogIn = async() =>{
-    try {
-        const result = await signInUser(email, password);
-        if (result.success) {
-          navigate("/home");
-        }else{
-          toast.warning(result.error);
-        }
-      } catch (error) {
-        console.error(error.message);
-      }
-  }
-
   const handleSubmit = async () => {
-    if(!email.trim() && !password.trim()){
+    if (!email.trim() && !password.trim()) {
       setErrorEmail("Không được để trống!");
       setErrorPassword("Không được để trống!");
-    }else if(!email.trim() && !!password.trim()){
+    } else if (!email.trim() && !!password.trim()) {
       setErrorEmail("Không được để trống!");
-    }else if(!!email.trim() && !password.trim()){
+    } else if (!!email.trim() && !password.trim()) {
       setErrorPassword("Không được để trống!");
-    }else if (password.length < 8) {
-      setErrorPassword("Mật khẩu phải tối thiểu 8 ký tự!");
-    }else if(!isValidEmail(email)){
-      setErrorEmail("Định dạng email không hợp lệ!");
-    }else{
-      try {
-        const result = await signInUser(email, password);
-        if (result.success) {
-          navigate("/home");
-        }else{
-          toast.warning(result.error);
+    } else {
+      let valueEmail = email;
+      let valuePassword = password;
+      if (!isValidEmail(valueEmail)) {
+        setErrorEmail("Định dạng email không hợp lệ!");
+      }
+      if (valuePassword?.length < 8) {
+        setErrorPassword("Mật khẩu phải tối thiểu 8 ký tự!");
+      }
+      if(isValidEmail(valueEmail) == true && valuePassword?.length <= 8){
+        try {
+          const result = await signInUser(valueEmail, valuePassword);
+          if (result.success) {
+            navigate("/home");
+          } else {
+            toast.warning(result.error);
+          }
+        } catch (error) {
+          console.error(error.message);
         }
-      } catch (error) {
-        console.error(error.message);
       }
     }
   }
@@ -116,11 +109,11 @@ function LoginPage() {
           required
           onKeyDown={(event) => {
             if (event.key === "Enter") {
-              event.preventDefault(); 
+              event.preventDefault();
               checkValidEmail();
               inputPasswordRef.current.focus();
             }
-          }}  
+          }}
         />
         {errorEmail && (<p className="errorMessage">{errorEmail}</p>)}
         <TextField
@@ -134,7 +127,7 @@ function LoginPage() {
           onChange={handleChangePassword}
           inputRef={inputPasswordRef}
           onKeyDown={(event) => {
-            if(event.key === 'Enter'){
+            if (event.key === 'Enter') {
               event.preventDefault();
               checkValidPassword();
               handleSubmit();
@@ -156,12 +149,12 @@ function LoginPage() {
         <div className="link">
           <Link to="/sign-up">Đăng ký tài khoản</Link>
         </div>
-        <Button 
-          variant="contained" 
+        <Button
+          variant="contained"
           onClick={handleSubmit}
-          >
-            Đăng Nhập
-          </Button>
+        >
+          Đăng Nhập
+        </Button>
       </div>
     </section>
   )
