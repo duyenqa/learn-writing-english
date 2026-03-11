@@ -45,9 +45,19 @@ function SignUpPage() {
     setErrorPassword(" ");
   }
 
-  function isValidUsername(username){
+  function isValidUsernameWithSpecialCharaters(username){
+    //Lọc các kí tự đặc biệt
     const regex = /^[a-zA-Z0-9\s]+$/;
+
     if (!regex.test(username)) return false;
+    return true;
+  }
+
+  function isValidUsernameWithTextandNumbers(){
+    //Chỉ chữ và số
+    const regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z0-9]+$/;
+
+    if(!regex.test(username)) return false;
     return true;
   }
 
@@ -78,8 +88,12 @@ function SignUpPage() {
     if (!username.trim()) {
       setErrorUsername("Không được để trống!");
     } else{
-      if (!isValidUsername(username)) {
+      if (!isValidUsernameWithSpecialCharaters(username)) {
         setErrorUsername("Username không chứa ký tự đặc biệt!!!");
+      }
+
+      if (!isValidUsernameWithTextandNumbers(username)) {
+        setErrorUsername("Username chứa vừa chữ và số!!!");
       }
 
       if(username?.length < 5){
@@ -120,17 +134,17 @@ function SignUpPage() {
       setErrorPassword("Không được để trống!");
     } else if (!username.trim() && !!email.trim() && !!password.trim()) {
       setErrorUsername("Không được để trống!");
-    } else {
-      if (!isValidUsername(username)) {
-        setErrorUsername("Không chứa ký tự đặc biệt!!!");
-      }
-
-      if(username?.length < 5){
+    } else if(username?.length < 5){
           setErrorUsername("Ít nhất 5 ký tự!!!");
+    }else if(username?.length > 20){
+          setErrorUsername("Tối đa 20 ký tự!!!");
+    }else{
+      if (!isValidUsernameWithSpecialCharaters(username)) {
+        setErrorUsername("Username không chứa ký tự đặc biệt!!!");
       }
 
-      if(username?.length > 20){
-          setErrorUsername("Tối đa 20 ký tự!!!");
+      if (!isValidUsernameWithTextandNumbers(username)) {
+        setErrorUsername("Username chứa vừa chữ và số!!!");
       }
 
       if (!isValidEmail(email)) {
