@@ -42,6 +42,12 @@ function SignUpPage() {
     setErrorPassword(" ");
   }
 
+  function isValidUsername(username){
+    const regex = /^[a-zA-Z0-9\s]+$/;
+    if (!regex.test(username)) return false;
+    return true;
+  }
+
   function isValidEmail(email) {
     const emailRegex = /^[a-zA-Z0-9._%+-]+@gmail+\.com$/;
 
@@ -68,9 +74,15 @@ function SignUpPage() {
   function checkValidUsername() {
     if (!username.trim()) {
       setErrorUsername("Không được để trống!");
-    } else if (username?.length < 5) {
-      setErrorUsername("Ít nhất 5 ký tự hoặc hơn!!!");
-    }
+    } else{
+      if (!isValidUsername(username)) {
+        setErrorUsername("Username không chứa ký tự đặc biệt!!!");
+      }
+
+      if(username?.length < 5){
+          setErrorUsername("Ít nhất 5 ký tự!!!");
+      }
+    } 
   }
 
   function checkValidEmail() {
@@ -102,9 +114,14 @@ function SignUpPage() {
     } else if (!username.trim() && !!email.trim() && !!password.trim()) {
       setErrorUsername("Không được để trống!");
     } else {
-      if (username?.length < 5) {
-        setErrorUsername("Ít nhất 5 ký tự hoặc hơn!!!");
+      if (!isValidUsername(username)) {
+        setErrorUsername("Không chứa ký tự đặc biệt!!!");
       }
+
+      if(username?.length < 5){
+          setErrorUsername("Ít nhất 5 ký tự!!!");
+      }
+
       if (!isValidEmail(email)) {
         setErrorEmail("Định dạng email không hợp lệ!");
       }
