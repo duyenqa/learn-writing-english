@@ -25,13 +25,19 @@ function LoginPage() {
   const { toast } = useNotification();
 
   function handleChangeEmail(event) {
-    setEmail(event.target.value);
+    const valueEmail = event.target.value;
+    setEmail(valueEmail.trim());
     setErrorEmail(" ");
   }
 
   function handleChangePassword(event) {
-    setPassword(event.target.value);
+    const valuePassword = event.target.value;
+    setPassword(valuePassword.trim());
     setErrorPassword(" ");
+    if(inputPasswordRef.current.focus()){
+      checkValidEmail();
+      console.log("Bạn vừa click ô mk");
+    }
   }
 
   function checkValidEmail() {
@@ -64,17 +70,15 @@ function LoginPage() {
     } else if (!!email.trim() && !password.trim()) {
       setErrorPassword("Không được để trống!");
     } else {
-      let valueEmail = email;
-      let valuePassword = password;
-      if (!isValidEmail(valueEmail)) {
+      if (!isValidEmail(email)) {
         setErrorEmail("Định dạng email không hợp lệ!");
       }
-      if (valuePassword?.length < 8) {
+      if (password?.length < 8) {
         setErrorPassword("Mật khẩu phải tối thiểu 8 ký tự!");
       }
-      if(isValidEmail(valueEmail) == true && valuePassword?.length >= 8){
+      if(isValidEmail(email) == true && password?.length >= 8){
         try {
-          const result = await signInUser(valueEmail, valuePassword);
+          const result = await signInUser(email, password);
           if (result.success) {
             navigate("/home");
           } else {
@@ -107,6 +111,7 @@ function LoginPage() {
           inputRef={inputEmailRef}
           autoComplete='off'
           required
+          autoFocus="true"
           onKeyDown={(event) => {
             if (event.key === "Enter") {
               event.preventDefault();
@@ -126,6 +131,9 @@ function LoginPage() {
           value={password}
           onChange={handleChangePassword}
           inputRef={inputPasswordRef}
+          onFocus={() => {
+            checkValidEmail();
+          }}
           onKeyDown={(event) => {
             if (event.key === 'Enter') {
               event.preventDefault();
