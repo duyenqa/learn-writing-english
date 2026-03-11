@@ -97,7 +97,7 @@ function SignUpPage() {
       }
 
       if (!isValidUsernameWithTextandNumbers(username)) {
-        setErrorUsername("Username chứa chữ hoa, chữ thường và số!!!");
+        setErrorUsername("Username chỉ được chứa chữ, số hoặc kết hợp giữa chữ và số, không phân biệt chữ hoa và chữ thường.");
       }
     }
   }
@@ -140,7 +140,7 @@ function SignUpPage() {
       }
 
       if (!isValidUsernameWithTextandNumbers(username)) {
-        setErrorUsername("Username chứa chữ hoa, chữ thường và số!!!");
+        setErrorUsername("Username chỉ được chứa chữ, số hoặc kết hợp giữa chữ và số, không phân biệt chữ hoa và chữ thường.");
       }
 
       if (!isValidEmail(email)) {
