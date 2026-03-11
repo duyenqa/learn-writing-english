@@ -55,36 +55,36 @@ function SignUpPage() {
     if (localPart.length <= 3) return false;
 
     // Toàn số hoặc toàn chữ lặp lại liên tục
-    if(/^(.)\1+$/.test(localPart)) return false;
-    
+    if (/^(.)\1+$/.test(localPart)) return false;
+
 
     const localFake = ["abc", "abc123", "test", "demo", "user", "demouser", "abc.test"];
     const domainFake = ["gmail.vn", "facebook.vn", "facebook.com", "example.com", "yahoo.com", "outlook.com", "company.vn"];
-    if(localFake.includes(localPart.toLowerCase())) return false;
-    if(domainFake.includes(domainPart.toLowerCase())) return false;
+    if (localFake.includes(localPart.toLowerCase())) return false;
+    if (domainFake.includes(domainPart.toLowerCase())) return false;
     return true;
   }
 
   function checkValidUsername() {
-    if (!username.trim()){
+    if (!username.trim()) {
       setErrorUsername("Không được để trống!");
-    }else if (username?.length < 5) {
+    } else if (username?.length < 5) {
       setErrorUsername("Ít nhất 5 ký tự hoặc hơn!!!");
     }
   }
 
-  function checkValidEmail(){
-    if (!email.trim()){
+  function checkValidEmail() {
+    if (!email.trim()) {
       setErrorEmail("Không được để trống!");
-    }else if (isValidEmail(email) == false) {
+    } else if (isValidEmail(email) == false) {
       setErrorEmail("Định dạng email không hợp lệ!");
     }
   }
 
   function checkValidPassword() {
-    if (!password.trim()){
+    if (!password.trim()) {
       setErrorPassword("Không được để trống!");
-    }else if (password.length < 8) {
+    } else if (password.length < 8) {
       setErrorPassword("Mật khẩu phải tối thiểu 8 ký tự!");
     }
   }
@@ -101,17 +101,26 @@ function SignUpPage() {
       setErrorPassword("Không được để trống!");
     } else if (!username.trim() && !!email.trim() && !!password.trim()) {
       setErrorUsername("Không được để trống!");
-    } else if (password.length < 8) {
-      setErrorPassword("Mật khẩu phải tối thiểu 8 ký tự!");
-    } else if (isValidEmail(email) == false) {
-      setErrorEmail("Định dạng email không hợp lệ!");
-    }else {
-      const result = await signUpUser(email, password);
-      if (!result.success) {
-        toast.warning(result.message);
-      } else {
-        toast.success("Đăng ký thành công");
-        navigate("/");
+    } else {
+      if (username?.length < 5) {
+        setErrorUsername("Ít nhất 5 ký tự hoặc hơn!!!");
+      }
+      if (!isValidEmail(email)) {
+        setErrorEmail("Định dạng email không hợp lệ!");
+      }
+
+      if (password?.length < 8) {
+        setErrorPassword("Mật khẩu phải tối thiểu 8 ký tự!");
+      }
+      
+      if (username?.length >= 5 && isValidEmail(email) == true && password?.length >= 8) {
+        const result = await signUpUser(email, password);
+        if (!result.success) {
+          toast.warning(result.message);
+        } else {
+          toast.success("Đăng ký thành công");
+          navigate("/");
+        }
       }
     }
   }

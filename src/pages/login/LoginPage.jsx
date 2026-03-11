@@ -72,7 +72,7 @@ function LoginPage() {
       if (valuePassword?.length < 8) {
         setErrorPassword("Mật khẩu phải tối thiểu 8 ký tự!");
       }
-      if(isValidEmail(valueEmail) == true && valuePassword?.length <= 8){
+      if(isValidEmail(valueEmail) == true && valuePassword?.length >= 8){
         try {
           const result = await signInUser(valueEmail, valuePassword);
           if (result.success) {
