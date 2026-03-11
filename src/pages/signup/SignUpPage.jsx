@@ -28,17 +28,20 @@ function SignUpPage() {
   const navigate = useNavigate();
 
   function handleChangeUsername(event) {
-    setUsername(event.target.value);
+    const valueUsername = event.target.value;
+    setUsername(valueUsername.trim());
     setErrorUsername(" ");
   }
 
   function handleChangeEmail(event) {
-    setEmail(event.target.value);
+    const valueEmail = event.target.value;
+    setEmail(valueEmail.trim());
     setErrorEmail(" ");
   }
 
   function handleChangePassword(event) {
-    setPassword(event.target.value);
+    const valuePassword = event.target.value;
+    setPassword(valuePassword.trim());
     setErrorPassword(" ");
   }
 
@@ -82,6 +85,10 @@ function SignUpPage() {
       if(username?.length < 5){
           setErrorUsername("Ít nhất 5 ký tự!!!");
       }
+
+      if(username?.length > 20){
+          setErrorUsername("Tối đa 20 ký tự!!!");
+      }
     } 
   }
 
@@ -122,6 +129,10 @@ function SignUpPage() {
           setErrorUsername("Ít nhất 5 ký tự!!!");
       }
 
+      if(username?.length > 20){
+          setErrorUsername("Tối đa 20 ký tự!!!");
+      }
+
       if (!isValidEmail(email)) {
         setErrorEmail("Định dạng email không hợp lệ!");
       }
@@ -130,7 +141,7 @@ function SignUpPage() {
         setErrorPassword("Mật khẩu phải tối thiểu 8 ký tự!");
       }
       
-      if (username?.length >= 5 && isValidEmail(email) == true && password?.length >= 8) {
+      if ((username?.length >= 5 && username?.length <= 20) && isValidEmail(email) == true && password?.length >= 8) {
         const result = await signUpUser(email, password);
         if (!result.success) {
           toast.warning(result.message);
@@ -159,6 +170,7 @@ function SignUpPage() {
           value={username}
           onChange={handleChangeUsername}
           inputRef={inputUsernameRef}
+          autoFocus="true"
           onKeyDown={(event) => {
             if (event.key === 'Enter') {
               event.preventDefault();
@@ -177,6 +189,9 @@ function SignUpPage() {
           value={email}
           onChange={handleChangeEmail}
           inputRef={inputEmailRef}
+          onFocus={() => {
+            checkValidUsername();
+          }}
           onKeyDown={(event) => {
             if (event.key === 'Enter') {
               event.preventDefault();
@@ -198,6 +213,9 @@ function SignUpPage() {
           value={password}
           onChange={handleChangePassword}
           inputRef={inputPasswordRef}
+          onFocus={() => {
+            checkValidEmail();
+          }}
           onKeyDown={(event) => {
             if (event.key === 'Enter') {
               event.preventDefault();
