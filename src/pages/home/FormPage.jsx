@@ -55,17 +55,17 @@ function FormPage() {
     };
 
     function onChangeTextEnglish(text) {
-        setTextEnglish(text);
+        setTextEnglish(text.trim());
         setErrorMsgField1(" ");
     }
 
     function onChangeTextTranslation(text) {
-        setTextTranslation(text);
+        setTextTranslation(text.trim());
         setErrorMsgField2(" ");
     }
 
     function onChangeTextIPA(text) {
-        setTextIPA(text);
+        setTextIPA(text.trim());
     }
 
     const onSubmit = async () => {
@@ -218,12 +218,11 @@ function FormPage() {
         setFilteredCards(sliderCards);
     }, [numberSlider, cards])
 
-    // console.log("xem: " + JSON.stringify(cards));
-
     return (
         <section className="home">
             <div className="wrapper">
                 <div className="navbar">
+                    <Chip label={session?.user?.email} />
                     <IconButton
                         size="large"
                         aria-label="account of current user"
@@ -250,12 +249,6 @@ function FormPage() {
                         open={Boolean(anchorEl)}
                         onClose={() => setAnchorEl(null)}
                     >
-                        <MenuItem>
-                            <ListItemIcon>
-                                <AccountCircle fontSize="small" />
-                            </ListItemIcon>
-                            <Chip label={session?.user?.email} />
-                        </MenuItem>
                         <MenuItem onClick={() => navigate("/notes")}>
                             <ListItemIcon>
                                 <EventNoteIcon fontSize="small" />
