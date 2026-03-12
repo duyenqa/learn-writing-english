@@ -95,30 +95,41 @@ function FormPage() {
             setErrorMsgField1('Văn bản quá dài. Vui lòng nhập tối đa 75 ký tự!!!');
             setErrorMsgField2('Văn bản quá dài. Vui lòng nhập tối đa 75 ký tự!!!');
             return;
+        } else {
+            const isExistWord = cards.find((item) => item.text_english == textEnglish);
+            if (!isExistWord) {
+                const { data: { user } } = await supabase.auth.getUser();
+                await supabase
+                    .from('cards')
+                    .insert([{
+                        text_english: textEnglish,
+                        text_translation: textTranslation,
+                        text_ipa: textIPA,
+                        user_id: user.id
+                    }]);
+
+                fetchCards();
+
+                toast.success("Thêm dữ liệu thành công!");
+                setTextEnglish(" ");
+                setTextTranslation(" ");
+                setTextIPA(" ");
+                setIsDisabled(true);
+
+                // Sau 5 giây, bật lại nút
+                setTimeout(() => {
+                    setIsDisabled(false);
+                }, 5000);
+            }else{
+                toast.warning("Từ này đã tồn tại!!!");
+                setTextEnglish(" ");
+                setTextTranslation(" ");
+                setTextIPA(" ");
+                return;
+            }
         }
 
-        const { data: { user } } = await supabase.auth.getUser();
-        await supabase
-            .from('cards')
-            .insert([{
-                text_english: textEnglish,
-                text_translation: textTranslation,
-                text_ipa: textIPA,
-                user_id: user.id
-            }]);
 
-        fetchCards();
-
-        toast.success("Thêm dữ liệu thành công!");
-        setTextEnglish(" ");
-        setTextTranslation(" ");
-        setTextIPA(" ");
-        setIsDisabled(true);
-
-        // Sau 5 giây, bật lại nút
-        setTimeout(() => {
-            setIsDisabled(false);
-        }, 5000);
     }
 
     const deleteOneCard = async (id) => {
@@ -207,6 +218,8 @@ function FormPage() {
         setFilteredCards(sliderCards);
     }, [numberSlider, cards])
 
+    // console.log("xem: " + JSON.stringify(cards));
+
     return (
         <section className="home">
             <div className="wrapper">
@@ -264,6 +277,7 @@ function FormPage() {
                         text={textEnglish}
                         handleChangeText={onChangeTextEnglish}
                         mandatory={true}
+
                     />
                     {errorMsgField1 && (<p className="errorMessage">{errorMsgField1}</p>)}
 
@@ -287,9 +301,9 @@ function FormPage() {
                         Đi đến trang tìm từ để lấy phiên âm quốc tế chuẩn
                     </Link>
                     <div className="saveBtn">
-                        <ButtonText handleSubmit={onSubmit} status={isDisabled} />  
+                        <ButtonText handleSubmit={onSubmit} status={isDisabled} />
                     </div>
-                    
+
                 </div>
                 <div className="menu">
                     <div className="searchField">
