@@ -64,7 +64,7 @@ function Navbar() {
                     <ListItemIcon>
                         <EventNoteIcon fontSize="small" />
                     </ListItemIcon>
-                    Ghi chú
+                    Tài liệu & ghi chú
                 </MenuItem>
                 <MenuItem onClick={handleSignOut}>
                     <ListItemIcon>
