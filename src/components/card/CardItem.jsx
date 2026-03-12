@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import dayjs from 'dayjs';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
@@ -19,7 +20,7 @@ const CardItem = ({ data, removeItem }) => {
         setOpenModal(false);
         toast.success("Xóa dữ liệu thành công!");
     };
-
+    
     return (
         <>
             <div className="cardItem">
@@ -58,6 +59,9 @@ const CardItem = ({ data, removeItem }) => {
                             {data.text_translation}
                         </Typography>
                     </div>
+                     <div className="dateText">
+                        <p>{dayjs(data.created_at).format('DD/MM/YYYY')}</p>
+                    </div>       
                 </div>
             </div>
             <Dialog

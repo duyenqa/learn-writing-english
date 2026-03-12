@@ -97,6 +97,13 @@
   transform: rotateY(0deg);
 }
 
+.dateText{
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  height: 100%;
+}
+
 .btn-delete {
   cursor: pointer;
   width: 100%;
