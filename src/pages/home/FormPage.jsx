@@ -211,7 +211,6 @@ function FormPage() {
         <section className="home">
             <div className="wrapper">
                 <div className="navbar">
-                    <Chip label={session?.user?.email} />
                     <IconButton
                         size="large"
                         aria-label="account of current user"
@@ -238,6 +237,12 @@ function FormPage() {
                         open={Boolean(anchorEl)}
                         onClose={() => setAnchorEl(null)}
                     >
+                        <MenuItem>
+                            <ListItemIcon>
+                                <AccountCircle fontSize="small" />
+                            </ListItemIcon>
+                            <Chip label={session?.user?.email} />
+                        </MenuItem>
                         <MenuItem onClick={() => navigate("/notes")}>
                             <ListItemIcon>
                                 <EventNoteIcon fontSize="small" />
@@ -281,8 +286,9 @@ function FormPage() {
                     <Link to="https://dictionary.cambridge.org/vi/dictionary/english">
                         Đi đến trang tìm từ để lấy phiên âm quốc tế chuẩn
                     </Link>
-
-                    <ButtonText handleSubmit={onSubmit} status={isDisabled} />
+                    <div className="saveBtn">
+                        <ButtonText handleSubmit={onSubmit} status={isDisabled} />  
+                    </div>
                     
                 </div>
                 <div className="menu">

@@ -5,7 +5,7 @@ const ButtonText = ({status, handleSubmit}) => {
     return <Button
         variant="contained"
         startIcon={<SaveOutlinedIcon />}
-        fullWidth
+        size="large"
         onClick={handleSubmit}
         disabled={status}
         >

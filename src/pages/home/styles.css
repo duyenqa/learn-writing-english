@@ -112,6 +112,12 @@
   margin: 1rem 0;
 }
 
+.saveBtn{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .searchField {
   width: 50%;
   padding: 1rem 0;
