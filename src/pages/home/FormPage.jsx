@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { supabase } from '../../supabaseClient';
 import { useAuth } from "../../context/AuthContext";
 import { useNotification } from '../../context/MessageContext';
 import { itemsOfOnePage } from '../../utils/constant';
 import { utils, writeFile } from 'xlsx';
+import Navbar from '../../components/navbar/Navbar';
 import ButtonText from '../../components/button/ButtonText';
 import TextInput from '../../components/input/TextInput';
 import CardItem from '../../components/card/CardItem';
@@ -14,19 +15,11 @@ import MultipleButtons from '../../components/buttons/MultipleButtons';
 import BadgeNumber from '../../components/badge/BadgeNumber';
 import ShareSocial from '../../components/share/ShareSocial';
 import Paper from '@mui/material/Paper';
-import IconButton from '@mui/material/IconButton';
-import MenuItem from '@mui/material/MenuItem';
-import Menu from '@mui/material/Menu';
-import Chip from '@mui/material/Chip';
-import ListItemIcon from '@mui/material/ListItemIcon';
 import Pagination from '@mui/material/Pagination';
-import AccountCircle from '@mui/icons-material/AccountCircle';
 import Slider from '@mui/material/Slider';
 import FlipCameraAndroidIcon from '@mui/icons-material/FlipCameraAndroid';
 import FileDownloadIcon from '@mui/icons-material/FileDownload';
 import ClearAllIcon from '@mui/icons-material/ClearAll';
-import EventNoteIcon from '@mui/icons-material/EventNote';
-import LogoutIcon from '@mui/icons-material/Logout';
 import './styles.css';
 
 function FormPage() {
@@ -39,16 +32,13 @@ function FormPage() {
     const [errorMsgField2, setErrorMsgField2] = useState('');
     const [textSearch, setTextSearch] = useState('');
     const [isDisabled, setIsDisabled] = useState(false);
-    const [anchorEl, setAnchorEl] = useState(null);
     const [numberSlider, setNumberSlider] = useState(10);
     const [currentPage, setCurrentPage] = useState(1);
     let itemsPage = itemsOfOnePage;
     let totalPages = Math.ceil(cards.length / itemsPage);
     let start = (currentPage - 1) * itemsPage;
     let end = start + itemsPage;
-    const { session, signOut } = useAuth();
     const { toast } = useNotification();
-    const navigate = useNavigate();
 
     const handleChangeSlider = (_, newValue) => {
         setNumberSlider(newValue);
@@ -128,8 +118,6 @@ function FormPage() {
                 return;
             }
         }
-
-
     }
 
     const deleteOneCard = async (id) => {
@@ -183,15 +171,6 @@ function FormPage() {
         setCurrentPage(value);
     }
 
-    const handleSignOut = async (event) => {
-        event.preventDefault();
-        try {
-            await signOut();
-        } catch (error) {
-            console.error(error);
-        }
-    }
-
     const fetchCards = async () => {
         const { data, error } = await supabase
             .from('cards')
@@ -221,48 +200,7 @@ function FormPage() {
     return (
         <section className="home">
             <div className="wrapper">
-                <div className="navbar">
-                    <Chip label={session?.user?.email} />
-                    <IconButton
-                        size="large"
-                        aria-label="account of current user"
-                        aria-controls="menu-appbar"
-                        aria-haspopup="true"
-                        onClick={(event) => setAnchorEl(event.currentTarget)}
-                        color="inherit"
-                    >
-                        <AccountCircle sx={{ fontSize: '32px' }} />
-                    </IconButton>
-                    <Menu
-                        id="demo-positioned-menu"
-                        aria-labelledby="demo-positioned-button"
-                        anchorEl={anchorEl}
-                        anchorOrigin={{
-                            vertical: 'bottom',
-                            horizontal: 'right',
-                        }}
-                        keepMounted
-                        transformOrigin={{
-                            vertical: 'top',
-                            horizontal: 'right',
-                        }}
-                        open={Boolean(anchorEl)}
-                        onClose={() => setAnchorEl(null)}
-                    >
-                        <MenuItem onClick={() => navigate("/notes")}>
-                            <ListItemIcon>
-                                <EventNoteIcon fontSize="small" />
-                            </ListItemIcon>
-                            Ghi chú
-                        </MenuItem>
-                        <MenuItem onClick={handleSignOut}>
-                            <ListItemIcon>
-                                <LogoutIcon fontSize="small" />
-                            </ListItemIcon>
-                            Đăng xuất
-                        </MenuItem>
-                    </Menu>
-                </div>
+                <Navbar/>
                 <div className="form">
                     <TextInput
                         textLabel="Nhập từ mới"

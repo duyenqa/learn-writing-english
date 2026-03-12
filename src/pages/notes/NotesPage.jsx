@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { supabase } from "../../supabaseClient";
 import { useNotification } from '../../context/MessageContext';
-import { useNavigate } from 'react-router-dom';
 import TextInput from "../../components/input/TextInput";
 import Typography from '@mui/material/Typography';
 import ButtonText from "../../components/button/ButtonText";
@@ -17,13 +16,13 @@ import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import Stack from '@mui/material/Stack';
-import IconButton from '@mui/material/IconButton';
 import Paper from '@mui/material/Paper';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import ClearAllIcon from '@mui/icons-material/ClearAll';
 import { styled } from '@mui/material/styles';
 import "./styles.css";
+import Navbar from "../../components/navbar/Navbar";
 
 function NotesPage() {
     const [tabIndex, setTabIndex] = useState('1');
@@ -34,7 +33,6 @@ function NotesPage() {
     const [isDisabled, setIsDisabled] = useState(false);
     const [notes, setNotes] = useState([]);
     const [slideIndex, setSlideIndex] = useState(0);
-    const navigate = useNavigate();
     const { toast } = useNotification();
 
     const handleChangeTabs = (event, newValue) => {
@@ -200,19 +198,7 @@ function NotesPage() {
     return (
         <section className="notes">
             <div className="wrapper">
-                <IconButton
-                    size="small"
-                    aria-label="delete"
-                    onClick={() => navigate(-1)}
-                    sx={{
-                        color: '#000',
-                        '&:hover': {
-                            color: '#ff6f61'
-                        },
-                    }}>
-                    <ArrowBackIcon />
-                </IconButton>
-
+                <Navbar />
                 <Box sx={{ width: '100%', typography: 'body1' }}>
                     <TabContext value={tabIndex}>
                         <Box sx={{ borderBottom: 1, borderColor: 'divider', bgcolor: 'warning.light' }}>
@@ -308,7 +294,7 @@ function NotesPage() {
                                     </Typography>
                                 </div>
                                 <div style={{ textAlign: 'right' }}>
-                                    <Button 
+                                    <Button
                                         variant="contained"
                                         startIcon={<ClearAllIcon />}
                                         onClick={onDeleteAllNotes}
@@ -346,7 +332,7 @@ function NotesPage() {
                         </TabPanel>
                     </TabContext>
                 </Box>
-                <ShareSocial/>
+                <ShareSocial />
                 <Footer />
             </div>
         </section>
