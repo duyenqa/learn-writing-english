@@ -54,8 +54,7 @@ function SignUpPage() {
   }
 
   function isValidUsernameWithTextandNumbers() {
-    //Chỉ chữ và số
-    const regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z0-9]+$/;
+    const regex = /^[a-zA-Z0-9\s]+$/;
 
     if (!regex.test(username)) return false;
     return true;
