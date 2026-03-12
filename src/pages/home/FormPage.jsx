@@ -6,7 +6,6 @@ import { useNotification } from '../../context/MessageContext';
 import { itemsOfOnePage } from '../../utils/constant';
 import { utils, writeFile } from 'xlsx';
 import ButtonText from '../../components/button/ButtonText';
-import ButtonCancel from '../../components/button/ButtonCancel';
 import TextInput from '../../components/input/TextInput';
 import CardItem from '../../components/card/CardItem';
 import Footer from '../../components/footer/Footer';
@@ -14,7 +13,6 @@ import SearchBar from '../../components/searchbar/SearchBar';
 import MultipleButtons from '../../components/buttons/MultipleButtons';
 import BadgeNumber from '../../components/badge/BadgeNumber';
 import ShareSocial from '../../components/share/ShareSocial';
-import Stack from '@mui/material/Stack';
 import Paper from '@mui/material/Paper';
 import IconButton from '@mui/material/IconButton';
 import MenuItem from '@mui/material/MenuItem';
@@ -29,7 +27,6 @@ import FileDownloadIcon from '@mui/icons-material/FileDownload';
 import ClearAllIcon from '@mui/icons-material/ClearAll';
 import EventNoteIcon from '@mui/icons-material/EventNote';
 import LogoutIcon from '@mui/icons-material/Logout';
-import { styled } from '@mui/material/styles';
 import './styles.css';
 
 function FormPage() {
@@ -69,12 +66,6 @@ function FormPage() {
 
     function onChangeTextIPA(text) {
         setTextIPA(text);
-    }
-
-    function onCancel() {
-        setTextEnglish(" ");
-        setTextTranslation(" ");
-        setTextIPA(" ");
     }
 
     const onSubmit = async () => {
@@ -216,18 +207,6 @@ function FormPage() {
         setFilteredCards(sliderCards);
     }, [numberSlider, cards])
 
-    const Item = styled(Paper)(({ theme }) => ({
-        backgroundColor: 'transparent',
-        ...theme.typography.body2,
-        padding: theme.spacing(1),
-        textAlign: 'center',
-        color: (theme.vars ?? theme).palette.text.secondary,
-        flexGrow: 1,
-        ...theme.applyStyles('dark', {
-            backgroundColor: '#1A2027',
-        }),
-    }));
-
     return (
         <section className="home">
             <div className="wrapper">
@@ -303,19 +282,7 @@ function FormPage() {
                         Đi đến trang tìm từ để lấy phiên âm quốc tế chuẩn
                     </Link>
 
-                    <Stack 
-                        spacing={{ xs: 1, sm: 2 }}
-                        direction="row"
-                        useFlexGap
-                        sx={{ flexWrap: 'wrap' }}
-                    >
-                        <Item>
-                            <ButtonText handleSubmit={onSubmit} status={isDisabled} />
-                        </Item>
-                        <Item>
-                            <ButtonCancel handleCancel={onCancel} />
-                        </Item>
-                    </Stack>
+                    <ButtonText handleSubmit={onSubmit} status={isDisabled} />
                     
                 </div>
                 <div className="menu">
