@@ -60,7 +60,7 @@ const CardItem = ({ data, removeItem }) => {
                         </Typography>
                     </div>
                      <div className="dateText">
-                        <p>{dayjs(data.created_at).format('DD/MM/YYYY')}</p>
+                        <p>{dayjs(data.created_at).format('DD/MM/YYYY HH:mm')}</p>
                     </div>       
                 </div>
             </div>

@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import ButtonText from "../../components/button/ButtonText";
 import ButtonCancel from "../../components/button/ButtonCancel";
 import Button from '@mui/material/Button';
+import Navbar from "../../components/navbar/Navbar";
 import NoteItem from "../../components/note/NoteItem";
 import ShareSocial from '../../components/share/ShareSocial';
 import Footer from "../../components/footer/Footer";
@@ -22,7 +23,6 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import ClearAllIcon from '@mui/icons-material/ClearAll';
 import { styled } from '@mui/material/styles';
 import "./styles.css";
-import Navbar from "../../components/navbar/Navbar";
 
 function NotesPage() {
     const [tabIndex, setTabIndex] = useState('1');
@@ -201,12 +201,12 @@ function NotesPage() {
                 <Navbar />
                 <Box sx={{ width: '100%', typography: 'body1' }}>
                     <TabContext value={tabIndex}>
-                        <Box sx={{ borderBottom: 1, borderColor: 'divider', bgcolor: 'warning.light' }}>
+                        <Box sx={{ borderBottom: 2, borderColor: 'divider', bgcolor: '#ffffff66' }}>
                             <TabList
                                 onChange={handleChangeTabs}
                                 aria-label="lab API tabs example"
                                 indicatorColor="primary"
-                                textColor="inherit"
+                                textColor="primary"
                                 variant="scrollable"
                                 scrollButtons
                                 allowScrollButtonsMobile
