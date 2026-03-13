@@ -16,12 +16,9 @@ import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
-import Stack from '@mui/material/Stack';
-import Paper from '@mui/material/Paper';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import ClearAllIcon from '@mui/icons-material/ClearAll';
-import { styled } from '@mui/material/styles';
 import "./styles.css";
 
 function NotesPage() {
@@ -122,10 +119,6 @@ function NotesPage() {
         setErrorMsgNote(" ");
     }
 
-    function onCancel() {
-        setNote(" ");
-    }
-
     const onSubmit = async () => {
         if (!note.trim()) {
             setErrorMsgNote("Không được để trống!!!");
@@ -184,17 +177,6 @@ function NotesPage() {
         setSlideIndex(slideIndex == notes.length - 1 ? 0 : slideIndex + 1);
     }
 
-    const Item = styled(Paper)(({ theme }) => ({
-        backgroundColor: 'transparent',
-        ...theme.typography.body2,
-        padding: theme.spacing(1),
-        textAlign: 'center',
-        color: (theme.vars ?? theme).palette.text.secondary,
-        flexGrow: 1,
-        ...theme.applyStyles('dark', {
-            backgroundColor: '#1A2027',
-        }),
-    }));
     return (
         <section className="notes">
             <div className="wrapper">
@@ -274,19 +256,9 @@ function NotesPage() {
                                     />
                                     {errorMsgNote && (<p className="errorMessage">{errorMsgNote}</p>)}
 
-                                    <Stack
-                                        spacing={{ xs: 1, sm: 2 }}
-                                        direction="row"
-                                        useFlexGap
-                                        sx={{ flexWrap: 'wrap' }}
-                                    >
-                                        <Item>
-                                            <ButtonText handleSubmit={onSubmit} status={isDisabled} />
-                                        </Item>
-                                        <Item>
-                                            <ButtonCancel handleCancel={onCancel} />
-                                        </Item>
-                                    </Stack>
+                                    <div className="saveBtn">
+                                        <ButtonText handleSubmit={onSubmit} status={isDisabled} />
+                                    </div>
                                 </div>
                                 <div style={{ textAlign: 'center' }}>
                                     <Typography variant="h5" gutterBottom>
