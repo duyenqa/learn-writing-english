@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
+import { useNotification } from '../../context/MessageContext';
 import { useNavigate } from 'react-router-dom';
 import IconButton from '@mui/material/IconButton';
 import MenuItem from '@mui/material/MenuItem';
@@ -14,7 +15,9 @@ import LogoutIcon from '@mui/icons-material/Logout';
 function Navbar() {
     const [anchorEl, setAnchorEl] = useState(null);
     const { session, signOut } = useAuth();
+    const { toast } = useNotification();
     const navigate = useNavigate();
+    
 
     const handleSignOut = async (event) => {
         event.preventDefault();
@@ -28,6 +31,7 @@ function Navbar() {
     useEffect(() => {
         const timer = setTimeout(async () => {
             await signOut().then(() => navigate("/"));
+            toast.warning("Hết thời gian đăng nhập hệ thống");
         }, 60 * 60 * 1000);
 
         return () => clearTimeout(timer);
