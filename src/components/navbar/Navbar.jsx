@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import IconButton from '@mui/material/IconButton';
@@ -24,6 +24,14 @@ function Navbar() {
             console.error(error);
         }
     }
+
+    useEffect(() => {
+        const timer = setTimeout(async () => {
+            await signOut().then(() => navigate("/"));
+        }, 60 * 60 * 1000);
+
+        return () => clearTimeout(timer);
+    }, [navigate])
 
     return (
         <div className="navbar">
