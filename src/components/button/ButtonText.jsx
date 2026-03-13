@@ -5,6 +5,7 @@ const ButtonText = ({status, handleSubmit}) => {
     return <Button
         variant="contained"
         startIcon={<SaveOutlinedIcon />}
+        sx={{width: '250px'}}
         size="large"
         onClick={handleSubmit}
         disabled={status}
