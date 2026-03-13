@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { useNotification } from '../../context/MessageContext';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import IconButton from '@mui/material/IconButton';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import Chip from '@mui/material/Chip';
 import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from "@mui/material/ListItemText";
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import HomeIcon from '@mui/icons-material/Home';
 import EventNoteIcon from '@mui/icons-material/EventNote';
@@ -17,8 +18,8 @@ function Navbar() {
     const { session, signOut } = useAuth();
     const { toast } = useNotification();
     const navigate = useNavigate();
+    const location = useLocation();
     
-
     const handleSignOut = async (event) => {
         event.preventDefault();
         try {
@@ -66,17 +67,45 @@ function Navbar() {
                 open={Boolean(anchorEl)}
                 onClose={() => setAnchorEl(null)}
             >
-                <MenuItem onClick={() => navigate("/home")}>
+                <MenuItem 
+                    onClick={() => navigate("/home")}
+                    selected={location.pathname == "/home"}
+                    sx={{
+                        "&.Mui-selected": {
+                            borderRight: "2px solid #1976d2",
+                        },
+                        "&.Mui-selected .MuiListItemText-primary": {
+                        color: "#1979d1", 
+                        },
+                        "&.Mui-selected .MuiListItemIcon-root": {
+                            color: "#1979d1",
+                        }
+                    }}
+                >
                     <ListItemIcon>
                         <HomeIcon fontSize="small" />
                     </ListItemIcon>
-                    Trang chủ
+                    <ListItemText primary="Trang chủ" />
                 </MenuItem>
-                <MenuItem onClick={() => navigate("/notes")}>
+                <MenuItem 
+                    onClick={() => navigate("/notes")}
+                    selected={location.pathname == "/notes"}
+                    sx={{
+                        "&.Mui-selected": {
+                            borderRight: "2px solid #1976d2",
+                        },
+                        "&.Mui-selected .MuiListItemText-primary": {
+                        color: "#1979d1", 
+                        },
+                        "&.Mui-selected .MuiListItemIcon-root": {
+                            color: "#1979d1",
+                        }
+                    }}
+                >
                     <ListItemIcon>
                         <EventNoteIcon fontSize="small" />
                     </ListItemIcon>
-                    Tài liệu & ghi chú
+                    <ListItemText primary="Tài liệu & ghi chú" />
                 </MenuItem>
                 <MenuItem onClick={handleSignOut}>
                     <ListItemIcon>
