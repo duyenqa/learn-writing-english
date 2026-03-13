@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { supabase } from '../../supabaseClient';
-import { useAuth } from "../../context/AuthContext";
 import { useNotification } from '../../context/MessageContext';
 import { itemsOfOnePage } from '../../utils/constant';
 import { utils, writeFile } from 'xlsx';
