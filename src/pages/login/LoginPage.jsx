@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { useNotification } from '../../context/MessageContext';
@@ -19,6 +19,7 @@ function LoginPage() {
   const [errorEmail, setErrorEmail] = useState(" ");
   const [errorPassword, setErrorPassword] = useState(" ");
   const [showPassword, setShowPassword] = useState(false);
+  const [isActive, setIsActive] = useState(false);
   const inputEmailRef = useRef(null);
   const inputPasswordRef = useRef(null);
   const { signInUser } = useAuth();
@@ -34,9 +35,8 @@ function LoginPage() {
     const valuePassword = event.target.value;
     setPassword(valuePassword.trim());
     setErrorPassword(" ");
-    if(inputPasswordRef.current.focus()){
+    if (inputPasswordRef.current.focus()) {
       checkValidEmail();
-      console.log("Bạn vừa click ô mk");
     }
   }
 
@@ -76,7 +76,7 @@ function LoginPage() {
       if (password?.length < 8) {
         setErrorPassword("Mật khẩu phải tối thiểu 8 ký tự!");
       }
-      if(isValidEmail(email) == true && password?.length >= 8){
+      if (isValidEmail(email) == true && password?.length >= 8) {
         try {
           const result = await signInUser(email, password);
           if (result.success) {
@@ -90,6 +90,32 @@ function LoginPage() {
       }
     }
   }
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (inputPasswordRef.current !== null) {
+        if (!inputPasswordRef.current.contains(event.target)) {
+          if(inputPasswordRef.current.value?.length <= 0){
+            setErrorPassword("Không được để trống!");
+          }else if(inputPasswordRef.current.value?.length > 0 && inputPasswordRef.current.value?.length < 8){
+            setErrorPassword("Mật khẩu phải tối thiểu 8 ký tự!");
+          }else{
+            setErrorPassword(" ");
+            setIsActive(false);
+          }
+        }
+      }
+
+    }
+
+    if (isActive) {
+      window.addEventListener("click", handleClickOutside);
+    }
+
+    return () => {
+      window.addEventListener("click", handleClickOutside);
+    }
+  }, [])
 
   return (
     <section className="loginPage">
